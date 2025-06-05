@@ -1,126 +1,146 @@
+/* Import Google Fonts - Using 'Inter' for a clean, modern look, similar to what many tech companies use */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* General Body Styles */
 body {
-    font-family: 'Inter', sans-serif; /* A modern, clean sans-serif font */
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #0d0d0d; /* Dark background, similar to x.ai */
-    color: #f0f0f0; /* Light text for contrast */
+    /* Deep dark background - almost black, subtle gradient to mimic x.ai's atmospheric feel */
+    background: radial-gradient(circle at top left, #1a1a2e, #0d0d1e, #000000);
+    background-color: #000000; /* Fallback */
+    color: #e0e0e0; /* Light grey for primary text */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Header Styles */
 header {
-    background-color: #1a1a1a; /* Slightly lighter dark for header */
-    color: #e0e0e0;
-    padding: 1.5rem 0;
+    background-color: rgba(10, 10, 20, 0.6); /* Slightly transparent dark header */
+    backdrop-filter: blur(8px); /* Glassmorphism effect */
+    color: #f0f0f0;
+    padding: 1.8rem 0;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Deeper shadow for dark theme */
-    border-bottom: 1px solid #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Deeper, softer shadow */
+    border-bottom: 1px solid rgba(50, 50, 80, 0.4); /* Subtle, thin border */
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h1 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     margin: 0;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px; /* Slightly increased letter spacing for title */
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.3); /* Subtle blue glow */
 }
 
 /* Main Content Area */
 main {
     display: flex;
     flex: 1;
-    padding: 30px;
+    padding: 40px; /* More padding for spacious feel */
     gap: 30px;
-    max-width: 1400px; /* Constrain width for better readability */
-    margin: 20px auto; /* Center the main content */
+    max-width: 1500px; /* Wider content area */
+    margin: 30px auto; /* Center the main content */
+}
+
+/* Shared Card/Box Styling (Sidebar, Content, Modals) */
+.sidebar, .content, .modal-content {
+    background-color: rgba(15, 15, 30, 0.7); /* Slightly transparent dark blueish grey */
+    backdrop-filter: blur(6px); /* Consistent glassmorphism */
+    border-radius: 16px; /* More rounded corners, premium feel */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Stronger, diffused shadow */
+    border: 1px solid rgba(60, 60, 100, 0.5); /* Accent border color */
+    padding: 30px;
 }
 
 /* Sidebar Navigation */
 .sidebar {
-    width: 280px; /* Slightly wider sidebar */
-    background-color: #1a1a1a;
-    padding: 25px;
-    border-radius: 12px; /* More rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 300px; /* Wider sidebar for emphasis */
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    border: 1px solid #333; /* Subtle border */
+    gap: 25px;
 }
 
 .sidebar nav {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
 .sidebar nav button {
-    background-color: #2a2a2a; /* Darker button background */
-    color: #888; /* Softer text color */
-    border: 1px solid #444; /* Subtle border */
-    padding: 15px;
-    border-radius: 8px; /* Rounded buttons */
+    background: linear-gradient(135deg, rgba(30, 30, 50, 0.8), rgba(20, 20, 40, 0.8)); /* Subtle gradient */
+    color: #b0b0b0; /* Softer text color for inactive buttons */
+    border: 1px solid rgba(80, 80, 120, 0.5);
+    padding: 18px 25px; /* Larger padding */
+    border-radius: 10px; /* Rounded buttons */
     cursor: pointer;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
     text-align: left;
-    outline: none; /* Remove outline on focus */
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar nav button:hover {
-    background-color: #3a3a3a; /* Lighter dark on hover */
-    color: #fff;
-    border-color: #555;
+    background: linear-gradient(135deg, rgba(40, 40, 70, 0.9), rgba(30, 30, 60, 0.9));
+    color: #ffffff;
+    border-color: rgba(100, 100, 150, 0.7);
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .sidebar nav button.active {
-    background-color: #007bff; /* Accent blue for active button */
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Bright blue gradient for active state */
     color: white;
     border-color: #007bff;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.7); /* Stronger blue glow */
+    font-weight: 600;
 }
-
 
 .current-credits {
     margin-top: auto;
     text-align: center;
-    padding-top: 25px;
-    border-top: 1px solid #333;
+    padding-top: 30px;
+    border-top: 1px solid rgba(60, 60, 100, 0.4);
 }
 
 .current-credits h3 {
     margin: 0;
-    color: #e0e0e0;
-    font-size: 1.3rem;
+    color: #f0f0f0;
+    font-size: 1.5rem;
+    letter-spacing: 0.8px;
 }
 
 .current-credits span {
-    font-size: 2rem; /* Larger credit display */
-    font-weight: bold;
-    color: #28a745; /* Green for credits */
-    text-shadow: 0 0 8px rgba(40, 167, 69, 0.6); /* Subtle glow */
+    font-size: 2.8rem; /* Larger, more impactful */
+    font-weight: 700;
+    color: #00ffcc; /* Vibrant teal/cyan for credits */
+    text-shadow: 0 0 15px rgba(0, 255, 204, 0.8); /* Stronger glow */
+    display: block; /* Ensure it takes full width */
+    margin-top: 5px;
 }
 
 /* Main Content Area Sections */
 .content {
     flex: 1;
-    background-color: #1a1a1a;
-    padding: 25px 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    border: 1px solid #333;
 }
 
 section h2 {
-    color: #e0e0e0;
-    font-size: 1.8rem;
-    margin-bottom: 25px;
-    border-bottom: 2px solid #007bff; /* Accent border */
-    padding-bottom: 10px;
-    letter-spacing: 0.5px;
+    color: #00ffcc; /* Accent color for section titles */
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    border-bottom: 2px solid rgba(0, 255, 204, 0.5); /* Accent border matching credits */
+    padding-bottom: 12px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
 }
 
 .hidden-section {
@@ -128,57 +148,58 @@ section h2 {
 }
 
 /* Card and Item Styles */
-.sprint-card, .reward-category, .task-item, #trophies-list li {
-    background-color: #222; /* Darker card background */
-    border: 1px solid #333;
-    border-left: 5px solid #007bff; /* Accent left border */
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 10px; /* More rounded */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.sprint-card, .reward-category {
+    background-color: rgba(25, 25, 45, 0.8); /* Slightly lighter dark for cards */
+    border: 1px solid rgba(80, 80, 120, 0.5);
+    border-left: 6px solid #00aaff; /* Vibrant blue for sprint cards */
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .sprint-card h3 {
-    margin: 0 0 8px 0;
-    color: #e0e0e0;
-    font-size: 1.4rem;
+    margin: 0 0 10px 0;
+    color: #f0f0f0;
+    font-size: 1.6rem;
     flex-basis: 100%;
+    letter-spacing: 0.5px;
 }
 
 .sprint-card p {
     margin: 0;
-    color: #bbb;
+    color: #c0c0c0; /* Softer text color */
     flex-basis: 100%;
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 .sprint-actions {
-    margin-top: 15px;
+    margin-top: 20px;
     flex-basis: 100%;
     text-align: right;
 }
 
+/* Shared Button Styles (primary, edit, delete) */
 .sprint-actions button,
 .task-item .task-actions button,
 #rewards-section button,
 #retrospective-section button,
 #data-management-section button,
 .modal-content button {
-    background-color: #007bff; /* Primary accent blue */
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Primary blue gradient */
     color: white;
     border: none;
-    padding: 10px 18px;
-    border-radius: 6px; /* Rounded buttons */
+    padding: 12px 22px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin-left: 10px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
     outline: none;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .sprint-actions button:hover,
@@ -187,140 +208,159 @@ section h2 {
 #retrospective-section button:hover,
 #data-management-section button:hover,
 .modal-content button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.6);
+    background: linear-gradient(135deg, #0056b3, #004085);
+    box-shadow: 0 6px 18px rgba(0, 123, 255, 0.6);
+    transform: translateY(-1px);
 }
 
 .sprint-actions button.edit, .task-item .task-actions button {
-    background-color: #ffc107; /* Warning yellow for edit */
-    color: #333;
+    background: linear-gradient(135deg, #ffc107, #e0a800); /* Yellow/Orange gradient for edit */
+    color: #222; /* Dark text for contrast */
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
 }
 .sprint-actions button.edit:hover, .task-item .task-actions button:hover {
-    background-color: #e0a800;
-    box-shadow: 0 3px 10px rgba(255, 193, 7, 0.6);
+    background: linear-gradient(135deg, #e0a800, #c79100);
+    box-shadow: 0 6px 18px rgba(255, 193, 7, 0.6);
 }
 
 .sprint-actions button.delete, .task-item .task-actions button.delete, #trophies-list li .delete-trophy-btn, .danger-button {
-    background-color: #dc3545; /* Danger red */
+    background: linear-gradient(135deg, #dc3545, #c82333); /* Red gradient for delete */
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
 .sprint-actions button.delete:hover, .task-item .task-actions button.delete:hover, #trophies-list li .delete-trophy-btn:hover, .danger-button:hover {
-    background-color: #c82333;
-    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.6);
+    background: linear-gradient(135deg, #c82333, #a71d2a);
+    box-shadow: 0 6px 18px rgba(220, 53, 69, 0.6);
 }
 
+
 .task-item {
-    background-color: #2a2a2a; /* Slightly lighter task background */
-    border-left: 5px solid #28a745; /* Green for tasks */
-    padding: 15px;
-    margin-bottom: 10px;
+    background-color: rgba(35, 35, 55, 0.8); /* Slightly lighter dark for tasks */
+    border-left: 6px solid #00ffcc; /* Teal accent for tasks */
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .task-item.completed {
-    background-color: #1c3220; /* Darker green for completed */
+    background-color: rgba(20, 40, 35, 0.8); /* Darker green for completed */
     text-decoration: line-through;
-    color: #777;
-    border-left-color: #1a4d29;
+    color: #888;
+    border-left-color: #008066;
 }
 
 .task-item input[type="checkbox"] {
-    margin-right: 15px;
-    width: 20px;
-    height: 20px;
-    accent-color: #007bff; /* Color for the checkbox itself */
+    margin-right: 20px;
+    width: 24px; /* Larger checkbox */
+    height: 24px;
+    accent-color: #00ffcc; /* Color for the checkbox itself */
     cursor: pointer;
+    border: 1px solid #00ffcc; /* Custom border */
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.5); /* Transparent background */
+    transition: all 0.2s ease-in-out;
+}
+
+.task-item input[type="checkbox"]:checked {
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
 }
 
 /* Modal Styles */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000; /* Higher z-index */
+    z-index: 2000; /* Even higher z-index for modals */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+    background-color: rgba(0, 0, 0, 0.85); /* Very dark, almost opaque overlay */
     justify-content: center;
     align-items: center;
     padding-top: 50px;
 }
 
 .modal-content {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-    padding: 30px;
-    border: 1px solid #444;
-    width: 90%;
-    max-width: 700px;
-    border-radius: 12px;
-    position: relative;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.3s ease-out; /* Simple fade-in animation */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .close-button {
-    color: #aaa;
+    color: #e0e0e0; /* Lighter close button */
     float: right;
-    font-size: 32px;
+    font-size: 38px; /* Larger */
     font-weight: bold;
-    line-height: 1; /* Adjust line height for better alignment */
-    transition: color 0.3s ease;
+    line-height: 1;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: #fff;
+    color: #00ffcc; /* Glow on hover */
+    transform: rotate(90deg); /* Spin on hover */
     text-decoration: none;
     cursor: pointer;
 }
 
 .modal-content h3, .modal-content h4 {
-    color: #e0e0e0;
+    color: #00ffcc; /* Accent for modal titles */
     margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.6rem;
-    border-bottom: 1px solid #444;
-    padding-bottom: 10px;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.5);
+    padding-bottom: 12px;
+    letter-spacing: 0.8px;
+    font-weight: 600;
 }
 
 .modal-content label {
     display: block;
-    margin-bottom: 8px;
-    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-top: 20px;
     font-weight: 500;
-    color: #bbb;
+    color: #c0c0c0;
+    font-size: 1.05rem;
 }
 
 .modal-content input[type="text"],
 .modal-content input[type="number"],
 .modal-content textarea {
-    width: calc(100% - 24px); /* Adjust padding */
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #444;
-    border-radius: 8px;
+    width: calc(100% - 30px); /* Adjust padding */
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(80, 80, 120, 0.6);
+    border-radius: 10px;
     box-sizing: border-box;
-    background-color: #2a2a2a; /* Dark input background */
+    background-color: rgba(20, 20, 40, 0.9); /* Dark input background */
     color: #e0e0e0;
-    font-size: 1rem;
+    font-size: 1.1rem;
     outline: none;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .modal-content input[type="text"]:focus,
 .modal-content input[type="number"]:focus,
 .modal-content textarea:focus {
-    border-color: #007bff; /* Accent border on focus */
+    border-color: #00ffcc; /* Accent border on focus */
+    box-shadow: 0 0 12px rgba(0, 255, 204, 0.5); /* Glow on focus */
 }
 
 .sub-modal .modal-content {
-    max-width: 500px; /* Smaller for sub-modals */
+    max-width: 550px; /* Slightly larger sub-modals */
 }
 
 /* Reward Specific Styles */
 .reward-category {
-    background-color: #222;
-    border-left-color: #ffc107; /* Yellow accent for rewards */
+    background-color: rgba(30, 30, 50, 0.8);
+    border-left-color: #ffcc00; /* Yellow accent for rewards */
 }
 
 #trophies-list {
@@ -329,91 +369,167 @@ section h2 {
 }
 
 #trophies-list li {
-    background-color: #2a2a2a;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-left: 5px solid #6f42c1; /* Purple accent for trophies */
-    border-radius: 8px;
+    background-color: rgba(40, 40, 60, 0.8);
+    padding: 18px;
+    margin-bottom: 12px;
+    border-left: 6px solid #a050ff; /* Purple accent for trophies */
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #e0e0e0;
+    color: #f0f0f0;
+    font-size: 1.05rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Retrospective Styles */
 #retrospective-notes {
-    width: calc(100% - 24px);
-    min-height: 250px; /* Taller textarea */
+    width: calc(100% - 30px);
+    min-height: 300px; /* Taller textarea */
     padding: 15px;
-    border: 1px solid #444;
-    border-radius: 8px;
-    font-size: 1rem;
+    border: 1px solid rgba(80, 80, 120, 0.6);
+    border-radius: 10px;
+    font-size: 1.1rem;
     box-sizing: border-box;
-    background-color: #2a2a2a;
+    background-color: rgba(20, 20, 40, 0.9);
     color: #e0e0e0;
     outline: none;
-    resize: vertical; /* Allow vertical resize */
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #retrospective-notes:focus {
-    border-color: #007bff;
+    border-color: #00ffcc;
+    box-shadow: 0 0 12px rgba(0, 255, 204, 0.5);
 }
 
 
 /* Data Management Styles */
 .warning-text {
-    color: #ffc107; /* Warning yellow */
-    font-weight: 500;
-    margin-top: 20px;
-    font-size: 0.9rem;
+    color: #ff7700; /* Orange for warnings */
+    font-weight: 600;
+    margin-top: 25px;
+    font-size: 0.95rem;
+    text-shadow: 0 0 5px rgba(255, 119, 0, 0.3);
 }
 
 /* Footer Styles */
 footer {
-    background-color: #1a1a1a;
-    color: #aaa;
+    background-color: rgba(10, 10, 20, 0.6);
+    backdrop-filter: blur(8px);
+    color: #a0a0a0;
     text-align: center;
-    padding: 1.2rem 0;
+    padding: 1.5rem 0;
     margin-top: auto;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
-    border-top: 1px solid #333;
-    font-size: 0.9rem;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.6);
+    border-top: 1px solid rgba(50, 50, 80, 0.4);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     main {
         flex-direction: column;
-        padding: 15px;
-        margin: 15px auto;
+        padding: 20px;
+        margin: 20px auto;
     }
 
     .sidebar {
         width: auto;
-        padding: 15px;
+        padding: 20px;
         order: 2; /* Move sidebar below content on small screens */
     }
 
     .content {
-        padding: 15px 20px;
+        padding: 20px 25px;
         order: 1;
     }
 
     .sidebar nav button {
-        padding: 12px;
-        font-size: 0.95rem;
+        padding: 15px;
+        font-size: 1rem;
     }
 
     .sprint-actions button {
-        margin-left: 5px;
+        margin-left: 8px;
         margin-top: 10px;
+        font-size: 0.9rem;
+        padding: 10px 18px;
     }
 
     .modal-content {
-        padding: 20px;
+        padding: 25px;
         width: 95%;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    .current-credits span {
+        font-size: 2.2rem;
     }
 }
 
-/* Add a Google Font (Inter) for a modern look */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@media (max-width: 576px) {
+    main {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .sidebar, .content, .modal-content {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    section h2 {
+        font-size: 1.6rem;
+    }
+
+    .current-credits h3 {
+        font-size: 1.2rem;
+    }
+    .current-credits span {
+        font-size: 1.8rem;
+    }
+
+    .sprint-card h3 {
+        font-size: 1.3rem;
+    }
+    .sprint-card p {
+        font-size: 0.9rem;
+    }
+
+    .sprint-actions button {
+        margin-left: 0;
+        margin-right: 10px;
+        font-size: 0.85rem;
+        padding: 8px 15px;
+    }
+    .sprint-actions {
+        text-align: center;
+    }
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .task-item input[type="checkbox"] {
+        margin-bottom: 5px;
+    }
+    .task-item .task-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
