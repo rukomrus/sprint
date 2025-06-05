@@ -149,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="sprint-actions">
                     <button class="view-tasks-btn" data-sprint-id="${sprint.id}">Задачи</button>
-                    <button class="edit-sprint-btn edit" data-sprint-id="${sprint.id}">Редактировать</button>
-                    <button class="delete-sprint-btn delete" data-sprint-id="${sprint.id}">Удалить</button>
+                    <button class="edit-sprint-btn edit" data-sprint-id="${sprint.id}" title="Редактировать">&#9998;</button>
+                    <button class="delete-sprint-btn delete" data-sprint-id="${sprint.id}" title="Удалить">&#128465;</button>
                 </div>
             `;
             sprintsList.appendChild(sprintCard);
@@ -172,8 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <input type="checkbox" data-task-id="${task.id}" ${task.completed ? 'checked' : ''}>
                     <span>${task.description}</span>
                     <div class="task-actions">
-                        <button class="edit-task-btn" data-task-id="${task.id}" data-sprint-id="${sprintId}">Редактировать</button>
-                        <button class="delete-task-btn delete" data-task-id="${task.id}" data-sprint-id="${sprintId}">Удалить</button>
+                        <button class="edit-task-btn" data-task-id="${task.id}" data-sprint-id="${sprintId}" title="Редактировать">&#9998;</button>
+                        <button class="delete-task-btn delete" data-task-id="${task.id}" data-sprint-id="${sprintId}" title="Удалить">&#128465;</button>
                     </div>
                 `;
                 tasksList.appendChild(taskItem);
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             li.innerHTML = `
                 <span>${trophy.description}</span>
-                <button class="delete-trophy-btn" data-trophy-id="${trophy.id}">Удалить</button>
+                <button class="delete-trophy-btn" data-trophy-id="${trophy.id}" title="Удалить">&#128465;</button>
             `;
             trophiesList.appendChild(li);
         });
