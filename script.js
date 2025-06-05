@@ -52,6 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const importFileInput = document.getElementById('import-file-input');
     const clearDataBtn = document.getElementById('clear-data-btn');
 
+    // Add active class to the initial active button
+    showSprintsBtn.classList.add('active');
+
     // --- Global Data Storage ---
     let appData = {
         sprints: [],
@@ -191,19 +194,34 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Event Handlers ---
-    const switchSection = (sectionToShow) => {
-        document.querySelectorAll('main section').forEach(section => {
-            section.classList.add('hidden-section');
-            section.classList.remove('active-section');
-        });
-        sectionToShow.classList.remove('hidden-section');
-        sectionToShow.classList.add('active-section');
-    };
+    const switchSection = (sectionToShow, activeButton) => {
+    // Hide all sections
+    document.querySelectorAll('main section').forEach(section => {
+        section.classList.add('hidden-section');
+        section.classList.remove('active-section');
+    });
+    // Remove active class from all sidebar buttons
+    document.querySelectorAll('.sidebar nav button').forEach(button => {
+        button.classList.remove('active');
+    });
 
-    showSprintsBtn.addEventListener('click', () => switchSection(sprintsSection));
-    showRewardsBtn.addEventListener('click', () => switchSection(rewardsSection));
-    showRetrospectiveBtn.addEventListener('click', () => switchSection(retrospectiveSection));
-    showDataManagementBtn.addEventListener('click', () => switchSection(dataManagementSection));
+    // Show the selected section
+    sectionToShow.classList.remove('hidden-section');
+    sectionToShow.classList.add('active-section');
+    // Add active class to the clicked button
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+};
+
+// Update event listeners to pass the button element
+showSprintsBtn.addEventListener('click', (e) => switchSection(sprintsSection, e.target));
+showRewardsBtn.addEventListener('click', (e) => switchSection(rewardsSection, e.target));
+showRetrospectiveBtn.addEventListener('click', (e) => switchSection(retrospectiveSection, e.target));
+showDataManagementBtn.addEventListener('click', (e) => switchSection(dataManagementSection, e.target));
+
+// Also update the initial load to set the active button
+showSprintsBtn.click(); // Simulate click to set initial active state
 
     // Sprint Management
     addSprintBtn.addEventListener('click', () => {
