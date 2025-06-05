@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бортовой журнал Космической Одиссеи</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Бортовой журнал Космической Одиссеи</h1>
+    </header>
+
+    <main>
+        <div class="sidebar">
+            <nav>
+                <button id="show-sprints">Спринты</button>
+                <button id="show-rewards">Вознаграждения</button>
+                <button id="show-retrospective">Ретроспектива</button>
+                <button id="show-data-management">Управление данными</button>
+            </nav>
+            <div class="current-credits">
+                <h3>Космические кредиты: <span id="credits-count">0</span></h3>
+            </div>
+        </div>
+
+        <div class="content">
+            <section id="sprints-section" class="active-section">
+                <h2>Мои Спринты</h2>
+                <div id="sprints-list">
+                    </div>
+                <button id="add-sprint-btn">Добавить Спринт</button>
+
+                <div id="sprint-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3>Добавить/Редактировать Спринт</h3>
+                        <input type="hidden" id="sprint-id-input">
+                        <label for="sprint-name">Название Спринта:</label>
+                        <input type="text" id="sprint-name" placeholder="Например, Запуск на орбиту">
+                        <label for="sprint-goal">Цель Спринта:</label>
+                        <textarea id="sprint-goal" placeholder="Например, Заложить фундамент знаний..."></textarea>
+                        <button id="save-sprint-btn">Сохранить Спринт</button>
+                    </div>
+                </div>
+
+                <div id="tasks-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3 id="tasks-modal-title">Задачи Спринта: <span id="current-sprint-name"></span></h3>
+                        <div id="tasks-list">
+                            </div>
+                        <button id="add-task-btn">Добавить Задачу</button>
+
+                        <div id="task-modal" class="modal sub-modal">
+                            <div class="modal-content">
+                                <span class="close-button">&times;</span>
+                                <h4>Добавить/Редактировать Задачу</h4>
+                                <input type="hidden" id="task-id-input">
+                                <label for="task-description">Описание Задачи:</label>
+                                <input type="text" id="task-description" placeholder="Например, Изучить базовый синтаксис HTML">
+                                <button id="save-task-btn">Сохранить Задачу</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rewards-section" class="hidden-section">
+                <h2>Мои Вознаграждения</h2>
+                <div class="reward-category">
+                    <h3>Космические кредиты</h3>
+                    <p>Текущий баланс: <span id="current-credits-main">0</span></p>
+                    <button id="add-credits-btn">Добавить Кредиты</button>
+                    <button id="spend-credits-btn">Потратить Кредиты</button>
+                </div>
+
+                <div class="reward-category">
+                    <h3>Галактические Трофеи</h3>
+                    <ul id="trophies-list">
+                        </ul>
+                    <button id="add-trophy-btn">Добавить Трофей</button>
+                </div>
+
+                <div id="credits-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3>Добавить/Потратить Кредиты</h3>
+                        <label for="credits-amount">Количество:</label>
+                        <input type="number" id="credits-amount" value="0">
+                        <label for="credits-reason">Причина:</label>
+                        <input type="text" id="credits-reason" placeholder="Например, Завершение спринта 1">
+                        <button id="apply-credits-btn">Применить</button>
+                    </div>
+                </div>
+
+                <div id="trophy-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3>Добавить Трофей</h3>
+                        <label for="trophy-description">Описание Трофея:</label>
+                        <input type="text" id="trophy-description" placeholder="Например, Покупка крутых наушников">
+                        <button id="save-trophy-btn">Сохранить Трофей</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="retrospective-section" class="hidden-section">
+                <h2>Ретроспектива</h2>
+                <textarea id="retrospective-notes" placeholder="Заметки по итогам спринтов, что было круто, что улучшить..."></textarea>
+                <button id="save-retrospective-btn">Сохранить Заметки</button>
+            </section>
+
+            <section id="data-management-section" class="hidden-section">
+                <h2>Управление Данными</h2>
+                <p>Здесь вы можете управлять данными приложения.</p>
+                <button id="export-data-btn">Экспортировать данные</button>
+                <button id="import-data-btn">Импортировать данные</button>
+                <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                <button id="clear-data-btn" class="danger-button">Очистить все данные</button>
+                <p class="warning-text">Внимание: Очистка данных удалит все сохраненные спринты, задачи и награды!</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Бортовой журнал Космической Одиссеи</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
