@@ -1,7 +1,7 @@
 /* style.css - Redesign based on passkeys.foundation */
 
 /* Import Google Fonts - Inter is a good fit for this modern, clean style */
-@import url('https://fonts.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* Define the new accent color for easier management */
 :root {
@@ -37,16 +37,46 @@ body {
     display: none;
 }
 
-/* Header Styles (if still present in HTML, although it was hidden in Odyssey) */
-header {
-    display: none; /* Keep hidden as per original Odyssey project */
+/* Header Styles for the new top logo bar */
+.app-header {
+    background-color: var(--card-background); /* White background for the header bar */
+    padding: 20px 60px; /* Padding for the header */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the left */
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width */
+    position: sticky; /* Make it stick to the top */
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Logo and text container in the header */
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between logo and text */
+}
+
+.app-logo img {
+    width: 48px; /* Size of the logo image */
+    height: 48px;
+}
+
+.app-logo h1 {
+    margin: 0;
+    font-size: 2.5rem; /* Same size as "Мои Спринты"*/
+    color: var(--primary-accent); /* Color of the "Редактировать" button*/
+    font-weight: 700; /* Bold, like other headings*/
+    letter-spacing: -0.5px;
 }
 
 /* Main Content Area */
 main {
     display: flex;
     flex: 1;
-    padding: 60px; /* More padding for spacious feel */
+    padding: 40px 60px; /* Adjusted padding to account for header */
     gap: 40px; /* Increased gap between sidebar and content */
     max-width: 1600px; /* Wider content area */
     margin: 40px auto; /* Center the main content */
@@ -71,28 +101,10 @@ main {
     gap: 30px;
 }
 
-/* Logo in Sidebar */
-.app-logo {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Space between logo and text */
-    margin-bottom: 25px; /* Space below the logo */
-    padding-bottom: 25px;
-    border-bottom: 1px solid #e0e0e0; /* Separator line */
-}
-
-.app-logo img {
-    width: 48px; /* Size of the logo image */
-    height: 48px;
-}
-
-.app-logo h1 {
-    margin: 0;
-    font-size: 2.5rem; /* Same size as "Мои Спринты"*/
-    color: var(--primary-accent); /* Color of the "Редактировать" button*/
-    font-weight: 700; /* Bold, like other headings*/
-    letter-spacing: -0.5px;
-}
+/* Remove app-logo styles from sidebar as it's now in header */
+/* .sidebar .app-logo {
+    display: none;
+} */
 
 
 .sidebar nav {
@@ -524,6 +536,9 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
+    .app-header {
+        padding: 15px 40px;
+    }
     main {
         flex-direction: column;
         padding: 40px;
@@ -562,6 +577,16 @@ footer {
 }
 
 @media (max-width: 576px) {
+    .app-header {
+        padding: 10px 20px;
+    }
+    .app-logo img {
+        width: 40px;
+        height: 40px;
+    }
+    .app-logo h1 {
+        font-size: 2rem;
+    }
     main {
         padding: 20px;
         margin: 20px auto;
