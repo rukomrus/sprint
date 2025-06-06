@@ -1,5 +1,5 @@
 /* Import Google Fonts - Using 'Inter' for a clean, modern look, similar to what many tech companies use */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* General Body Styles */
 body {
@@ -186,8 +186,9 @@ section h2 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.sprint-card {
-    border-left: 6px solid #00aaff; /* Сохранили акцентную левую границу */
+/* Единый стиль для всех акцентных левых полосок */
+.sprint-card, .task-item, .reward-category, #trophies-list li {
+    border-left: 6px solid #00aaff; /* Единая голубая полоска */
 }
 
 .sprint-card h3 {
@@ -324,7 +325,7 @@ section h2 {
 .task-item {
     background: transparent; /* Сделали фон прозрачным */
     border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
-    border-left: 6px solid #00ffcc; /* Сохранили акцентную левую границу */
+    /* border-left уже установлен в едином стиле выше */
     padding: 18px;
     margin-bottom: 12px;
     border-radius: 10px;
@@ -338,7 +339,7 @@ section h2 {
     background-color: rgba(20, 40, 35, 0.8); /* Темно-зеленый фон для завершенных задач */
     text-decoration: line-through;
     color: #888;
-    border-left-color: #008066;
+    border-left-color: #008066; /* Сохраняем цвет завершенной задачи */
 }
 
 .task-item input[type="checkbox"] {
@@ -457,7 +458,7 @@ section h2 {
 .reward-category {
     background: transparent; /* Сделали фон прозрачным */
     border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
-    border-left-color: #ffcc00; /* Сохранили акцентную левую границу */
+    /* border-left уже установлен в едином стиле выше */
 }
 
 #trophies-list {
@@ -468,7 +469,7 @@ section h2 {
 #trophies-list li {
     background: transparent; /* Сделали фон прозрачным */
     border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
-    border-left: 6px solid #a050ff; /* Сохранили акцентную левую границу */
+    /* border-left уже установлен в едином стиле выше */
     padding: 18px;
     margin-bottom: 12px;
     border-radius: 10px;
