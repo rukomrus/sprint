@@ -80,11 +80,11 @@ main {
 
 /* Shared Card/Box Styling (Sidebar, Content, Modals) */
 .sidebar, .content, .modal-content {
-    background-color: rgba(15, 15, 30, 0.7); /* Slightly transparent dark blueish grey */
+    background: transparent; /* Сделали фон прозрачным */
     backdrop-filter: blur(6px); /* Consistent glassmorphism */
     border-radius: 16px; /* More rounded corners, premium feel */
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Stronger, diffused shadow */
-    border: 1px solid rgba(60, 60, 100, 0.5); /* Accent border color */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка с прозрачностью */
     padding: 30px;
 }
 
@@ -137,7 +137,7 @@ main {
     margin-top: auto;
     text-align: center;
     padding-top: 30px;
-    border-top: 1px solid rgba(60, 60, 100, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Белая обводка, менее прозрачная чем основная */
 }
 
 .current-credits h3 {
@@ -178,13 +178,16 @@ section h2 {
 
 /* Card and Item Styles */
 .sprint-card, .reward-category {
-    background-color: rgba(25, 25, 45, 0.8); /* Slightly lighter dark for cards */
-    border: 1px solid rgba(80, 80, 120, 0.5);
-    border-left: 6px solid #00aaff; /* Vibrant blue for sprint cards */
+    background: transparent; /* Сделали фон прозрачным */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
     padding: 25px;
     margin-bottom: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.sprint-card {
+    border-left: 6px solid #00aaff; /* Сохранили акцентную левую границу */
 }
 
 .sprint-card h3 {
@@ -319,8 +322,9 @@ section h2 {
 
 
 .task-item {
-    background-color: rgba(35, 35, 55, 0.8); /* Slightly lighter dark for tasks */
-    border-left: 6px solid #00ffcc; /* Teal accent for tasks */
+    background: transparent; /* Сделали фон прозрачным */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
+    border-left: 6px solid #00ffcc; /* Сохранили акцентную левую границу */
     padding: 18px;
     margin-bottom: 12px;
     border-radius: 10px;
@@ -331,7 +335,7 @@ section h2 {
 }
 
 .task-item.completed {
-    background-color: rgba(20, 40, 35, 0.8); /* Darker green for completed */
+    background-color: rgba(20, 40, 35, 0.8); /* Темно-зеленый фон для завершенных задач */
     text-decoration: line-through;
     color: #888;
     border-left-color: #008066;
@@ -451,8 +455,9 @@ section h2 {
 
 /* Reward Specific Styles */
 .reward-category {
-    background-color: rgba(30, 30, 50, 0.8);
-    border-left-color: #ffcc00; /* Yellow accent for rewards */
+    background: transparent; /* Сделали фон прозрачным */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
+    border-left-color: #ffcc00; /* Сохранили акцентную левую границу */
 }
 
 #trophies-list {
@@ -461,10 +466,11 @@ section h2 {
 }
 
 #trophies-list li {
-    background-color: rgba(40, 40, 60, 0.8);
+    background: transparent; /* Сделали фон прозрачным */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
+    border-left: 6px solid #a050ff; /* Сохранили акцентную левую границу */
     padding: 18px;
     margin-bottom: 12px;
-    border-left: 6px solid #a050ff; /* Purple accent for trophies */
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
