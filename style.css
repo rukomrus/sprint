@@ -47,16 +47,6 @@ body {
 /* Header Styles */
 header {
     display: none; /* Скрываем весь header */
-    /* background-color: rgba(10, 10, 20, 0.6); */
-    /* backdrop-filter: blur(8px); */
-    /* color: #f0f0f0; */
-    /* padding: 1.8rem 0; */
-    /* text-align: center; */
-    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); */
-    /* border-bottom: 1px solid rgba(50, 50, 80, 0.4); */
-    /* position: sticky; */
-    /* top: 0; */
-    /* z-index: 100; */
 }
 
 header h1 {
@@ -420,7 +410,7 @@ section h2 {
     margin-bottom: 10px;
     margin-top: 20px;
     font-weight: 500;
-    color: #c0c0c0;
+    color: #ffffff; /* Цвет текста лейблов в модальных окнах - белый */
     font-size: 1.05rem;
 }
 
@@ -552,10 +542,6 @@ footer {
         width: 95%;
     }
 
-    /* header h1 { */
-    /* font-size: 2rem; */
-    /* } */
-
     section h2 {
         font-size: 1.8rem;
     }
@@ -575,10 +561,6 @@ footer {
         padding: 15px;
         border-radius: 12px;
     }
-
-    /* header h1 { */
-    /* font-size: 1.8rem; */
-    /* } */
 
     section h2 {
         font-size: 1.6rem;
