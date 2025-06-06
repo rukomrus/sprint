@@ -1,7 +1,7 @@
 /* style.css - Redesign based on passkeys.foundation */
 
 /* Import Google Fonts - Inter is a good fit for this modern, clean style */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* Define the new accent color for easier management */
 :root {
@@ -11,7 +11,7 @@
     --text-medium: #555555; /* Medium grey for main body text */
     --text-light: #ffffff; /* White text on dark backgrounds */
     --card-background: #ffffff; /* White background for all main content cards */
-    --dark-background: #F0EFE8; /* Main body background - ИЗМЕНЕНО НА НОВЫЙ ЦВЕТ */
+    --dark-background: #f0efe8; /* Main body background */
     --input-background: #f0f0f0; /* Light background for input fields */
 }
 
@@ -23,658 +23,524 @@ body {
     background-color: var(--dark-background); /* Solid dark background */
     color: var(--text-medium); /* Default text color for body (main text) */
     display: flex;
-    flex-direction: column; /* Изменено, чтобы footer был внизу, а main занимал оставшееся пространство */
-    min-height: 100vh; /* Минимальная высота, чтобы footer был внизу */
-    overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
-/* Glow effect in background - subtle animation */
-.bg-glow {
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 10% 20%, var(--primary-accent) 0%, rgba(255, 255, 255, 0) 25%),
-                radial-gradient(circle at 70% 80%, var(--secondary-accent) 0%, rgba(255, 255, 255, 0) 25%);
-    background-size: 50% 50%;
-    animation: glow-move 20s infinite alternate;
-    opacity: 0.1;
-    z-index: 0;
-}
-
-@keyframes glow-move {
-    0% { background-position: 0% 0%, 100% 100%; }
-    100% { background-position: 100% 100%, 0% 0%; }
-}
-
-/* Стили для нового HEADER с логотипом */
-.app-header {
-    position: absolute; /* Позиционируем абсолютно, чтобы не влиять на flexbox main */
-    top: 40px; /* Отступ сверху */
-    left: 60px; /* Отступ слева */
-    z-index: 2; /* Убедимся, что он поверх всего, кроме модальных окон */
-    padding: 0; /* Убираем внутренние отступы */
-}
-
-.app-logo {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Расстояние между иконкой и текстом */
-}
-
-.app-logo img {
-    height: 48px; /* Размер иконки */
-    width: auto;
-}
-
-.app-logo span {
-    color: var(--primary-accent); /* Цвет текста как у акцентного цвета */
-    font-size: 2.5rem; /* Размер шрифта как у заголовка "Мои Спринты" */
-    font-weight: 700; /* Жирный шрифт */
-    letter-spacing: -0.5px; /* Плотнее межбуквенное расстояние */
-    line-height: 1; /* Убрать лишний пробел по вертикали */
-}
-
-
-/* Main Content Area - Возвращаем к исходной flex-структуре */
-main {
-    display: flex; /* Flex-контейнер */
-    flex: 1; /* Занимает все доступное пространство по вертикали */
-    padding: 40px 60px; /* Отступы вокруг основного контента */
-    gap: 40px; /* Отступ между сайдбаром и контентом */
-    max-width: 1600px;
-    margin: 40px auto; /* Центрируем main */
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
     position: relative;
-    z-index: 1; /* Чтобы main был поверх glow */
-    margin-top: 100px; /* Добавляем отступ сверху, чтобы логотип не перекрывал main */
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased; /* Ensure smooth text rendering */
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Sidebar Styles */
+/* Remove the old bg-glow as the reference site uses a solid dark background */
+.bg-glow {
+    display: none;
+}
+
+/* Header Styles (if still present in HTML, although it was hidden in Odyssey) */
+header {
+    display: none; /* Keep hidden as per original Odyssey project */
+}
+
+/* Main Content Area */
+main {
+    display: flex;
+    flex: 1;
+    padding: 60px; /* More padding for spacious feel */
+    gap: 40px; /* Increased gap between sidebar and content */
+    max-width: 1600px; /* Wider content area */
+    margin: 40px auto; /* Center the main content */
+    position: relative;
+    z-index: 1;
+}
+
+/* Shared Card/Box Styling (Sidebar, Content, Modals) */
+.sidebar, .content, .modal-content {
+    background: var(--card-background); /* White/light background for all cards */
+    border-radius: 20px; /* More pronounced rounded corners */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Soft, diffused shadow */
+    border: none; /* Remove explicit border, rely on shadow for separation */
+    padding: 40px; /* Generous padding */
+}
+
+/* Sidebar Navigation */
 .sidebar {
-    background-color: var(--card-background);
-    border-radius: 20px;
-    padding: 40px;
-    width: 280px; /* Fixed width for sidebar */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    width: 320px; /* Slightly wider sidebar */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch; /* Stretch buttons to full width */
-    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    gap: 30px;
 }
 
 .sidebar nav {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 30px;
 }
 
-.sidebar button {
-    background-color: transparent;
-    border: none;
-    padding: 15px 20px;
-    text-align: left;
+.sidebar nav button {
+    background: var(--card-background); /* White background for inactive buttons */
+    color: var(--text-dark); /* Dark text for inactive buttons */
+    border: none; /* No border */
+    padding: 18px 25px;
+    border-radius: 12px; /* Rounded buttons */
+    cursor: pointer;
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--text-medium);
-    cursor: pointer;
-    border-radius: 12px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
+    outline: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
-.sidebar button:hover,
-.sidebar button.active {
-    background-color: var(--primary-accent);
-    color: var(--text-light);
+.sidebar nav button:hover {
+    background-color: #f5f5f5; /* Slight grey on hover */
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar nav button.active {
+    background: var(--primary-accent); /* Accent color for active state */
+    color: var(--text-light); /* White text for active */
+    box-shadow: 0 5px 20px rgba(231, 98, 164, 0.5); /* Glow with accent color */
+    font-weight: 600;
 }
 
 .current-credits {
+    margin-top: auto;
     text-align: center;
-    margin-top: auto; /* Pushes credits to the bottom */
-    background-color: var(--input-background); /* Lighter background for the credits box */
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+    padding-top: 30px;
+    border-top: 1px solid #e0e0e0; /* Light grey separator */
 }
 
 .current-credits h3 {
-    color: var(--text-dark);
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    font-weight: 600;
+    margin: 0;
+    color: var(--text-dark); /* Dark text for credits title (Heading style) */
+    font-size: 1.5rem;
+    letter-spacing: 0.8px;
+    font-weight: 600; /* Adjusted for consistency */
 }
 
-#credits-count {
-    color: var(--primary-accent);
-    font-size: 1.8rem;
-    font-weight: 700;
+.current-credits span {
+    font-size: 3.2rem; /* Larger, more impactful */
+    font-weight: 800; /* Extra bold */
+    color: var(--primary-accent); /* Accent color for credits value */
+    display: block;
+    margin-top: 10px;
 }
 
-
-/* Content Area */
+/* Main Content Area Sections */
 .content {
-    flex-grow: 1; /* Allows content to take up remaining space */
-    background-color: var(--card-background);
-    border-radius: 20px;
-    padding: 40px 45px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-}
-
-.content h2 {
-    color: var(--text-dark);
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-top: 0;
-    margin-bottom: 30px;
-    letter-spacing: -0.5px;
-}
-
-.content section {
-    display: none; /* Hide all sections by default */
-    flex-direction: column;
     flex: 1;
 }
 
-.content section.active-section {
-    display: flex; /* Show active section */
+/* Все заголовки: стиль надписи "Мои Спринты" */
+h1, h2, h3, h4 {
+    color: var(--text-dark); /* Темный цвет для всех заголовков */
+    font-weight: 700; /* Жирный шрифт для всех заголовков */
+    letter-spacing: -0.5px; /* Немного более плотное межбуквенное расстояние */
 }
 
-/* General Input & Button Styles */
-input[type="text"],
-input[type="number"],
-textarea {
-    width: calc(100% - 24px); /* Account for padding */
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: var(--text-dark);
-    background-color: var(--input-background);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+/* Конкретные размеры для разных уровней заголовков */
+section h2 { /* Мои Спринты */
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 0 3px rgba(231, 98, 164, 0.2); /* Soft glow on focus */
+.modal-content h3, .modal-content h4 { /* Заголовки модальных окон */
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
+.sprint-card h3 { /* Заголовки карточек спринтов */
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
+    flex-basis: 100%;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: var(--text-dark);
+.hidden-section {
+    display: none;
 }
 
-button {
-    padding: 12px 25px;
+/* Card and Item Styles (Sprint Card, Task Item, Reward Category, Trophy List) */
+.sprint-card, .reward-category {
+    background: var(--card-background); /* White background for cards */
     border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    white-space: nowrap; /* Prevent text wrapping */
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Soft, diffused shadow */
+    position: relative;
 }
 
-button:hover {
-    transform: translateY(-1px);
+/* Accent left border for all main cards */
+.sprint-card::before, .task-item::before, .reward-category::before, #trophies-list li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 6px;
+    background-color: var(--primary-accent); /* Accent color for the left stripe */
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
 }
 
-button:active {
-    transform: translateY(0);
+/* Подзаголовки: стиль надписи "Запуск на орбиту" (это для описаний, как и весь текст) */
+/* Весь текст: стиль текста "Заложить фундамент знаний и создать первую веб-страницу." */
+p, ul li { /* Применяем ко всем параграфам и элементам списков */
+    color: var(--text-medium); /* Средне-серый цвет для основного текста */
+    font-size: 1rem; /* Единый размер для основного текста */
 }
 
-/* Primary Button Styles */
-button:not(.danger-button):not(.success-button):not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) {
+.sprint-card p { /* Описание спринта */
+    margin: 0;
+    flex-basis: 100%;
+}
+
+.sprint-actions {
+    margin-top: 25px;
+    flex-basis: 100%;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* General styles for small icon buttons (edit/delete) */
+.sprint-actions button.edit-sprint-btn,
+.sprint-actions button.delete-sprint-btn,
+.task-item .task-actions button.edit-task-btn,
+.task-item .task-actions button.delete-task-btn,
+#trophies-list li .delete-trophy-btn {
+    background: #e0e0e0;
+    color: var(--text-dark);
+    border: none;
+    border-radius: 50%;
+    min-width: 44px;
+    height: 44px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    font-size: 1.3rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sprint-actions button.edit-sprint-btn:hover,
+.sprint-actions button.delete-sprint-btn:hover,
+.task-item .task-actions button.edit-task-btn:hover,
+.task-item .task-actions button.delete-task-btn:hover,
+#trophies-list li .delete-trophy-btn:hover {
+    background-color: #d0d0d0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Specific styles for "Edit" button (using accent color) */
+.sprint-actions button.edit, .task-item .task-actions button.edit-task-btn {
     background-color: var(--primary-accent);
     color: var(--text-light);
 }
-
-button:not(.danger-button):not(.success-button):not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn):hover {
-    background-color: #d15694; /* Slightly darker pink */
+.sprint-actions button.edit:hover, .task-item .task-actions button.edit-task-btn:hover {
+    background-color: #d94fa2; /* Darker accent on hover */
+    box-shadow: 0 5px 15px rgba(231, 98, 164, 0.3);
 }
 
-.success-button {
-    background-color: #28a745; /* Green */
+/* Specific styles for "Delete" button (using red) */
+.sprint-actions button.delete, .task-item .task-actions button.delete-task-btn, #trophies-list li .delete-trophy-btn {
+    background-color: #ff4444;
     color: var(--text-light);
 }
-
-.success-button:hover {
-    background-color: #218838;
+.sprint-actions button.delete:hover, .task-item .task-actions button.delete-task-btn:hover, #trophies-list li .delete-trophy-btn:hover {
+    background-color: #e63939;
+    box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
 }
 
-.danger-button {
-    background-color: #dc3545; /* Red */
+/* General styles for all other main action buttons (Add, Save, View Tasks, etc.) */
+#add-sprint-btn, #add-task-btn, #save-sprint-btn, #save-task-btn,
+#add-credits-btn, #spend-credits-btn, #apply-credits-btn,
+#add-trophy-btn, #save-trophy-btn, #save-retrospective-btn,
+#export-data-btn, #import-data-btn,
+.sprint-actions button.view-tasks-btn,
+.modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) {
+    background: var(--text-dark);
     color: var(--text-light);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-transform: capitalize;
+    letter-spacing: 0;
 }
 
-.danger-button:hover {
-    background-color: #c82333;
+/* Hover effects for these primary buttons */
+#add-sprint-btn:hover, #add-task-btn:hover, #save-sprint-btn:hover, #save-task-btn:hover,
+#add-credits-btn:hover, #spend-credits-btn:hover, #apply-credits-btn:hover,
+#add-trophy-btn:hover, #save-trophy-btn:hover, #save-retrospective-btn:hover,
+#export-data-btn:hover, #import-data-btn:hover,
+.sprint-actions button.view-tasks-btn:hover,
+.modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn):hover {
+    background-color: #333333; /* Slightly lighter dark on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Specific Styles for Sprints and Tasks */
-#sprints-list, #tasks-list, #trophies-list {
-    display: grid;
-    gap: 25px;
-    margin-bottom: 30px;
-    padding-right: 15px; /* Prevent scrollbar from overlapping content */
-    overflow-y: auto; /* Enable scrolling for lists */
-    max-height: 50vh; /* Limit height to allow scrolling */
+/* Override for danger-button (e.g., clear data) */
+#clear-data-btn.danger-button {
+    background: #ff4444 !important;
+    color: var(--text-light) !important;
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2) !important;
+}
+#clear-data-btn.danger-button:hover {
+    background-color: #e63939 !important;
+    box-shadow: 0 6px 20px rgba(255, 68, 68, 0.3) !important;
 }
 
-.sprint-item, .task-item, .trophy-item {
-    background-color: var(--input-background); /* Lighter card background */
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
-    display: flex;
-    flex-direction: column;
-    position: relative; /* For actions button positioning */
-}
-
-.sprint-item h3, .task-item h4, .trophy-item h4 {
-    color: var(--primary-accent);
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.sprint-item p, .task-item p, .trophy-item p {
-    margin-bottom: 8px;
-    line-height: 1.5;
-    color: var(--text-medium);
-}
-
-.sprint-item .sprint-goal {
-    font-size: 0.95rem;
-    color: var(--text-dark);
-}
-
-.sprint-item .sprint-status, .task-item .task-status {
-    font-weight: 600;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px dashed #e0e0e0;
-}
-
-.sprint-item .sprint-status.completed, .task-item .task-status.completed {
-    color: #28a745; /* Green */
-}
-
-.sprint-item .sprint-status.in-progress, .task-item .task-status.in-progress {
-    color: var(--primary-accent);
-}
-
-.sprint-actions, .task-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    justify-content: flex-end; /* Align buttons to the right */
-}
-
-.sprint-actions button, .task-actions button, #trophies-list li .delete-trophy-btn {
-    padding: 10px 15px;
-    font-size: 0.9rem;
-    border-radius: 8px;
-}
-
-.sprint-actions button.edit-sprint-btn, .task-actions button.edit-task-btn {
-    background-color: #6c757d; /* Grey for edit */
-    color: var(--text-light);
-}
-
-.sprint-actions button.edit-sprint-btn:hover, .task-actions button.edit-task-btn:hover {
-    background-color: #5a6268;
-}
-
-.sprint-actions button.delete-sprint-btn, .task-actions button.delete-task-btn, #trophies-list li .delete-trophy-btn {
-    background-color: #dc3545; /* Red for delete */
-    color: var(--text-light);
-}
-
-.sprint-actions button.delete-sprint-btn:hover, .task-actions button.delete-task-btn:hover, #trophies-list li .delete-trophy-btn:hover {
-    background-color: #c82333;
-}
-
-.sprint-actions button.view-tasks-btn {
-    background-color: var(--secondary-accent); /* Blue for view tasks */
-    color: var(--text-light);
-}
-
-.sprint-actions button.view-tasks-btn:hover {
-    background-color: #0088cc;
-}
-
-.task-item .task-checkbox {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    width: 25px;
-    height: 25px;
-    border: 2px solid var(--primary-accent);
-    border-radius: 8px;
-    cursor: pointer;
+.task-item {
+    background: var(--card-background);
+    border: none;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    justify-content: space-between;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
-.task-item.completed .task-checkbox {
-    background-color: #28a745;
-    border-color: #28a745;
+.task-item.completed {
+    background-color: #f8f8f8;
+    text-decoration: line-through;
+    color: #888;
 }
 
-.task-item.completed .task-checkbox::after {
-    content: '✔';
-    color: white;
-    font-size: 1.2rem;
+.task-item input[type="checkbox"] {
+    margin-right: 20px;
+    width: 28px;
+    height: 28px;
+    accent-color: var(--primary-accent);
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background-color: var(--card-background);
+    transition: all 0.2s ease-in-out;
 }
 
-/* Modals */
+.task-item input[type="checkbox"]:checked {
+    box-shadow: 0 0 10px rgba(231, 98, 164, 0.5);
+}
+
+.task-item .task-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Modal Styles */
 .modal {
-    display: none; /* Hidden by default - ИСПРАВЛЕНО! */
-    position: fixed; /* Stay in place */
-    z-index: 100; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 2000;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    align-items: center; /* Эти свойства применяются, когда display: flex; */
-    justify-content: center; /* и когда модальное окно видимо */
-    padding: 20px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
 }
 
 .modal-content {
-    background-color: var(--card-background);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    width: 100%;
     max-width: 600px;
-    position: relative;
-    animation: fadeIn 0.3s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.modal-content h3 {
-    color: var(--text-dark);
-    margin-top: 0;
-    margin-bottom: 25px;
-    font-size: 2rem;
-    font-weight: 600;
+    margin: auto;
+    padding: 40px;
 }
 
 .close-button {
-    color: #aaa;
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s ease;
+    color: #666666;
+    float: right;
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .close-button:hover,
 .close-button:focus {
     color: var(--primary-accent);
+    transform: rotate(0deg);
     text-decoration: none;
     cursor: pointer;
 }
 
-/* Rewards Section */
-.credits-management {
-    background-color: var(--input-background);
-    border-radius: 15px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
-    text-align: center;
-}
-
-.credits-management h3 {
-    color: var(--text-dark);
-    font-size: 1.6rem;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-.credits-management input {
-    width: calc(100% - 24px);
-    max-width: 250px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 15px;
-}
-
-.credits-management button {
-    display: inline-block;
-    vertical-align: middle;
-    margin-top: 0; /* Remove top margin if input is beside */
-}
-
-#available-rewards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-.reward-item {
-    background-color: var(--input-background);
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.reward-item h4 {
-    color: var(--primary-accent);
-    font-size: 1.4rem;
-    margin-top: 0;
+.modal-content label {
+    display: block;
     margin-bottom: 10px;
+    margin-top: 20px;
+    font-weight: 500;
+    color: var(--text-dark); /* Dark text for labels */
+    font-size: 1.05rem;
 }
 
-.reward-item p {
-    font-size: 0.95rem;
-    color: var(--text-medium);
-    margin-bottom: 15px;
-}
-
-.reward-item .reward-cost {
-    font-size: 1.2rem;
-    font-weight: 700;
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content textarea {
+    width: calc(100% - 40px);
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    box-sizing: border-box;
+    background-color: var(--input-background);
     color: var(--text-dark);
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: box-shadow 0.2s ease;
 }
 
-.reward-item button {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
+.modal-content input[type="text"]:focus,
+.modal-content input[type="number"]:focus,
+.modal-content textarea:focus {
+    box-shadow: 0 0 0 3px var(--primary-accent);
+}
+
+/* Specific styling for placeholder text */
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+    color: #999999;
+    opacity: 1;
+}
+
+.sub-modal .modal-content {
+    max-width: 550px;
+}
+
+/* Reward Specific Styles */
+.reward-category {
+    position: relative;
 }
 
 #trophies-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    list-style: none;
+    padding: 0;
 }
 
-.trophy-item {
-    text-align: center;
-}
-
-.trophy-item .trophy-icon {
-    font-size: 3rem;
-    color: gold; /* Example color for trophies */
-    margin-bottom: 10px;
-}
-
-.trophy-item h4 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-}
-
-/* Retrospective Section */
-#retrospective-section textarea {
-    min-height: 250px;
-    margin-bottom: 25px;
-}
-
-#retrospective-section button {
-    width: auto;
-    align-self: flex-start; /* Align button to the left */
-}
-
-/* Data Management Section */
-#data-management-section button {
-    margin-right: 15px;
+#trophies-list li {
+    background: var(--card-background);
+    border: none;
+    padding: 20px;
     margin-bottom: 15px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-medium); /* Main text style for list items */
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
+/* Retrospective Styles */
+#retrospective-notes {
+    width: calc(100% - 40px);
+    min-height: 300px;
+    padding: 18px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    background-color: var(--input-background);
+    color: var(--text-dark);
+    outline: none;
+    resize: vertical;
+    transition: box-shadow 0.2s ease;
+}
+
+#retrospective-notes:focus {
+    box-shadow: 0 0 0 3px var(--primary-accent);
+}
+
+
+/* Data Management Styles */
 .warning-text {
-    color: #dc3545;
-    font-weight: 500;
-    margin-top: 20px;
-    font-size: 0.9rem;
+    color: #ff7700;
+    font-weight: 600;
+    margin-top: 25px;
+    font-size: 0.95rem;
+    text-shadow: none;
 }
 
 /* Footer Styles */
 footer {
-    background-color: var(--text-dark); /* Dark footer */
-    color: var(--text-light);
+    background-color: var(--dark-background);
+    backdrop-filter: none;
+    color: #777777;
     text-align: center;
-    padding: 20px;
-    margin-top: auto; /* Pushes footer to the bottom */
-    z-index: 1; /* Ensure footer is above glow */
-}
-
-footer p {
-    margin: 0;
+    padding: 2rem 0;
+    margin-top: auto;
+    box-shadow: none;
+    border-top: 1px solid #333333;
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.5px;
 }
-
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
-    .app-header {
-        top: 30px;
-        left: 40px;
-    }
-    .app-logo img {
-        height: 40px;
-    }
-    .app-logo span {
-        font-size: 2rem;
-    }
-
     main {
-        flex-direction: column; /* Stack sidebar and content vertically */
-        padding: 30px;
-        margin-top: 90px; /* Увеличиваем, чтобы логотип не перекрывал */
+        flex-direction: column;
+        padding: 40px;
+        margin: 30px auto;
         gap: 30px;
     }
 
     .sidebar {
-        width: auto; /* Sidebar takes full width */
+        width: auto;
         padding: 30px;
-        order: 2; /* Сайдбар будет ниже контента на малых экранах */
+        order: 2;
     }
 
     .content {
         padding: 30px 35px;
-        order: 1; /* Контент будет выше сайдбара */
+        order: 1;
+    }
+
+    .sidebar nav button {
+        padding: 15px;
+        font-size: 1rem;
     }
 
     .modal-content {
-        max-width: 90%;
         padding: 30px;
+        width: 95%;
     }
 
-    h2 {
+    section h2 {
         font-size: 2rem;
     }
 
-    .sprint-item h3, .task-item h4, .trophy-item h4 {
-        font-size: 1.3rem;
-    }
-
-    .sprint-actions, .task-actions {
-        flex-direction: column; /* Stack buttons vertically */
-        gap: 8px;
-    }
-
-    .sprint-actions button, .task-actions button, #trophies-list li .delete-trophy-btn,
-    .sprint-actions button.view-tasks-btn,
-    .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) {
-        width: 100%; /* Full width buttons */
-        min-width: unset; /* Remove fixed min-width */
-        height: auto; /* Remove fixed height */
-    }
-
-    .sprint-item .sprint-status, .task-item .task-status {
-        text-align: center;
-    }
-
-    .task-item .task-checkbox {
-        position: static; /* Reset position to static on small screens */
-        margin: 15px auto 0 auto; /* Center the checkbox below text */
-    }
-
-    #sprints-list, #tasks-list, #trophies-list, #available-rewards {
-        gap: 20px;
-        max-height: unset; /* Allow height to adjust */
-        padding-right: 0;
+    .current-credits span {
+        font-size: 2.5rem;
     }
 }
 
 @media (max-width: 576px) {
-    .app-header {
-        top: 20px;
-        left: 20px;
-    }
-    .app-logo {
-        gap: 10px;
-    }
-    .app-logo img {
-        height: 32px;
-    }
-    .app-logo span {
-        font-size: 1.8rem;
-    }
-
     main {
         padding: 20px;
-        margin-top: 70px; /* Увеличиваем, чтобы логотип не перекрывал */
+        margin: 20px auto;
         gap: 20px;
     }
 
@@ -683,68 +549,72 @@ footer p {
         border-radius: 16px;
     }
 
-    .content h2 {
+    section h2 {
         font-size: 1.8rem;
-        margin-bottom: 20px;
     }
 
-    .modal-content h3 {
-        font-size: 1.6rem;
+    .current-credits h3 {
+        font-size: 1.3rem;
+    }
+    .current-credits span {
+        font-size: 2rem;
     }
 
-    input[type="text"],
-    input[type="number"],
-    textarea {
-        padding: 10px;
-        margin-bottom: 15px;
+    .sprint-card h3 {
+        font-size: 1.5rem;
+    }
+    .sprint-card p {
+        font-size: 0.95rem;
     }
 
-    button {
-        padding: 10px 15px;
+    /* Adjust size for icon buttons on small screens */
+    .sprint-actions button.edit-sprint-btn,
+    .sprint-actions button.delete-sprint-btn,
+    .task-item .task-actions button.edit-task-btn,
+    .task-item .task-actions button.delete-task-btn,
+    #trophies-list li .delete-trophy-btn {
+        min-width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+
+    /* Adjust padding for new style buttons on small screens */
+    #add-sprint-btn, #add-task-btn, #save-sprint-btn, #save-task-btn,
+    #add-credits-btn, #spend-credits-btn, #apply-credits-btn,
+    #add-trophy-btn, #save-trophy-btn, #save-retrospective-btn,
+    #export-data-btn, #import-data-btn,
+    .sprint-actions button.view-tasks-btn,
+    .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) {
+        padding: 10px 20px;
         font-size: 0.9rem;
         border-radius: 10px;
     }
 
-    .close-button {
-        font-size: 30px;
-        top: 15px;
-        right: 20px;
+    .sprint-actions {
+        justify-content: center;
+        gap: 8px;
     }
-
-    .current-credits {
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
         padding: 15px;
     }
-
-    .current-credits h3 {
-        font-size: 1.1rem;
+    .task-item input[type="checkbox"] {
+        margin-bottom: 5px;
+        width: 24px;
+        height: 24px;
     }
-
-    #credits-count {
-        font-size: 1.6rem;
-    }
-
-    .credits-management input {
-        margin-right: 0; /* Remove margin to stack buttons below */
-        margin-bottom: 10px;
-        display: block; /* Make input block level */
-        max-width: 100%;
-    }
-
-    .credits-management button {
-        display: block; /* Make buttons block level */
+    .task-item .task-actions {
         width: 100%;
-        margin-bottom: 10px;
+        display: flex;
+        justify-content: flex-end;
     }
 
-    .credits-management button:last-child {
-        margin-bottom: 0;
-    }
-
-    .reward-item {
-        padding: 20px;
-    }
-
-    .reward-item h4 {
-        font-size: 1.2rem;
+    .modal-content input[type="text"],
+    .modal-content input[type="number"],
+    .modal-content textarea {
+        padding: 15px 18px;
+        font-size: 1rem;
     }
 }

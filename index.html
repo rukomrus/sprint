@@ -12,13 +12,6 @@
 <body>
     <div class="bg-glow"></div>
     
-    <header class="app-header">
-        <div class="app-logo">
-            <img src="go_s_logo.png" alt="_go_sprint Logo">
-            <span>_go_sprint</span>
-        </div>
-    </header>
-
     <main>
         <div class="sidebar">
             <nav>
@@ -45,11 +38,9 @@
                         <h3>Добавить/Редактировать Спринт</h3>
                         <input type="hidden" id="sprint-id-input">
                         <label for="sprint-name">Название Спринта:</label>
-                        <input type="text" id="sprint-name" placeholder="Например, Спринт 1: Подготовка к запуску">
+                        <input type="text" id="sprint-name" placeholder="Например, Запуск на орбиту">
                         <label for="sprint-goal">Цель Спринта:</label>
-                        <textarea id="sprint-goal" placeholder="Например, Завершить основные задачи по навигации"></textarea>
-                        <label for="sprint-points">Очки (баллы):</label>
-                        <input type="number" id="sprint-points" value="0" min="0">
+                        <textarea id="sprint-goal" placeholder="Например, Заложить фундамент знаний..."></textarea>
                         <button id="save-sprint-btn">Сохранить Спринт</button>
                     </div>
                 </div>
@@ -57,59 +48,57 @@
                 <div id="tasks-modal" class="modal">
                     <div class="modal-content">
                         <span class="close-button">&times;</span>
-                        <h3 id="tasks-modal-title">Задачи для спринта: <span id="current-sprint-name"></span></h3>
+                        <h3 id="tasks-modal-title">Задачи Спринта: <span id="current-sprint-name"></span></h3>
                         <div id="tasks-list">
                             </div>
                         <button id="add-task-btn">Добавить Задачу</button>
-                    </div>
-                </div>
 
-                <div id="task-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-button">&times;</span>
-                        <h3>Добавить/Редактировать Задачу</h3>
-                        <input type="hidden" id="task-id-input">
-                        <input type="hidden" id="task-sprint-id-input">
-                        <label for="task-name">Название Задачи:</label>
-                        <input type="text" id="task-name" placeholder="Например, Разработать модуль гравитационного анализа">
-                        <label for="task-description">Описание Задачи:</label>
-                        <textarea id="task-description" placeholder="Подробно описать требования и ожидаемый результат"></textarea>
-                        <label for="task-effort">Очки усилий (Story Points):</label>
-                        <input type="number" id="task-effort" value="1" min="1">
-                        <button id="save-task-btn">Сохранить Задачу</button>
+                        <div id="task-modal" class="modal sub-modal">
+                            <div class="modal-content">
+                                <span class="close-button">&times;</span>
+                                <h4>Добавить/Редактировать Задачу</h4>
+                                <input type="hidden" id="task-id-input">
+                                <label for="task-description">Описание Задачи:</label>
+                                <input type="text" id="task-description" placeholder="Например, Изучить базовый синтаксис HTML">
+                                <button id="save-task-btn">Сохранить Задачу</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="rewards-section" class="hidden-section">
-                <h2>Мои Вознаграждения и Трофеи</h2>
-                <div class="credits-management">
-                    <h3>Управление Кредитами</h3>
-                    <input type="number" id="credits-amount" placeholder="Кол-во кредитов">
-                    <button id="add-credits-btn" class="success-button">Добавить Кредиты</button>
-                    <button id="spend-credits-btn" class="danger-button">Потратить Кредиты</button>
+                <h2>Мои Вознаграждения</h2>
+                <div class="reward-category">
+                    <h3>Космические кредиты</h3>
+                    <p>Текущий баланс: <span id="current-credits-main">0</span></p>
+                    <button id="add-credits-btn">Добавить Кредиты</button>
+                    <button id="spend-credits-btn">Потратить Кредиты</button>
                 </div>
 
-                <div class="rewards-list">
-                    <h3>Список Доступных Наград</h3>
-                    <div id="available-rewards">
-                        </div>
-                </div>
-
-                <div class="trophies-list">
-                    <h3>Мои Трофеи</h3>
-                    <div id="trophies-list">
-                        </div>
+                <div class="reward-category">
+                    <h3>Галактические Трофеи</h3>
+                    <ul id="trophies-list">
+                        </ul>
                     <button id="add-trophy-btn">Добавить Трофей</button>
+                </div>
+
+                <div id="credits-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3>Добавить/Потратить Кредиты</h3>
+                        <label for="credits-amount">Количество:</label>
+                        <input type="number" id="credits-amount" value="0">
+                        <label for="credits-reason">Причина:</label>
+                        <input type="text" id="credits-reason" placeholder="Например, Завершение спринта 1">
+                        <button id="apply-credits-btn">Применить</button>
+                    </div>
                 </div>
 
                 <div id="trophy-modal" class="modal">
                     <div class="modal-content">
                         <span class="close-button">&times;</span>
                         <h3>Добавить Трофей</h3>
-                        <input type="hidden" id="trophy-id-input">
-                        <label for="trophy-name">Название Трофея:</label>
-                        <input type="text" id="trophy-name" placeholder="Например, Первый Запуск">
                         <label for="trophy-description">Описание Трофея:</label>
                         <input type="text" id="trophy-description" placeholder="Например, Покупка крутых наушников">
                         <button id="save-trophy-btn">Сохранить Трофей</button>
