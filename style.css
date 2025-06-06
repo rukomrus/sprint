@@ -1,86 +1,74 @@
-/* Import Google Fonts - Using 'Inter' for a clean, modern look, similar to what many tech companies use */
-@import url('https://fonts.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* style.css - Redesign based on passkeys.foundation */
+
+/* Import Google Fonts - Inter is a good fit for this modern, clean style */
+@import url('https://fonts.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Define the new accent color for easier management */
+:root {
+    --primary-accent: #E762A4; /* A vibrant pink/purple accent color */
+    --secondary-accent: #00aaff; /* For specific blue elements if needed */
+    --text-dark: #222222; /* Very dark grey for text on light backgrounds */
+    --text-light: #ffffff; /* White text on dark backgrounds */
+    --card-background: #ffffff; /* White background for all main content cards */
+    --dark-background: #000000; /* Main body background */
+    --input-background: #f0f0f0; /* Light background for input fields */
+}
 
 /* General Body Styles */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    /* Новый фон из примера визитки */
-    background-color: #000000; /* Более темный базовый цвет для фона, на случай если градиент не загрузится */
-    color: #e0e0e0; /* Light grey for primary text */
+    background-color: var(--dark-background); /* Solid dark background */
+    color: var(--text-light); /* Default text color for body (mostly for elements on dark parts) */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     line-height: 1.6;
-    position: relative; /* Важно для позиционирования bg-glow */
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    position: relative;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased; /* Ensure smooth text rendering */
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Анимация дыхания фона (из примера визитки) */
-@keyframes breathe {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.92; }
-}
-
+/* Remove the old bg-glow as the reference site uses a solid dark background */
 .bg-glow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0; /* Важно, чтобы фон был за содержимым */
-  pointer-events: none; /* Чтобы фон не мешал кликам */
-  background-image:
-    radial-gradient(circle at 50% 140%, rgba(255, 70, 30, 0.18), transparent 70%),
-    linear-gradient(to top,
-      rgba(255, 90, 50, 0.12),
-      rgba(255, 160, 60, 0.1),
-      rgba(255, 210, 90, 0.06),
-      rgba(255, 255, 255, 0.04),
-      rgba(20, 20, 20, 0.2) 60%,
-      #0e0e0e); /* Используем темный базовый цвет */
-  animation: breathe 6s ease-in-out infinite;
+    display: none;
 }
 
-
-/* Header Styles */
+/* Header Styles (if still present in HTML, although it was hidden in Odyssey) */
 header {
-    display: none; /* Скрываем весь header */
-}
-
-header h1 {
-    /* display: none;  Уже скрыт родительским элементом */
+    /* If you decide to show header in Odyssey, style it here */
+    display: none; /* Keep hidden as per original Odyssey project */
 }
 
 /* Main Content Area */
 main {
     display: flex;
     flex: 1;
-    padding: 40px; /* More padding for spacious feel */
-    gap: 30px;
-    max-width: 1500px; /* Wider content area */
-    margin: 30px auto; /* Center the main content */
-    position: relative; /* Чтобы контент был над фоном */
-    z-index: 1; /* Чтобы контент был над фоном */
+    padding: 60px; /* More padding for spacious feel */
+    gap: 40px; /* Increased gap between sidebar and content */
+    max-width: 1600px; /* Wider content area */
+    margin: 40px auto; /* Center the main content */
+    position: relative;
+    z-index: 1;
 }
 
 /* Shared Card/Box Styling (Sidebar, Content, Modals) */
 .sidebar, .content, .modal-content {
-    background: transparent; /* Сделали фон прозрачным */
-    backdrop-filter: blur(6px); /* Consistent glassmorphism */
-    border-radius: 16px; /* More rounded corners, premium feel */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); /* Stronger, diffused shadow */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка с прозрачностью */
-    padding: 30px;
+    background: var(--card-background); /* White/light background for all cards */
+    border-radius: 20px; /* More pronounced rounded corners */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Soft, diffused shadow */
+    border: none; /* Remove explicit border, rely on shadow for separation */
+    padding: 40px; /* Generous padding */
 }
 
 /* Sidebar Navigation */
 .sidebar {
-    width: 300px; /* Wider sidebar for emphasis */
+    width: 320px; /* Slightly wider sidebar */
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
 }
 
 .sidebar nav {
@@ -90,33 +78,30 @@ main {
 }
 
 .sidebar nav button {
-    background: linear-gradient(135deg, rgba(30, 30, 50, 0.8), rgba(20, 20, 40, 0.8)); /* Subtle gradient */
-    color: #b0b0b0; /* Softer text color for inactive buttons */
-    border: 1px solid rgba(80, 80, 120, 0.5);
-    padding: 18px 25px; /* Larger padding */
-    border-radius: 10px; /* Rounded buttons */
+    background: var(--card-background); /* White background for inactive buttons */
+    color: var(--text-dark); /* Dark text */
+    border: none; /* No border */
+    padding: 18px 25px;
+    border-radius: 12px; /* Rounded buttons */
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: 500;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     text-align: left;
     outline: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
 .sidebar nav button:hover {
-    background: linear-gradient(135deg, rgba(40, 40, 70, 0.9), rgba(30, 30, 60, 0.9));
-    color: #ffffff;
-    border-color: rgba(100, 100, 150, 0.7);
-    transform: translateY(-2px); /* Slight lift on hover */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: #f5f5f5; /* Slight grey on hover */
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar nav button.active {
-    background: linear-gradient(135deg, #007bff, #0056b3); /* Bright blue gradient for active state */
-    color: white;
-    border-color: #007bff;
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.7); /* Stronger blue glow */
+    background: var(--primary-accent); /* Accent color for active state */
+    color: var(--text-light); /* White text for active */
+    box-shadow: 0 5px 20px rgba(var(--primary-accent-rgb, 231, 98, 164), 0.5); /* Glow with accent color */
     font-weight: 600;
 }
 
@@ -124,23 +109,22 @@ main {
     margin-top: auto;
     text-align: center;
     padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Белая обводка, менее прозрачная чем основная */
+    border-top: 1px solid #e0e0e0; /* Light grey separator */
 }
 
 .current-credits h3 {
     margin: 0;
-    color: #f0f0f0;
+    color: var(--text-dark); /* Dark text for credits title */
     font-size: 1.5rem;
     letter-spacing: 0.8px;
 }
 
 .current-credits span {
-    font-size: 2.8rem; /* Larger, more impactful */
-    font-weight: 700;
-    color: #00ffcc; /* Vibrant teal/cyan for credits */
-    text-shadow: 0 0 15px rgba(0, 255, 204, 0.8); /* Stronger glow */
-    display: block; /* Ensure it takes full width */
-    margin-top: 5px;
+    font-size: 3.2rem; /* Larger, more impactful */
+    font-weight: 800; /* Extra bold */
+    color: var(--primary-accent); /* Accent color for credits value */
+    display: block;
+    margin-top: 10px;
 }
 
 /* Main Content Area Sections */
@@ -149,205 +133,206 @@ main {
 }
 
 section h2 {
-    color: #ffffff; /* Цвет текста заголовков секций - белый */
-    font-size: 2.2rem;
+    color: var(--text-dark); /* Dark text for section headings */
+    font-size: 2.5rem; /* Larger headings */
     margin-bottom: 30px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.5); /* Цвет полоски под заголовками - белый с прозрачностью */
-    padding-bottom: 12px;
-    letter-spacing: 1px;
-    font-weight: 600;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* Белое свечение текста */
+    border-bottom: none; /* Remove bottom border */
+    padding-bottom: 0;
+    letter-spacing: -0.5px; /* Tighter letter spacing for modern look */
+    font-weight: 700; /* Bold */
+    text-shadow: none; /* Remove text shadow */
 }
 
 .hidden-section {
     display: none;
 }
 
-/* Card and Item Styles */
+/* Card and Item Styles (Sprint Card, Task Item, Reward Category, Trophy List) */
 .sprint-card, .reward-category {
-    background: transparent; /* Сделали фон прозрачным */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
-    padding: 25px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    background: var(--card-background); /* White background for cards */
+    border: none; /* Rely on shadow */
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 16px; /* Consistent rounded corners */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Soft shadow */
+    position: relative; /* For the accent border */
 }
 
-/* Единый стиль для всех акцентных левых полосок */
-.sprint-card, .task-item, .reward-category, #trophies-list li {
-    border-left: 6px solid #00aaff; /* Единая голубая полоска */
+/* Accent left border for all main cards */
+.sprint-card::before, .task-item::before, .reward-category::before, #trophies-list li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 6px;
+    background-color: var(--primary-accent); /* Accent color for the left stripe */
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
 }
 
 .sprint-card h3 {
     margin: 0 0 10px 0;
-    color: #ffffff; /* Устанавливаем чисто белый цвет для заголовков карточек спринтов */
-    font-size: 1.6rem;
+    color: var(--text-dark); /* Dark text for sprint card titles */
+    font-size: 1.8rem;
     flex-basis: 100%;
-    letter-spacing: 0.5px;
+    letter-spacing: -0.3px;
+    font-weight: 600;
 }
 
 .sprint-card p {
     margin: 0;
-    color: #c0c0c0; /* Softer text color */
+    color: #555555; /* Medium grey for body text */
     flex-basis: 100%;
     font-size: 1rem;
 }
 
 .sprint-actions {
-    margin-top: 20px;
+    margin-top: 25px;
     flex-basis: 100%;
     text-align: right;
-    display: flex; /* Use flexbox for button alignment */
-    justify-content: flex-end; /* Align buttons to the right */
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 8px; /* Space between buttons */
+    flex-wrap: wrap;
+    gap: 12px; /* Increased gap between buttons */
 }
 
-/* --- Кнопки действий (Редактировать, Удалить) --- */
-/* Общие стили для всех кнопок действий */
+/* General styles for small icon buttons (edit/delete) */
 .sprint-actions button.edit-sprint-btn,
 .sprint-actions button.delete-sprint-btn,
 .task-item .task-actions button.edit-task-btn,
 .task-item .task-actions button.delete-task-btn,
 #trophies-list li .delete-trophy-btn {
-    background: transparent; /* Фон полностью прозрачный */
-    color: #e0e0e0; /* Цвет иконок (белый/светло-серый) */
-    border: 1px solid rgba(200, 200, 200, 0.4); /* Белая обводка с прозрачностью */
-    border-radius: 50%; /* Круглая форма */
-    min-width: 40px; /* Фиксированная ширина для круга */
-    height: 40px; /* Фиксированная высота для круга */
-    display: inline-flex; /* Для центрирования иконки */
+    background: #e0e0e0; /* Light grey background */
+    color: var(--text-dark); /* Dark icon color */
+    border: none;
+    border-radius: 50%;
+    min-width: 44px; /* Larger icon buttons */
+    height: 44px;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 0; /* Убираем внутренние отступы */
-    font-size: 1.2rem; /* Размер иконки */
-    transition: all 0.3s ease-in-out;
-    box-shadow: none; /* Убираем тени по умолчанию */
-    margin-left: 0; /* Управляем gap свойством flexbox */
+    padding: 0;
+    font-size: 1.3rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Ховер-эффекты для кнопок действий */
 .sprint-actions button.edit-sprint-btn:hover,
 .sprint-actions button.delete-sprint-btn:hover,
 .task-item .task-actions button.edit-task-btn:hover,
 .task-item .task-actions button.delete-task-btn:hover,
 #trophies-list li .delete-trophy-btn:hover {
-    background-color: rgba(200, 200, 200, 0.1); /* Легкий фон при наведении */
-    border-color: rgba(255, 255, 255, 0.7); /* Обводка становится ярче */
-    transform: scale(1.05); /* Немного увеличиваем */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Легкое свечение */
+    background-color: #d0d0d0; /* Darker grey on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Специфические стили для кнопки "Редактировать" */
+/* Specific styles for "Edit" button (using accent color) */
 .sprint-actions button.edit, .task-item .task-actions button.edit-task-btn {
-    color: #00aaff; /* Цвет иконки для редактирования (голубой) */
-    border-color: rgba(0, 170, 255, 0.4); /* Обводка голубого оттенка */
+    background-color: var(--primary-accent);
+    color: var(--text-light); /* White icon */
 }
 .sprint-actions button.edit:hover, .task-item .task-actions button.edit-task-btn:hover {
-    background-color: rgba(0, 170, 255, 0.1);
-    border-color: rgba(0, 170, 255, 0.7);
-    box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+    background-color: darken(var(--primary-accent), 10%); /* Darker accent on hover */
+    box-shadow: 0 5px 15px rgba(var(--primary-accent-rgb, 231, 98, 164), 0.3);
 }
 
-/* Специфические стили для кнопки "Удалить" */
+/* Specific styles for "Delete" button (using red) */
 .sprint-actions button.delete, .task-item .task-actions button.delete-task-btn, #trophies-list li .delete-trophy-btn {
-    color: #ff4444; /* Цвет иконки для удаления (красный) */
-    border-color: rgba(255, 68, 68, 0.4); /* Обводка красного оттенка */
+    background-color: #ff4444; /* Red for delete */
+    color: var(--text-light);
 }
 .sprint-actions button.delete:hover, .task-item .task-actions button.delete-task-btn:hover, #trophies-list li .delete-trophy-btn:hover {
-    background-color: rgba(255, 68, 68, 0.1);
-    border-color: rgba(255, 68, 68, 0.7);
-    box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+    background-color: darken(#ff4444, 10%);
+    box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
 }
 
-/* --- Единый стиль для всех остальных основных кнопок (Задачи, Добавить, Сохранить, и т.д.) --- */
+/* General styles for all other main action buttons (Add, Save, View Tasks, etc.) */
 #add-sprint-btn, #add-task-btn, #save-sprint-btn, #save-task-btn,
 #add-credits-btn, #spend-credits-btn, #apply-credits-btn,
 #add-trophy-btn, #save-trophy-btn, #save-retrospective-btn,
 #export-data-btn, #import-data-btn,
-.sprint-actions button.view-tasks-btn, /* Включаем кнопку "Задачи" сюда */
-.modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) { /* Исключаем кнопки с иконками и кнопку закрытия модала */
-    background: transparent; /* Прозрачный фон */
-    color: #ffffff; /* Устанавливаем чисто белый цвет для текста кнопок */
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Белая обводка с прозрачностью */
-    border-radius: 12px; /* Увеличиваем скругление */
-    padding: 12px 22px; /* Возвращаем нормальные отступы */
-    font-size: 1rem; /* Размер шрифта */
+.sprint-actions button.view-tasks-btn,
+.modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) {
+    background: var(--text-dark); /* Dark background for primary buttons */
+    color: var(--text-light); /* White text */
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 1.05rem;
     font-weight: 500;
-    transition: all 0.3s ease-in-out;
-    box-shadow: none; /* Убираем тени по умолчанию */
-    margin-left: 0; /* Управляем gap свойством flexbox */
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-transform: capitalize; /* Capitalize first letter */
+    letter-spacing: 0; /* Remove letter spacing */
 }
 
-/* Ховер-эффекты для этих кнопок */
+/* Hover effects for these primary buttons */
 #add-sprint-btn:hover, #add-task-btn:hover, #save-sprint-btn:hover, #save-task-btn:hover,
 #add-credits-btn:hover, #spend-credits-btn:hover, #apply-credits-btn:hover,
 #add-trophy-btn:hover, #save-trophy-btn:hover, #save-retrospective-btn:hover,
 #export-data-btn:hover, #import-data-btn:hover,
 .sprint-actions button.view-tasks-btn:hover,
 .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn):hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Легкий фон при наведении */
-    border-color: rgba(255, 255, 255, 0.8); /* Обводка становится ярче */
-    transform: translateY(-2px); /* Легкий подъем */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Легкое свечение */
+    background-color: lighten(var(--text-dark), 10%); /* Slightly lighter dark on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Переопределяем цвета для "danger-button", если они также используются */
-#clear-data-btn.danger-button { /* Target specific clear button with danger class */
-    background: transparent !important; /* Прозрачный фон для кнопки очистки */
-    color: #ff4444 !important; /* Красный текст */
-    border: 1px solid rgba(255, 68, 68, 0.5) !important; /* Красная обводка */
-    box-shadow: none !important;
+/* Override for danger-button (e.g., clear data) */
+#clear-data-btn.danger-button {
+    background: #ff4444 !important; /* Red background */
+    color: var(--text-light) !important;
+    box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2) !important;
 }
 #clear-data-btn.danger-button:hover {
-    background-color: rgba(255, 68, 68, 0.1) !important;
-    border-color: rgba(255, 68, 68, 0.8) !important;
-    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3) !important;
+    background-color: darken(#ff4444, 10%) !important;
+    box-shadow: 0 6px 20px rgba(255, 68, 68, 0.3) !important;
 }
 
-
 .task-item {
-    background: transparent; /* Сделали фон прозрачным */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
-    /* border-left уже установлен в едином стиле выше */
-    padding: 18px;
-    margin-bottom: 12px;
-    border-radius: 10px;
+    background: var(--card-background); /* White background for task items */
+    border: none;
+    /* border-left will be applied by ::before pseudo-element */
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    position: relative;
 }
+/* No explicit border-left property here, it's moved to ::before */
 
 .task-item.completed {
-    background-color: rgba(20, 40, 35, 0.8); /* Темно-зеленый фон для завершенных задач */
+    background-color: #f8f8f8; /* Very light grey for completed tasks */
     text-decoration: line-through;
     color: #888;
-    border-left-color: #008066; /* Сохраняем цвет завершенной задачи */
+    /* The ::before accent stripe will still apply */
 }
 
 .task-item input[type="checkbox"] {
     margin-right: 20px;
-    width: 24px; /* Larger checkbox */
-    height: 24px;
-    accent-color: #00ffcc; /* Color for the checkbox itself */
+    width: 28px; /* Larger checkbox */
+    height: 28px;
+    accent-color: var(--primary-accent); /* Accent color for checkbox */
     cursor: pointer;
-    border: 1px solid #00ffcc; /* Custom border */
-    border-radius: 4px;
-    background-color: rgba(0,0,0,0.5); /* Transparent background */
+    border: 2px solid #ccc; /* Lighter border */
+    border-radius: 6px; /* Slightly rounded checkbox */
+    background-color: var(--card-background);
     transition: all 0.2s ease-in-out;
 }
 
 .task-item input[type="checkbox"]:checked {
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+    box-shadow: 0 0 10px rgba(var(--primary-accent-rgb, 231, 98, 164), 0.5);
 }
 
 .task-item .task-actions {
     display: flex;
-    gap: 8px; /* Spacing between task action buttons */
+    gap: 10px;
     align-items: center;
 }
 
@@ -356,54 +341,52 @@ section h2 {
 .modal {
     display: none;
     position: fixed;
-    z-index: 2000; /* Even higher z-index for modals */
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.85); /* Very dark, almost opaque overlay */
+    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
     justify-content: center;
     align-items: center;
     padding-top: 50px;
 }
 
 .modal-content {
-    animation: fadeIn 0.3s ease-out; /* Simple fade-in animation */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    /* Styles are defined in .sidebar, .content, .modal-content shared rule */
+    max-width: 600px; /* Adjust modal width */
+    margin: auto;
+    padding: 40px;
 }
 
 .close-button {
-    color: #e0e0e0; /* Lighter close button */
+    color: #666666; /* Darker close button */
     float: right;
-    font-size: 38px; /* Larger */
-    font-weight: bold;
+    font-size: 30px; /* Slightly smaller, more subtle */
+    font-weight: normal; /* Less bold */
     line-height: 1;
-    transition: color 0.3s ease, transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: #00ffcc; /* Glow on hover */
-    transform: rotate(90deg); /* Spin on hover */
+    color: var(--primary-accent); /* Accent color on hover */
+    transform: rotate(0deg); /* No spin */
     text-decoration: none;
     cursor: pointer;
 }
 
 .modal-content h3, .modal-content h4 {
-    color: #ffffff; /* Цвет текста заголовков модальных окон - белый */
+    color: var(--text-dark); /* Dark text for modal headings */
     margin-top: 0;
     margin-bottom: 25px;
-    font-size: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Цвет полоски под заголовками модальных окон - белый с прозрачностью */
-    padding-bottom: 12px;
-    letter-spacing: 0.8px;
-    font-weight: 600;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* Белое свечение текста заголовков модальных окон */
+    font-size: 2.2rem;
+    border-bottom: none; /* Remove border */
+    padding-bottom: 0;
+    letter-spacing: -0.5px;
+    font-weight: 700;
+    text-shadow: none; /* Remove text shadow */
 }
 
 .modal-content label {
@@ -411,42 +394,47 @@ section h2 {
     margin-bottom: 10px;
     margin-top: 20px;
     font-weight: 500;
-    color: #ffffff; /* Цвет текста лейблов в модальных окнах - белый */
+    color: var(--text-dark); /* Dark text for labels */
     font-size: 1.05rem;
 }
 
 .modal-content input[type="text"],
 .modal-content input[type="number"],
 .modal-content textarea {
-    width: calc(100% - 30px); /* Adjust padding */
-    padding: 15px;
+    width: calc(100% - 40px); /* Adjust padding */
+    padding: 18px 20px; /* More vertical padding */
     margin-bottom: 20px;
-    border: 1px solid rgba(80, 80, 120, 0.6);
-    border-radius: 10px;
+    border: none; /* No border */
+    border-radius: 12px; /* Rounded corners */
     box-sizing: border-box;
-    background-color: rgba(20, 20, 40, 0.9); /* Dark input background */
-    color: #e0e0e0;
+    background-color: var(--input-background); /* Light input background */
+    color: var(--text-dark); /* Dark text */
     font-size: 1.1rem;
     outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.2s ease;
 }
 
 .modal-content input[type="text"]:focus,
 .modal-content input[type="number"]:focus,
 .modal-content textarea:focus {
-    border-color: #00ffcc; /* Accent border on focus */
-    box-shadow: 0 0 12px rgba(0, 255, 204, 0.5); /* Glow on focus */
+    box-shadow: 0 0 0 3px var(--primary-accent); /* Accent glow on focus */
+}
+
+/* Specific styling for placeholder text */
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+    color: #999999; /* Softer placeholder color */
+    opacity: 1; /* Firefox fix */
 }
 
 .sub-modal .modal-content {
-    max-width: 550px; /* Slightly larger sub-modals */
+    max-width: 550px;
 }
 
 /* Reward Specific Styles */
 .reward-category {
-    background: transparent; /* Сделали фон прозрачным */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
-    /* border-left уже установлен в едином стиле выше */
+    /* Styles are defined in .sprint-card shared rule */
+    position: relative; /* For the accent border */
 }
 
 #trophies-list {
@@ -455,39 +443,39 @@ section h2 {
 }
 
 #trophies-list li {
-    background: transparent; /* Сделали фон прозрачным */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Белая обводка */
-    /* border-left уже установлен в едином стиле выше */
-    padding: 18px;
-    margin-bottom: 12px;
-    border-radius: 10px;
+    background: var(--card-background); /* White background */
+    border: none;
+    /* border-left will be applied by ::before pseudo-element */
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #f0f0f0;
+    color: var(--text-dark); /* Dark text */
     font-size: 1.05rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
 /* Retrospective Styles */
 #retrospective-notes {
-    width: calc(100% - 30px);
-    min-height: 300px; /* Taller textarea */
-    padding: 15px;
-    border: 1px solid rgba(80, 80, 120, 0.6);
-    border-radius: 10px;
+    width: calc(100% - 40px); /* Adjust padding */
+    min-height: 300px;
+    padding: 18px 20px;
+    border: none;
+    border-radius: 12px;
     font-size: 1.1rem;
     box-sizing: border-box;
-    background-color: rgba(20, 20, 40, 0.9);
-    color: #e0e0e0;
+    background-color: var(--input-background); /* Light background */
+    color: var(--text-dark); /* Dark text */
     outline: none;
     resize: vertical;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: box-shadow 0.2s ease;
 }
 
 #retrospective-notes:focus {
-    border-color: #00ffcc;
-    box-shadow: 0 0 12px rgba(0, 255, 204, 0.5);
+    box-shadow: 0 0 0 3px var(--primary-accent); /* Accent glow on focus */
 }
 
 
@@ -497,20 +485,20 @@ section h2 {
     font-weight: 600;
     margin-top: 25px;
     font-size: 0.95rem;
-    text-shadow: 0 0 5px rgba(255, 119, 0, 0.3);
+    text-shadow: none; /* Remove text shadow */
 }
 
 /* Footer Styles */
 footer {
-    background-color: rgba(10, 10, 20, 0.6);
-    backdrop-filter: blur(8px);
-    color: #a0a0a0;
+    background-color: var(--dark-background); /* Dark footer background */
+    backdrop-filter: none; /* Remove blur */
+    color: #777777; /* Darker grey for footer text */
     text-align: center;
-    padding: 1.5rem 0;
+    padding: 2rem 0;
     margin-top: auto;
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.6);
-    border-top: 1px solid rgba(50, 50, 80, 0.4);
-    font-size: 0.95rem;
+    box-shadow: none; /* Remove shadow */
+    border-top: 1px solid #333333; /* Subtle dark border */
+    font-size: 0.9rem;
     letter-spacing: 0.5px;
 }
 
@@ -518,18 +506,19 @@ footer {
 @media (max-width: 992px) {
     main {
         flex-direction: column;
-        padding: 20px;
-        margin: 20px auto;
+        padding: 40px;
+        margin: 30px auto;
+        gap: 30px;
     }
 
     .sidebar {
         width: auto;
-        padding: 20px;
+        padding: 30px;
         order: 2; /* Move sidebar below content on small screens */
     }
 
     .content {
-        padding: 20px 25px;
+        padding: 30px 35px;
         order: 1;
     }
 
@@ -539,46 +528,47 @@ footer {
     }
 
     .modal-content {
-        padding: 25px;
+        padding: 30px;
         width: 95%;
     }
 
     section h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     .current-credits span {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
     }
 }
 
 @media (max-width: 576px) {
     main {
-        padding: 10px;
-        margin: 10px auto;
+        padding: 20px;
+        margin: 20px auto;
+        gap: 20px;
     }
 
     .sidebar, .content, .modal-content {
-        padding: 15px;
-        border-radius: 12px;
+        padding: 20px;
+        border-radius: 16px;
     }
 
     section h2 {
-        font-size: 1.6rem;
-    }
-
-    .current-credits h3 {
-        font-size: 1.2rem;
-    }
-    .current-credits span {
         font-size: 1.8rem;
     }
 
-    .sprint-card h3 {
+    .current-credits h3 {
         font-size: 1.3rem;
     }
+    .current-credits span {
+        font-size: 2rem;
+    }
+
+    .sprint-card h3 {
+        font-size: 1.5rem;
+    }
     .sprint-card p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
     /* Adjust size for icon buttons on small screens */
@@ -587,9 +577,9 @@ footer {
     .task-item .task-actions button.edit-task-btn,
     .task-item .task-actions button.delete-task-btn,
     #trophies-list li .delete-trophy-btn {
-        min-width: 36px; /* Чуть меньше на мобильных */
-        height: 36px;
-        font-size: 1rem;
+        min-width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
     }
 
     /* Adjust padding for new style buttons on small screens */
@@ -599,25 +589,36 @@ footer {
     #export-data-btn, #import-data-btn,
     .sprint-actions button.view-tasks-btn,
     .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) {
-        padding: 8px 15px;
-        font-size: 0.85rem;
-        border-radius: 10px; /* Slightly smaller radius for mobile */
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        border-radius: 10px;
     }
 
     .sprint-actions {
-        justify-content: center; /* Center align buttons when they wrap */
+        justify-content: center;
+        gap: 8px;
     }
     .task-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+        padding: 15px;
     }
     .task-item input[type="checkbox"] {
         margin-bottom: 5px;
+        width: 24px;
+        height: 24px;
     }
     .task-item .task-actions {
         width: 100%;
         display: flex;
         justify-content: flex-end;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content input[type="number"],
+    .modal-content textarea {
+        padding: 15px 18px;
+        font-size: 1rem;
     }
 }
