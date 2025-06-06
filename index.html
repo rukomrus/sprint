@@ -1,133 +1,337 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бортовой журнал Космической Одиссеи</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Моя Визитка</title>
+  <style>
+    /* Общие стили */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0e0e0e;
+      color: #ffffff;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+/* Цвет текста в шапке */
+header h1 {
+  color: #ffffff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+header p {
+  color: #ffffff; /* Белый */
+}
+
+.header-text {
+  opacity: 1;
+}
+
+header h1, header p {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Цвет ссылок */
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1, h2 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    header {
+      text-align: center;
+      padding-top: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* Стили для формы "Отправить бриф" */
+    .brief-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper input[type="text"] {
+      width: 100%;
+      padding: 1rem 2rem;
+      padding-right: 5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 999px;
+      background-color: #1a1a1a;
+      color: white;
+      outline: none;
+    }
+
+    .input-wrapper button {
+      position: absolute;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .input-wrapper button:hover {
+      opacity: 0.7;
+    }
+
+.center-circle {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6rem auto;
+  z-index: 2;
+  transition: all 0.3s ease;
+  animation: pulse 2.5s infinite; /* Анимация пульса */
+}
+
+.center-circle:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.top-stripe {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+  z-index: 3;
+}
+
+/* Только полоска сверху */
+.top-stripe-only {
+  position: relative;
+}
+
+.top-stripe-only::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+  z-index: 3;
+}
+    /* Анимация дыхания фона */
+    @keyframes breathe {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.92; }
+    }
+
+    .bg-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 50% 140%, rgba(255, 70, 30, 0.18), transparent 70%),
+        linear-gradient(to top,
+          rgba(255, 90, 50, 0.12),
+          rgba(255, 160, 60, 0.1),
+          rgba(255, 210, 90, 0.06),
+          rgba(255, 255, 255, 0.04),
+          rgba(20, 20, 20, 0.2) 60%,
+          #0e0e0e);
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    /* Блоки с обводкой */
+    /* #about,
+.has-border {
+  position: relative;
+  padding: 4rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.01);
+  margin-bottom: 4rem;
+} */
+
+#contact,
+.has-border {
+  position: relative;
+  padding: 4rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.01);
+  margin-bottom: 4rem;
+}
+
+    /* Анимация появления при скролле */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 768px) {
+      header {
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+      }
+
+      .container {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+      }
+
+      .input-wrapper input[type="text"] {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
-    
-    <main>
-        <div class="sidebar">
-            <nav>
-                <button id="show-sprints">Спринты</button>
-                <button id="show-rewards">Вознаграждения</button>
-                <button id="show-retrospective">Ретроспектива</button>
-                <button id="show-data-management">Управление данными</button>
-            </nav>
-            <div class="current-credits">
-                <h3>Космические кредиты: <span id="credits-count">0</span></h3>
-            </div>
+
+  <div class="fixed-logo">
+    <img src="https://www.svgrepo.com/show/364273/star-four-points.svg" alt="Логотип" width="24" height="24">
+    <span>Моя Визитка</span>
+  </div>
+
+  <div class="bg-glow"></div>
+
+  <header>
+    <h1>Иван Петров</h1>
+    <p>Разработчик | Дизайнер | Предприниматель</p>
+  </header>
+
+<a href="#about" class="center-circle" aria-label="Продолжить">
+  <img src="empty.svg" alt="" width="90" height="90" style="max-width: 80%; max-height: 80%;">
+</a>
+
+  <div class="container">
+
+    <section id="about" class="fade-up top-stripe-only">
+  <h2>Обо мне</h2>
+  <p>Привет! Меня зовут Иван, я фронтенд-разработчик и дизайнер из Москвы...</p>
+</section>
+
+    <section id="contact" class="has-border fade-up">
+  <h2>Связаться со мной</h2>
+  <p>Вы можете написать мне по любым вопросам, связанным с работой, проектами или сотрудничеством:</p>
+  <ul>
+    <li>Email: <a href="mailto:ivan@example.com">ivan@example.com</a></li>
+    <li>Telegram: <a href="https://t.me/ivan_petrov ">@ivan_petrov</a></li>
+    <li>LinkedIn: <a href="https://linkedin.com/in/ivanpetrov ">ivanpetrov</a></li>
+  </ul>
+</section>
+
+    <section id="brief" class="fade-up">
+      <h2>Отправить бриф</h2>
+      <div class="brief-section">
+        <div class="input-wrapper">
+          <input type="text" placeholder="Здесь можно загрузить файл или написать о чём-то..." disabled />
+          <button title="Отправить">➤</button>
         </div>
+        <p style="font-size: 0.9rem; color: #aaa;">Форма пока недоступна, но скоро заработает!</p>
+      </div>
+    </section>
 
-        <div class="content">
-            <section id="sprints-section" class="active-section">
-                <h2>Мои Спринты</h2>
-                <div id="sprints-list">
-                    </div>
-                <button id="add-sprint-btn">Добавить Спринт</button>
+  </div>
 
-                <div id="sprint-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-button">&times;</span>
-                        <h3>Добавить/Редактировать Спринт</h3>
-                        <input type="hidden" id="sprint-id-input">
-                        <label for="sprint-name">Название Спринта:</label>
-                        <input type="text" id="sprint-name" placeholder="Например, Запуск на орбиту">
-                        <label for="sprint-goal">Цель Спринта:</label>
-                        <textarea id="sprint-goal" placeholder="Например, Заложить фундамент знаний..."></textarea>
-                        <button id="save-sprint-btn">Сохранить Спринт</button>
-                    </div>
-                </div>
+  <footer>
+    &copy; 2025 Иван Петров. Все права защищены.
+  </footer>
 
-                <div id="tasks-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-button">&times;</span>
-                        <h3 id="tasks-modal-title">Задачи Спринта: <span id="current-sprint-name"></span></h3>
-                        <div id="tasks-list">
-                            </div>
-                        <button id="add-task-btn">Добавить Задачу</button>
+  <script>
+    const faders = document.querySelectorAll('.fade-up');
 
-                        <div id="task-modal" class="modal sub-modal">
-                            <div class="modal-content">
-                                <span class="close-button">&times;</span>
-                                <h4>Добавить/Редактировать Задачу</h4>
-                                <input type="hidden" id="task-id-input">
-                                <label for="task-description">Описание Задачи:</label>
-                                <input type="text" id="task-description" placeholder="Например, Изучить базовый синтаксис HTML">
-                                <button id="save-task-btn">Сохранить Задачу</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Один раз
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
 
-            <section id="rewards-section" class="hidden-section">
-                <h2>Мои Вознаграждения</h2>
-                <div class="reward-category">
-                    <h3>Космические кредиты</h3>
-                    <p>Текущий баланс: <span id="current-credits-main">0</span></p>
-                    <button id="add-credits-btn">Добавить Кредиты</button>
-                    <button id="spend-credits-btn">Потратить Кредиты</button>
-                </div>
+    faders.forEach(el => {
+      appearOnScroll.observe(el);
+    });
+  </script>
 
-                <div class="reward-category">
-                    <h3>Галактические Трофеи</h3>
-                    <ul id="trophies-list">
-                        </ul>
-                    <button id="add-trophy-btn">Добавить Трофей</button>
-                </div>
-
-                <div id="credits-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-button">&times;</span>
-                        <h3>Добавить/Потратить Кредиты</h3>
-                        <label for="credits-amount">Количество:</label>
-                        <input type="number" id="credits-amount" value="0">
-                        <label for="credits-reason">Причина:</label>
-                        <input type="text" id="credits-reason" placeholder="Например, Завершение спринта 1">
-                        <button id="apply-credits-btn">Применить</button>
-                    </div>
-                </div>
-
-                <div id="trophy-modal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-button">&times;</span>
-                        <h3>Добавить Трофей</h3>
-                        <label for="trophy-description">Описание Трофея:</label>
-                        <input type="text" id="trophy-description" placeholder="Например, Покупка крутых наушников">
-                        <button id="save-trophy-btn">Сохранить Трофей</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="retrospective-section" class="hidden-section">
-                <h2>Ретроспектива</h2>
-                <textarea id="retrospective-notes" placeholder="Заметки по итогам спринтов, что было круто, что улучшить..."></textarea>
-                <button id="save-retrospective-btn">Сохранить Заметки</button>
-            </section>
-
-            <section id="data-management-section" class="hidden-section">
-                <h2>Управление Данными</h2>
-                <p>Здесь вы можете управлять данными приложения.</p>
-                <button id="export-data-btn">Экспортировать данные</button>
-                <button id="import-data-btn">Импортировать данные</button>
-                <input type="file" id="import-file-input" accept=".json" style="display: none;">
-                <button id="clear-data-btn" class="danger-button">Очистить все данные</button>
-                <p class="warning-text">Внимание: Очистка данных удалит все сохраненные спринты, задачи и награды!</p>
-            </section>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Бортовой журнал Космической Одиссеи</p>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
