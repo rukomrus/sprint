@@ -101,12 +101,6 @@ main {
     gap: 30px;
 }
 
-/* Remove app-logo styles from sidebar as it's now in header */
-/* .sidebar .app-logo {
-    display: none;
-} */
-
-
 .sidebar nav {
     display: flex;
     flex-direction: column;
@@ -202,7 +196,7 @@ section h2 { /* Мои Спринты*/
     display: none;
 }
 
-/* Card and Item Styles (Sprint Card, Task Item, Reward Category, Trophy List) */
+/* Card and Item Styles (Sprint Card, Reward Category) */
 .sprint-card, .reward-category {
     background: var(--card-background); /* White background for cards */
     border: none;
@@ -213,8 +207,8 @@ section h2 { /* Мои Спринты*/
     position: relative;
 }
 
-/* Accent left border for all main cards */
-.sprint-card::before, .task-item::before, .reward-category::before, #trophies-list li::before {
+/* Accent left border for sprint cards and reward categories */
+.sprint-card::before, .reward-category::before {
     content: '';
     position: absolute;
     top: 0;
@@ -225,6 +219,12 @@ section h2 { /* Мои Спринты*/
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
 }
+
+/* Remove accent left border for task items and trophy list items */
+.task-item::before, #trophies-list li::before {
+    display: none; /* Скрываем псевдоэлемент */
+}
+
 
 /* Подзаголовки: стиль надписи "Запуск на орбиту" (это для описаний, как и весь текст) */
 /* Весь текст: стиль текста "Заложить фундамент знаний и создать первую веб-страницу." */
@@ -353,7 +353,7 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    position: relative;
+    position: relative; /* Оставляем position: relative, чтобы потомки могли позиционироваться относительно */
 }
 
 .task-item.completed {
@@ -487,7 +487,7 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     color: var(--text-medium); /* Main text style for list items */
     font-size: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    position: relative;
+    position: relative; /* Оставляем position: relative */
 }
 
 /* Retrospective Styles */
