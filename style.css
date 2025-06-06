@@ -48,32 +48,19 @@ body {
     100% { background-position: 100% 100%, 0% 0%; }
 }
 
-/* Header Styles (if still present in HTML, although it was hidden in Odyssey) */
-header {
-    display: none; /* Keep hidden as per original Odyssey project */
+/* Стили для нового HEADER с логотипом */
+.app-header {
+    position: absolute; /* Позиционируем абсолютно, чтобы не влиять на flexbox main */
+    top: 40px; /* Отступ сверху */
+    left: 60px; /* Отступ слева */
+    z-index: 2; /* Убедимся, что он поверх всего, кроме модальных окон */
+    padding: 0; /* Убираем внутренние отступы */
 }
 
-/* Main Content Area */
-main {
-    /* Удаляем display: flex, flex: 1, gap, max-width, margin отсюда,
-       так как main теперь будет просто контейнером для всего.
-       Отступы будут управляться внутренними элементами. */
-    display: block; /* Сбрасываем flexbox на main, чтобы он был блочным контейнером */
-    padding: 60px; /* Общий padding для всего содержимого внутри main */
-    max-width: 1600px; /* Ограничиваем ширину основного контента */
-    margin: 40px auto; /* Центрируем main по горизонтали */
-    position: relative;
-    z-index: 1; /* Чтобы main был поверх glow */
-    flex: 1; /* Позволяет main занимать все доступное пространство между header и footer */
-}
-
-/* Стили для нового блока логотипа */
 .app-logo {
     display: flex;
     align-items: center;
     gap: 15px; /* Расстояние между иконкой и текстом */
-    margin-bottom: 40px; /* Отступ снизу, чтобы отделить от остального контента */
-    /* padding уже задан на main, поэтому для .app-logo не нужен */
 }
 
 .app-logo img {
@@ -89,13 +76,19 @@ main {
     line-height: 1; /* Убрать лишний пробел по вертикали */
 }
 
-/* НОВЫЙ КОНТЕЙНЕР ДЛЯ САЙДБАРА И КОНТЕНТА */
-.main-content-wrapper {
-    display: flex; /* Снова делаем flexbox для сайдбара и контента */
-    flex: 1; /* Позволяет обертке занимать доступное пространство */
-    gap: 40px; /* Отступ между сайдбаром и контентом */
-}
 
+/* Main Content Area - Возвращаем к исходной flex-структуре */
+main {
+    display: flex; /* Flex-контейнер */
+    flex: 1; /* Занимает все доступное пространство по вертикали */
+    padding: 40px 60px; /* Отступы вокруг основного контента */
+    gap: 40px; /* Отступ между сайдбаром и контентом */
+    max-width: 1600px;
+    margin: 40px auto; /* Центрируем main */
+    position: relative;
+    z-index: 1; /* Чтобы main был поверх glow */
+    margin-top: 100px; /* Добавляем отступ сверху, чтобы логотип не перекрывал main */
+}
 
 /* Sidebar Styles */
 .sidebar {
@@ -396,7 +389,7 @@ button:not(.danger-button):not(.success-button):not(.close-button):not(.edit-spr
 
 /* Modals */
 .modal {
-    display: none; /* Hidden by default - ЭТО ДОЛЖНО БЫТЬ ЕДИНСТВЕННЫМ display ЗДЕСЬ */
+    display: none; /* Hidden by default - ИСПРАВЛЕНО! */
     position: fixed; /* Stay in place */
     z-index: 100; /* Sit on top */
     left: 0;
@@ -593,14 +586,9 @@ footer p {
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
-    main {
-        flex-direction: column; /* Stack logo, then sidebar/content */
-        padding: 40px; /* Уменьшаем общий padding main */
-        margin: 30px auto;
-    }
-
-    .app-logo {
-        margin-bottom: 30px; /* Уменьшаем отступ снизу */
+    .app-header {
+        top: 30px;
+        left: 40px;
     }
     .app-logo img {
         height: 40px;
@@ -609,9 +597,11 @@ footer p {
         font-size: 2rem;
     }
 
-    .main-content-wrapper {
-        flex-direction: column; /* На малых экранах сайдбар и контент располагаются вертикально */
-        gap: 30px; /* Отступ между ними */
+    main {
+        flex-direction: column; /* Stack sidebar and content vertically */
+        padding: 30px;
+        margin-top: 90px; /* Увеличиваем, чтобы логотип не перекрывал */
+        gap: 30px;
     }
 
     .sidebar {
@@ -668,14 +658,11 @@ footer p {
 }
 
 @media (max-width: 576px) {
-    main {
-        padding: 20px;
-        margin: 20px auto;
-        gap: 20px;
+    .app-header {
+        top: 20px;
+        left: 20px;
     }
-
     .app-logo {
-        margin-bottom: 20px;
         gap: 10px;
     }
     .app-logo img {
@@ -685,7 +672,9 @@ footer p {
         font-size: 1.8rem;
     }
 
-    .main-content-wrapper {
+    main {
+        padding: 20px;
+        margin-top: 70px; /* Увеличиваем, чтобы логотип не перекрывал */
         gap: 20px;
     }
 
