@@ -104,17 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCreditsDisplay();
         renderTrophies();
         retrospectiveNotesTextarea.value = appData.retrospective;
-        // Ensure only one section is active
+        // Ensure only one section is active and set default to sprints on load
+        // This logic is already handled in your current script, ensure it works as intended.
+        // On initial load, sprintsSection should be active.
         const activeSection = document.querySelector('.active-section');
-        if (activeSection) {
-            activeSection.classList.remove('active-section');
+        if (!activeSection) { // If no section is active (e.g. first load)
+            sprintsSection.classList.add('active-section');
+            showSprintsBtn.classList.add('active');
         }
-        // Set default section to sprints on load
-        sprintsSection.classList.add('active-section');
-        showSprintsBtn.classList.add('active'); // Set initial active sidebar button
-        showRewardsBtn.classList.remove('active');
-        showRetrospectiveBtn.classList.remove('active');
-        showDataManagementBtn.classList.remove('active');
     }
 
     function renderSprints() {
@@ -601,20 +598,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Close modals on outside click - MODIFIED TO USE classList
     window.addEventListener('click', (e) => {
-        if (e.target === sprintModal) {
-            sprintModal.classList.remove('visible');
-        }
-        if (e.target === tasksModal) {
-            tasksModal.classList.remove('visible');
-        }
-        if (e.target === taskModal) {
-            taskModal.classList.remove('visible');
-        }
-        if (e.target === creditsModal) {
-            creditsModal.classList.remove('visible');
-        }
-        if (e.target === trophyModal) {
-            trophyModal.classList.remove('visible');
+        // Проверяем, что клик был по самому модалу, а не по его содержимому
+        if (e.target.classList.contains('modal')) {
+            // Закрываем только тот модал, по которому кликнули
+            e.target.classList.remove('visible');
         }
     });
 
