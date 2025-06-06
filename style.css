@@ -60,7 +60,7 @@ main {
     border-radius: 20px; /* More pronounced rounded corners */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Soft, diffused shadow */
     border: none; /* Remove explicit border, rely on shadow for separation */
-    padding: 40px; /* Generous padding */
+    padding: 40px; /* Generous padding*/
 }
 
 /* Sidebar Navigation */
@@ -70,6 +70,30 @@ main {
     flex-direction: column;
     gap: 30px;
 }
+
+/* Logo in Sidebar */
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between logo and text */
+    margin-bottom: 25px; /* Space below the logo */
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e0e0e0; /* Separator line */
+}
+
+.app-logo img {
+    width: 48px; /* Size of the logo image */
+    height: 48px;
+}
+
+.app-logo h1 {
+    margin: 0;
+    font-size: 2.5rem; /* Same size as "Мои Спринты"*/
+    color: var(--primary-accent); /* Color of the "Редактировать" button*/
+    font-weight: 700; /* Bold, like other headings*/
+    letter-spacing: -0.5px;
+}
+
 
 .sidebar nav {
     display: flex;
@@ -135,20 +159,20 @@ main {
 
 /* Все заголовки: стиль надписи "Мои Спринты" */
 h1, h2, h3, h4 {
-    color: var(--text-dark); /* Темный цвет для всех заголовков */
-    font-weight: 700; /* Жирный шрифт для всех заголовков */
-    letter-spacing: -0.5px; /* Немного более плотное межбуквенное расстояние */
+    color: var(--text-dark); /* Темный цвет для всех заголовков*/
+    font-weight: 700; /* Жирный шрифт для всех заголовков*/
+    letter-spacing: -0.5px; /* Немного более плотное межбуквенное расстояние*/
 }
 
 /* Конкретные размеры для разных уровней заголовков */
-section h2 { /* Мои Спринты */
+section h2 { /* Мои Спринты*/
     font-size: 2.5rem;
     margin-bottom: 30px;
     border-bottom: none;
     padding-bottom: 0;
 }
 
-.modal-content h3, .modal-content h4 { /* Заголовки модальных окон */
+.modal-content h3, .modal-content h4 { /* Заголовки модальных окон*/
     font-size: 2rem;
     margin-top: 0;
     margin-bottom: 25px;
@@ -156,7 +180,7 @@ section h2 { /* Мои Спринты */
     padding-bottom: 0;
 }
 
-.sprint-card h3 { /* Заголовки карточек спринтов */
+.sprint-card h3 { /* Заголовки карточек спринтов*/
     font-size: 1.8rem;
     margin: 0 0 10px 0;
     flex-basis: 100%;
@@ -192,12 +216,12 @@ section h2 { /* Мои Спринты */
 
 /* Подзаголовки: стиль надписи "Запуск на орбиту" (это для описаний, как и весь текст) */
 /* Весь текст: стиль текста "Заложить фундамент знаний и создать первую веб-страницу." */
-p, ul li { /* Применяем ко всем параграфам и элементам списков */
-    color: var(--text-medium); /* Средне-серый цвет для основного текста */
-    font-size: 1rem; /* Единый размер для основного текста */
+p, ul li { /* Применяем ко всем параграфам и элементам списков*/
+    color: var(--text-medium); /* Средне-серый цвет для основного текста*/
+    font-size: 1rem; /* Единый размер для основного текста*/
 }
 
-.sprint-card p { /* Описание спринта */
+.sprint-card p { /* Описание спринта*/
     margin: 0;
     flex-basis: 100%;
 }
