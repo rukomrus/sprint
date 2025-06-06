@@ -4,103 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бортовой журнал Космической Одиссеи</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="fixed-logo">
-        <img src="https://www.svgrepo.com/show/364273/star-four-points.svg" alt="Логотип" width="24" height="24">
-        <span>Одиссея</span>
-    </div>
-
+    <div class="bg-glow"></div>
+    
     <main>
         <div class="sidebar">
-            <div class="current-credits">
-                <h3>Твои Кредиты</h3>
-                <span id="credits-display">1000</span>
-            </div>
             <nav>
-                <button class="nav-button active" data-section="sprints-section">Мои Спринты</button>
-                <button class="nav-button" data-section="credits-section">Кредиты</button>
-                <button class="nav-button" data-section="trophies-section">Трофеи</button>
-                <button class="nav-button" data-section="retrospective-section">Ретроспектива</button>
-                <button class="nav-button" data-section="data-section">Данные</button>
+                <button id="show-sprints">Спринты</button>
+                <button id="show-rewards">Вознаграждения</button>
+                <button id="show-retrospective">Ретроспектива</button>
+                <button id="show-data-management">Управление данными</button>
             </nav>
+            <div class="current-credits">
+                <h3>Космические кредиты: <span id="credits-count">0</span></h3>
+            </div>
         </div>
+
         <div class="content">
             <section id="sprints-section" class="active-section">
                 <h2>Мои Спринты</h2>
-                <div id="sprint-list">
+                <div id="sprints-list">
                     </div>
-                <button id="add-sprint-btn" class="add-button">Добавить Спринт</button>
-            </section>
+                <button id="add-sprint-btn">Добавить Спринт</button>
 
-            <section id="credits-section" class="hidden-section">
-                <h2>Управление Кредитами</h2>
-                <p>Здесь вы можете добавлять или тратить свои космические кредиты.</p>
-                <div class="form-group">
-                    <label for="credits-amount">Сумма Кредитов:</label>
-                    <input type="number" id="credits-amount" value="100" min="1">
+                <div id="sprint-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3>Добавить/Редактировать Спринт</h3>
+                        <input type="hidden" id="sprint-id-input">
+                        <label for="sprint-name">Название Спринта:</label>
+                        <input type="text" id="sprint-name" placeholder="Например, Запуск на орбиту">
+                        <label for="sprint-goal">Цель Спринта:</label>
+                        <textarea id="sprint-goal" placeholder="Например, Заложить фундамент знаний..."></textarea>
+                        <button id="save-sprint-btn">Сохранить Спринт</button>
+                    </div>
                 </div>
-                <button id="add-credits-btn">Добавить Кредиты</button>
-                <button id="spend-credits-btn">Потратить Кредиты</button>
+
+                <div id="tasks-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3 id="tasks-modal-title">Задачи Спринта: <span id="current-sprint-name"></span></h3>
+                        <div id="tasks-list">
+                            </div>
+                        <button id="add-task-btn">Добавить Задачу</button>
+
+                        <div id="task-modal" class="modal sub-modal">
+                            <div class="modal-content">
+                                <span class="close-button">&times;</span>
+                                <h4>Добавить/Редактировать Задачу</h4>
+                                <input type="hidden" id="task-id-input">
+                                <label for="task-description">Описание Задачи:</label>
+                                <input type="text" id="task-description" placeholder="Например, Изучить базовый синтаксис HTML">
+                                <button id="save-task-btn">Сохранить Задачу</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <section id="trophies-section" class="hidden-section">
-                <h2>Мои Трофеи</h2>
-                <p>Зарабатывайте трофеи, выполняя важные этапы вашей одиссеи!</p>
-                <div id="trophies-list">
+            <section id="rewards-section" class="hidden-section">
+                <h2>Мои Вознаграждения</h2>
+                <div class="reward-category">
+                    <h3>Космические кредиты</h3>
+                    <p>Текущий баланс: <span id="current-credits-main">0</span></p>
+                    <button id="add-credits-btn">Добавить Кредиты</button>
+                    <button id="spend-credits-btn">Потратить Кредиты</button>
+                </div>
+
+                <div class="reward-category">
+                    <h3>Галактические Трофеи</h3>
+                    <ul id="trophies-list">
+                        </ul>
+                    <button id="add-trophy-btn">Добавить Трофей</button>
+                </div>
+
+                <div id="credits-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3>Добавить/Потратить Кредиты</h3>
+                        <label for="credits-amount">Количество:</label>
+                        <input type="number" id="credits-amount" value="0">
+                        <label for="credits-reason">Причина:</label>
+                        <input type="text" id="credits-reason" placeholder="Например, Завершение спринта 1">
+                        <button id="apply-credits-btn">Применить</button>
                     </div>
-                <button id="add-trophy-btn">Добавить Трофей</button>
+                </div>
+
+                <div id="trophy-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3>Добавить Трофей</h3>
+                        <label for="trophy-description">Описание Трофея:</label>
+                        <input type="text" id="trophy-description" placeholder="Например, Покупка крутых наушников">
+                        <button id="save-trophy-btn">Сохранить Трофей</button>
+                    </div>
+                </div>
             </section>
 
             <section id="retrospective-section" class="hidden-section">
-                <h2>Ретроспектива Одиссеи</h2>
-                <p>Запишите свои мысли, уроки и достижения по завершении ключевых этапов.</p>
-                <textarea id="retrospective-notes" placeholder="Ваши мысли о прошедшем этапе..."></textarea>
+                <h2>Ретроспектива</h2>
+                <textarea id="retrospective-notes" placeholder="Заметки по итогам спринтов, что было круто, что улучшить..."></textarea>
                 <button id="save-retrospective-btn">Сохранить Заметки</button>
             </section>
 
-            <section id="data-section" class="hidden-section">
+            <section id="data-management-section" class="hidden-section">
                 <h2>Управление Данными</h2>
-                <p>Экспортируйте или импортируйте данные вашего журнала. Будьте осторожны при очистке данных!</p>
-                <button id="export-data-btn">Экспортировать Данные</button>
-                <button id="import-data-btn">Импортировать Данные</button>
-                <button id="clear-data-btn" class="danger-button">Очистить Все Данные</button>
-                <p class="warning-text">Внимание: Очистка данных необратима!</p>
+                <p>Здесь вы можете управлять данными приложения.</p>
+                <button id="export-data-btn">Экспортировать данные</button>
+                <button id="import-data-btn">Импортировать данные</button>
+                <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                <button id="clear-data-btn" class="danger-button">Очистить все данные</button>
+                <p class="warning-text">Внимание: Очистка данных удалит все сохраненные спринты, задачи и награды!</p>
             </section>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 Космическая Одиссея. Все права защищены.</p>
+        <p>&copy; 2025 Бортовой журнал Космической Одиссеи</p>
     </footer>
-
-    <div id="sprint-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h3 id="sprint-modal-title">Добавить Спринт</h3>
-            <label for="sprint-name">Название Спринта:</label>
-            <input type="text" id="sprint-name" placeholder="Например: Запуск на орбиту" required>
-            <label for="sprint-description">Описание Спринта:</label>
-            <textarea id="sprint-description" placeholder="Цель, основные задачи спринта..."></textarea>
-            <button id="save-sprint-btn">Сохранить Спринт</button>
-        </div>
-    </div>
-
-    <div id="task-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h3 id="task-modal-title">Задачи Спринта</h3>
-            <div id="task-list">
-                </div>
-            <div class="form-group">
-                <label for="new-task-text">Новая Задача:</label>
-                <input type="text" id="new-task-text" placeholder="Описание новой задачи" required>
-            </div>
-            <button id="add-task-btn">Добавить Задачу</button>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>

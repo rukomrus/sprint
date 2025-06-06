@@ -32,29 +32,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Fixed Logo in Top Left */
-.fixed-logo {
-    position: fixed; /* Фиксированное позиционирование */
-    top: 30px; /* Отступ сверху */
-    left: 40px; /* Отступ слева */
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Пространство между иконкой и текстом */
-    z-index: 1000; /* Поверх всех элементов */
-    color: var(--primary-accent); /* Акцентный цвет для текста логотипа */
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.fixed-logo img {
-    /* Этот фильтр применяет к SVG цвет, соответствующий --primary-accent */
-    /* Он инвертирует цвета, затем сдвигает оттенок, чтобы достичь розового */
-    filter: invert(70%) sepia(50%) saturate(2000%) hue-rotate(290deg) brightness(100%) contrast(100%);
-}
-
-
 /* Remove the old bg-glow as the reference site uses a solid dark background */
 .bg-glow {
     display: none;
@@ -523,17 +500,6 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
-    .fixed-logo {
-        top: 20px;
-        left: 20px;
-        font-size: 1rem;
-        gap: 8px;
-    }
-    .fixed-logo img {
-        width: 20px;
-        height: 20px;
-    }
-
     main {
         flex-direction: column;
         padding: 40px;
@@ -572,17 +538,6 @@ footer {
 }
 
 @media (max-width: 576px) {
-    .fixed-logo {
-        top: 15px;
-        left: 15px;
-        font-size: 0.9rem;
-        gap: 5px;
-    }
-    .fixed-logo img {
-        width: 18px;
-        height: 18px;
-    }
-
     main {
         padding: 20px;
         margin: 20px auto;
