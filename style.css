@@ -1,7 +1,7 @@
 /* style.css - Redesign based on passkeys.foundation */
 
 /* Import Google Fonts - Inter is a good fit for this modern, clean style */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap'); /* Исправлено: fonts.googleapis.com */
 
 /* Define the new accent color for easier management */
 :root {
@@ -27,7 +27,7 @@ body {
     min-height: 100vh;
     line-height: 1.6;
     position: relative;
-    /* overflow-x: hidden; */ /* Убрано, чтобы не скрывать проблемы, если они есть */
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased; /* Ensure smooth text rendering */
     -moz-osx-font-smoothing: grayscale;
 }
@@ -38,11 +38,11 @@ body {
 }
 
 /* Header Styles for the new top logo bar */
-.app-header {
+.app-header { /* Используем класс .app-header вместо header */
     background-color: var(--card-background); /* White background for the header bar */
     padding: 20px 60px; /* Padding for the header */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-    display: flex;
+    display: flex; /* Делаем видимым */
     align-items: center;
     justify-content: flex-start; /* Align content to the left */
     width: 100%;
@@ -66,9 +66,9 @@ body {
 
 .app-logo h1 {
     margin: 0;
-    font-size: 2.5rem;
-    color: var(--primary-accent);
-    font-weight: 700;
+    font-size: 2.5rem; /* Same size as "Мои Спринты"*/
+    color: var(--primary-accent); /* Color of the "Редактировать" button*/
+    font-weight: 700; /* Bold, like other headings*/
     letter-spacing: -0.5px;
 }
 
@@ -82,17 +82,15 @@ main {
     margin: 40px auto; /* Center the main content */
     position: relative;
     z-index: 1;
-    box-sizing: border-box; /* Важно для мобильных, чтобы padding не выходил за 100% */
 }
 
 /* Shared Card/Box Styling (Sidebar, Content, Modals) */
 .sidebar, .content, .modal-content {
-    background: var(--card-background);
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    border: none;
-    padding: 40px;
-    box-sizing: border-box; /* Важно для всех блоков контента */
+    background: var(--card-background); /* White/light background for all cards */
+    border-radius: 20px; /* More pronounced rounded corners */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Soft, diffused shadow */
+    border: none; /* Remove explicit border, rely on shadow for separation */
+    padding: 40px; /* Generous padding*/
 }
 
 /* Sidebar Navigation */
@@ -101,7 +99,6 @@ main {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    flex-shrink: 0; /* Не сжимать сайдбар на больших экранах */
 }
 
 .sidebar nav {
@@ -111,30 +108,30 @@ main {
 }
 
 .sidebar nav button {
-    background: var(--card-background);
-    color: var(--text-dark);
-    border: none;
+    background: var(--card-background); /* White background for inactive buttons */
+    color: var(--text-dark); /* Dark text for inactive buttons */
+    border: none; /* No border */
     padding: 18px 25px;
-    border-radius: 12px;
+    border-radius: 12px; /* Rounded buttons */
     cursor: pointer;
     font-size: 1.1rem;
     font-weight: 500;
     transition: all 0.2s ease-in-out;
     text-align: left;
     outline: none;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
 .sidebar nav button:hover {
-    background-color: #f5f5f5;
-    transform: translateY(-2px);
+    background-color: #f5f5f5; /* Slight grey on hover */
+    transform: translateY(-2px); /* Slight lift */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar nav button.active {
-    background: var(--primary-accent);
-    color: var(--text-light);
-    box-shadow: 0 5px 20px rgba(231, 98, 164, 0.5);
+    background: var(--primary-accent); /* Accent color for active state */
+    color: var(--text-light); /* White text for active */
+    box-shadow: 0 5px 20px rgba(231, 98, 164, 0.5); /* Glow with accent color */
     font-weight: 600;
 }
 
@@ -142,47 +139,46 @@ main {
     margin-top: auto;
     text-align: center;
     padding-top: 30px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0; /* Light grey separator */
 }
 
 .current-credits h3 {
     margin: 0;
-    color: var(--text-dark);
+    color: var(--text-dark); /* Dark text for credits title (Heading style) */
     font-size: 1.5rem;
     letter-spacing: 0.8px;
-    font-weight: 600;
+    font-weight: 600; /* Adjusted for consistency */
 }
 
 .current-credits span {
-    font-size: 3.2rem;
-    font-weight: 800;
-    color: var(--primary-accent);
+    font-size: 3.2rem; /* Larger, more impactful */
+    font-weight: 800; /* Extra bold */
+    color: var(--primary-accent); /* Accent color for credits value */
     display: block;
     margin-top: 10px;
 }
 
 /* Main Content Area Sections */
 .content {
-    flex: 1; /* Занимает оставшееся пространство */
-    min-width: 0; /* Важно для предотвращения переполнения гибких элементов */
+    flex: 1;
 }
 
 /* Все заголовки: стиль надписи "Мои Спринты" */
 h1, h2, h3, h4 {
-    color: var(--text-dark);
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    color: var(--text-dark); /* Темный цвет для всех заголовков*/
+    font-weight: 700; /* Жирный шрифт для всех заголовков*/
+    letter-spacing: -0.5px; /* Немного более плотное межбуквенное расстояние*/
 }
 
 /* Конкретные размеры для разных уровней заголовков */
-section h2 {
+section h2 { /* Мои Спринты*/
     font-size: 2.5rem;
     margin-bottom: 30px;
     border-bottom: none;
     padding-bottom: 0;
 }
 
-.modal-content h3, .modal-content h4 {
+.modal-content h3, .modal-content h4 { /* Заголовки модальных окон*/
     font-size: 2rem;
     margin-top: 0;
     margin-bottom: 25px;
@@ -190,7 +186,7 @@ section h2 {
     padding-bottom: 0;
 }
 
-.sprint-card h3 {
+.sprint-card h3 { /* Заголовки карточек спринтов*/
     font-size: 1.8rem;
     margin: 0 0 10px 0;
     flex-basis: 100%;
@@ -202,14 +198,13 @@ section h2 {
 
 /* Card and Item Styles (Sprint Card, Reward Category) */
 .sprint-card, .reward-category {
-    background: var(--card-background);
+    background: var(--card-background); /* White background for cards */
     border: none;
     padding: 30px;
     margin-bottom: 25px;
     border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Soft, diffused shadow */
     position: relative;
-    box-sizing: border-box; /* Убедимся, что padding не добавляет ширину */
 }
 
 /* Accent left border for sprint cards and reward categories */
@@ -220,24 +215,25 @@ section h2 {
     left: 0;
     height: 100%;
     width: 6px;
-    background-color: var(--primary-accent);
+    background-color: var(--primary-accent); /* Accent color for the left stripe */
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
 }
 
 /* Remove accent left border for task items and trophy list items */
 .task-item::before, #trophies-list li::before {
-    display: none;
+    display: none; /* Скрываем псевдоэлемент */
 }
+
 
 /* Подзаголовки: стиль надписи "Запуск на орбиту" (это для описаний, как и весь текст) */
 /* Весь текст: стиль текста "Заложить фундамент знаний и создать первую веб-страницу." */
-p, ul li {
-    color: var(--text-medium);
-    font-size: 1rem;
+p, ul li { /* Применяем ко всем параграфам и элементам списков*/
+    color: var(--text-medium); /* Средне-серый цвет для основного текста*/
+    font-size: 1rem; /* Единый размер для основного текста*/
 }
 
-.sprint-card p {
+.sprint-card p { /* Описание спринта*/
     margin: 0;
     flex-basis: 100%;
 }
@@ -272,7 +268,6 @@ p, ul li {
     font-size: 1.3rem;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0; /* Не сжимать кнопки */
 }
 
 .sprint-actions button.edit-sprint-btn:hover,
@@ -291,7 +286,7 @@ p, ul li {
     color: var(--text-light);
 }
 .sprint-actions button.edit:hover, .task-item .task-actions button.edit-task-btn:hover {
-    background-color: #d94fa2;
+    background-color: #d94fa2; /* Darker accent on hover */
     box-shadow: 0 5px 15px rgba(231, 98, 164, 0.3);
 }
 
@@ -323,7 +318,6 @@ p, ul li {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     text-transform: capitalize;
     letter-spacing: 0;
-    cursor: pointer;
 }
 
 /* Hover effects for these primary buttons */
@@ -333,7 +327,7 @@ p, ul li {
 #export-data-btn:hover, #import-data-btn:hover,
 .sprint-actions button.view-tasks-btn:hover,
 .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn):hover {
-    background-color: #333333;
+    background-color: #333333; /* Slightly lighter dark on hover */
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
@@ -360,15 +354,7 @@ p, ul li {
     justify-content: space-between;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     position: relative;
-    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
 }
-.task-item > div:first-child { /* Для текста задачи, чтобы он не выходил за рамки */
-    flex: 1; /* Позволяет тексту задачи занимать доступное пространство */
-    min-width: 0; /* Важно для предотвращения переполнения гибких элементов */
-    word-break: break-word; /* Разбивать длинные слова */
-    padding-right: 15px; /* Отступ от кнопок */
-}
-
 
 .task-item.completed {
     background-color: #f8f8f8;
@@ -386,7 +372,6 @@ p, ul li {
     border-radius: 6px;
     background-color: var(--card-background);
     transition: all 0.2s ease-in-out;
-    flex-shrink: 0; /* Не сжимать чекбокс */
 }
 
 .task-item input[type="checkbox"]:checked {
@@ -397,55 +382,43 @@ p, ul li {
     display: flex;
     gap: 10px;
     align-items: center;
-    flex-shrink: 0; /* Не сжимать кнопки действий */
-    margin-left: auto; /* Прижимаем к правому краю */
 }
 
 /* Modal Styles */
 .modal {
-    display: none; /* Скрываем по умолчанию */
+    display: none;
     position: fixed;
     z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
+    /* overflow: auto;  Убрано для управления скроллом внутри modal-content */
     background-color: rgba(0, 0, 0, 0.7);
     justify-content: center;
     align-items: center;
-    padding: 20px; /* Добавляем padding для самого оверлея */
-    box-sizing: border-box;
-    overflow-y: auto; /* Для скролла всего модала, если он очень высокий */
-}
-
-/* Класс для показа модала */
-.modal.visible {
-    display: flex;
+    padding-top: 50px;
 }
 
 .modal-content {
-    background: var(--card-background);
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Base max-width for larger screens */
+    width: 90%; /* Start with 90% width for general responsiveness */
+    margin: auto;
     padding: 40px;
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Для Flexbox */
+    flex-direction: column; /* Элементы будут располагаться в столбец */
     max-height: 90vh; /* Ограничиваем высоту модального окна */
     overflow-y: auto; /* Делаем содержимое прокручиваемым */
     box-sizing: border-box; /* Важно, чтобы padding не увеличивал ширину сверх width/max-width */
-    width: 90%; /* Начальная ширина для всех экранов, будет уточняться медиа-запросами */
-    max-width: 600px; /* Максимальная ширина для десктопов */
 }
 
 .close-button {
     color: #666666;
-    align-self: flex-end; /* Прижимаем к правому верхнему углу */
+    float: right;
     font-size: 30px;
     font-weight: normal;
     line-height: 1;
     transition: color 0.2s ease, transform 0.2s ease;
-    margin-bottom: 10px; /* Отступ от заголовка */
-    cursor: pointer;
 }
 
 .close-button:hover,
@@ -453,6 +426,7 @@ p, ul li {
     color: var(--primary-accent);
     transform: rotate(0deg);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .modal-content label {
@@ -460,42 +434,34 @@ p, ul li {
     margin-bottom: 10px;
     margin-top: 20px;
     font-weight: 500;
-    color: var(--text-dark);
+    color: var(--text-dark); /* Dark text for labels */
     font-size: 1.05rem;
 }
 
 .modal-content input[type="text"],
-.modal-content input[type="number"] {
-    width: 100%;
+.modal-content input[type="number"],
+.modal-content textarea {
+    width: 100%; /* Убрал calc(100% - 40px) - теперь padding учитывается box-sizing */
     padding: 18px 20px;
     margin-bottom: 20px;
     border: none;
     border-radius: 12px;
-    box-sizing: border-box; /* Важно */
+    box-sizing: border-box; /* ВАЖНО: Убедиться, что padding не добавляется к width */
     background-color: var(--input-background);
     color: var(--text-dark);
     font-size: 1.1rem;
     outline: none;
     transition: box-shadow 0.2s ease;
-    /* overflow: auto; */ /* Убрано для input */
+    /* Добавляем прокрутку для полей ввода */
+    overflow: auto; /* Позволяет прокручивать содержимое, если оно не помещается */
+    resize: vertical; /* Разрешаем вертикальное изменение размера для textarea */
 }
 
+/* Исправлена полоса прокрутки для textarea */
 .modal-content textarea {
-    width: 100%;
-    padding: 18px 20px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 12px;
-    box-sizing: border-box;
-    background-color: var(--input-background);
-    color: var(--text-dark);
-    font-size: 1.1rem;
-    outline: none;
-    transition: box-shadow 0.2s ease;
-    min-height: 120px;
-    resize: vertical;
-    overflow: auto; /* **ВАЖНО: Полоса прокрутки для textarea** */
+    min-height: 100px; /* Минимальная высота для textarea */
 }
+
 
 .modal-content input[type="text"]:focus,
 .modal-content input[type="number"]:focus,
@@ -511,7 +477,7 @@ p, ul li {
 }
 
 .sub-modal .modal-content {
-    max-width: 500px;
+    max-width: 550px;
 }
 
 /* Reward Specific Styles */
@@ -522,10 +488,11 @@ p, ul li {
 /* Стилизация кнопок "Добавить кредиты" и "Потратить кредиты" для мобильных */
 .reward-category .credits-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+    flex-direction: column; /* Располагаем кнопки вертикально */
+    gap: 15px; /* Отступ между кнопками */
+    margin-top: 20px; /* Отступ сверху */
 }
+/* Переопределяем ширину для кнопок, чтобы они занимали всю доступную ширину в колонке */
 .reward-category .credits-buttons button {
     width: 100%;
 }
@@ -545,44 +512,34 @@ p, ul li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--text-medium);
+    color: var(--text-medium); /* Main text style for list items */
     font-size: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     position: relative;
-    flex-wrap: wrap; /* Позволяет тексту трофея переноситься */
 }
-#trophies-list li span { /* Для текста трофея, чтобы он не выходил за рамки */
-    flex: 1;
-    min-width: 0;
-    word-break: break-word;
-    padding-right: 15px; /* Отступ от кнопки */
-}
-#trophies-list li .delete-trophy-btn {
-    flex-shrink: 0;
-    margin-left: auto;
-}
-
 
 /* Retrospective Styles */
 #retrospective-notes {
-    width: 100%;
+    width: 100%; /* Убрал calc(100% - 40px) */
     min-height: 300px;
     padding: 18px 20px;
     border: none;
     border-radius: 12px;
     font-size: 1.1rem;
-    box-sizing: border-box;
+    box-sizing: border-box; /* ВАЖНО */
     background-color: var(--input-background);
     color: var(--text-dark);
     outline: none;
     resize: vertical;
     transition: box-shadow 0.2s ease;
-    overflow: auto;
+    /* Добавляем прокрутку для поля textarea */
+    overflow: auto; /* Позволяет прокручивать содержимое */
 }
 
 #retrospective-notes:focus {
     box-shadow: 0 0 0 3px var(--primary-accent);
 }
+
 
 /* Data Management Styles */
 .warning-text {
@@ -613,24 +570,21 @@ footer {
         padding: 15px 40px;
     }
     main {
-        flex-direction: column; /* Сайдбар и контент в столбец */
-        padding: 30px; /* Уменьшаем padding */
-        margin: 20px auto; /* Центрируем и уменьшаем отступ */
+        flex-direction: column;
+        padding: 40px;
+        margin: 30px auto;
         gap: 30px;
-        width: calc(100% - 40px); /* Чтобы контент не прилипал к краям */
-        max-width: 700px; /* Максимальная ширина для планшетов */
     }
 
     .sidebar {
-        width: auto; /* Автоматическая ширина */
+        width: auto;
         padding: 30px;
-        order: 2; /* Перемещаем сайдбар ниже контента */
+        order: 2;
     }
 
     .content {
         padding: 30px 35px;
-        order: 1; /* Перемещаем контент выше сайдбара */
-        width: auto; /* Автоматическая ширина */
+        order: 1;
     }
 
     .sidebar nav button {
@@ -641,7 +595,7 @@ footer {
     /* Модальные окна на средних экранах */
     .modal-content {
         padding: 30px;
-        width: 95%; /* Более контролируемая ширина */
+        width: 90%; /* Более контролируемая ширина */
         max-width: 480px; /* Уменьшаем максимальную ширину */
         max-height: 85vh;
     }
@@ -649,9 +603,9 @@ footer {
     .modal-content input[type="text"],
     .modal-content input[type="number"],
     .modal-content textarea {
-        width: 100%;
-        padding: 15px 18px; /* Немного уменьшаем padding */
+        width: 100%; /* Убедимся, что они занимают всю доступную ширину родителя */
     }
+
 
     section h2 {
         font-size: 2rem;
@@ -674,11 +628,9 @@ footer {
         font-size: 2rem;
     }
     main {
-        padding: 15px; /* Еще меньше padding */
-        margin: 15px auto;
+        padding: 20px;
+        margin: 20px auto;
         gap: 20px;
-        width: calc(100% - 30px); /* Учитываем padding */
-        max-width: unset; /* Снимаем ограничение для маленьких экранов */
     }
 
     .sidebar, .content, .modal-content {
@@ -688,9 +640,9 @@ footer {
 
     /* Модальные окна на маленьких экранах */
     .modal-content {
-        padding: 15px;
-        width: 95%;
-        max-width: unset; /* Снимаем ограничение max-width */
+        padding: 15px; /* Еще меньше padding */
+        width: 95%; /* Почти на всю ширину, но с отступами */
+        max-width: unset; /* Снимаем ограничение max-width для узких экранов */
         max-height: 80vh;
     }
     /* Убедимся, что поля ввода адаптируются */
@@ -698,7 +650,7 @@ footer {
     .modal-content input[type="number"],
     .modal-content textarea {
         width: 100%;
-        padding: 12px 15px;
+        padding: 12px 15px; /* Уменьшаем padding для инпутов */
     }
 
 
@@ -766,7 +718,7 @@ footer {
 
     /* Кнопки кредитов на мобильных */
     .reward-category .credits-buttons {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: column; /* Убедимся, что они всегда в колонке на мобильных */
+        gap: 10px; /* Немного уменьшим отступ */
     }
 }
