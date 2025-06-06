@@ -439,17 +439,21 @@ p, ul li { /* Применяем ко всем параграфам и элем�
 .modal-content input[type="text"],
 .modal-content input[type="number"],
 .modal-content textarea {
-    width: calc(100% - 40px);
+    width: calc(100% - 40px); /* Adjust width considering padding */
     padding: 18px 20px;
     margin-bottom: 20px;
     border: none;
     border-radius: 12px;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Include padding in width */
     background-color: var(--input-background);
     color: var(--text-dark);
     font-size: 1.1rem;
     outline: none;
     transition: box-shadow 0.2s ease;
+    /* Добавляем прокрутку для полей ввода */
+    overflow: auto; /* Позволяет прокручивать содержимое, если оно не помещается */
+    white-space: pre-wrap; /* Сохраняет пробелы и переводы строк, переносит текст */
+    word-wrap: break-word; /* Разбивает длинные слова, если они не помещаются */
 }
 
 .modal-content input[type="text"]:focus,
@@ -521,6 +525,10 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     outline: none;
     resize: vertical;
     transition: box-shadow 0.2s ease;
+    /* Добавляем прокрутку для поля textarea */
+    overflow: auto; /* Позволяет прокручивать содержимое */
+    white-space: pre-wrap; /* Сохраняет пробелы и переводы строк, переносит текст */
+    word-wrap: break-word; /* Разбивает длинные слова */
 }
 
 #retrospective-notes:focus {
@@ -582,7 +590,8 @@ footer {
     /* Модальные окна на средних экранах */
     .modal-content {
         padding: 30px;
-        width: 95%;
+        width: 90%; /* Сделаем чуть уже */
+        max-width: 500px; /* Ограничим максимальную ширину */
         max-height: 85vh; /* Немного уменьшим высоту */
     }
 
@@ -620,7 +629,8 @@ footer {
     /* Модальные окна на маленьких экранах */
     .modal-content {
         padding: 20px; /* Уменьшаем padding */
-        width: 95%;
+        width: 95%; /* Почти на всю ширину, но с отступами */
+        max-width: unset; /* Снимаем ограничение max-width для узких экранов */
         max-height: 80vh; /* Еще уменьшим высоту */
     }
 
