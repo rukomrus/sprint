@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sprintNameInput = document.getElementById('sprint-name');
     const sprintGoalInput = document.getElementById('sprint-goal');
     const saveSprintBtn = document.getElementById('save-sprint-btn');
-    const closeButtons = document.querySelectorAll('.close-button');
+    const closeButtons = document.querySelectorAll('.close-button'); // Все кнопки закрытия модальных окон
 
     const tasksModal = document.getElementById('tasks-modal');
     const tasksModalTitle = document.getElementById('tasks-modal-title');
@@ -26,7 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const addTaskBtn = document.getElementById('add-task-btn');
     const taskModal = document.getElementById('task-modal');
     const taskIdInput = document.getElementById('task-id-input');
-    const taskDescriptionInput = document.getElementById('task-description');
+    const taskNameInput = document.getElementById('task-name');
+    const taskDescriptionInput = document.getElementById('task-description'); // textarea
+    const taskPointsInput = document.getElementById('task-points');
+    const taskCompletedInput = document.getElementById('task-completed');
     const saveTaskBtn = document.getElementById('save-task-btn');
 
     const creditsCountSpan = document.getElementById('credits-count');
@@ -37,14 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const creditsAmountInput = document.getElementById('credits-amount');
     const creditsReasonInput = document.getElementById('credits-reason');
     const applyCreditsBtn = document.getElementById('apply-credits-btn');
+    const creditsOperationTypeInput = document.getElementById('credits-operation-type'); // Hidden input
 
-    const trophiesList = document.getElementById('trophies-list');
     const addTrophyBtn = document.getElementById('add-trophy-btn');
     const trophyModal = document.getElementById('trophy-modal');
+    const trophyIdInput = document.getElementById('trophy-id-input');
+    const trophyNameInput = document.getElementById('trophy-name');
     const trophyDescriptionInput = document.getElementById('trophy-description');
     const saveTrophyBtn = document.getElementById('save-trophy-btn');
+    const trophiesList = document.getElementById('trophies-list');
 
-    const retrospectiveNotes = document.getElementById('retrospective-notes');
+    const retrospectiveNotesTextarea = document.getElementById('retrospective-notes');
     const saveRetrospectiveBtn = document.getElementById('save-retrospective-btn');
 
     const exportDataBtn = document.getElementById('export-data-btn');
@@ -52,207 +58,201 @@ document.addEventListener('DOMContentLoaded', () => {
     const importFileInput = document.getElementById('import-file-input');
     const clearDataBtn = document.getElementById('clear-data-btn');
 
-    // Add active class to the initial active button
-    showSprintsBtn.classList.add('active');
-
-    // --- Global Data Storage ---
+    // --- App Data (global state) ---
     let appData = {
         sprints: [],
         credits: 0,
         trophies: [],
         retrospective: ""
     };
+    let currentSprintId = null; // Used when managing tasks for a specific sprint
 
-    let currentSprintId = null; // Used for managing tasks in the tasks modal
+    // --- Utility Functions ---
 
-    // --- Data Management Functions ---
-    const saveData = () => {
-        localStorage.setItem('agileAppData', JSON.stringify(appData));
-        updateCreditsDisplay();
-    };
-
-    const loadData = () => {
+    // Load data from LocalStorage
+    function loadData() {
         const storedData = localStorage.getItem('agileAppData');
         if (storedData) {
             appData = JSON.parse(storedData);
         } else {
-            // Initialize with your sample data if no data exists
-            appData.sprints = [
-                {
-                    id: 'sprint1',
-                    name: 'Запуск на орбиту',
-                    goal: 'Заложить фундамент знаний и создать первую веб-страницу.',
-                    tasks: [
-                        { id: 't1_1', description: 'Пройти уроки по HTML и CSS на freeCodeCamp (5–7 часов)', completed: false },
-                        { id: 't1_2', description: 'Создать статическую веб-страницу (например, личная страница "Обо мне")', completed: false },
-                        { id: 't1_3', description: 'Задать ИИ 3 вопроса по HTML/CSS для уточнения', completed: false },
-                        { id: 't1_4', description: 'Исследовать 2–3 идеи приложения', completed: false }
-                    ]
-                },
-                {
-                    id: 'sprint2',
-                    name: 'Космический полёт в JavaScript',
-                    goal: 'Освоить основы JavaScript и добавить интерактивность в проект.',
-                    tasks: [
-                        { id: 't2_1', description: 'Пройти уроки по JavaScript (переменные, функции, события) на freeCodeCamp', completed: false },
-                        { id: 't2_2', description: 'Добавить на страницу интерактив (кнопку, меняющую текст или цвет)', completed: false },
-                        { id: 't2_3', description: 'Использовать ИИ для генерации простого JS-кода', completed: false },
-                        { id: 't2_4', description: 'Собрать 5 идей приложения, обсудить 1–2 с друзьями', completed: false }
-                    ]
-                },
-                {
-                    id: 'sprint3',
-                    name: 'Гиперпрыжок к MVP',
-                    goal: 'Выбрать идею приложения и начать прототип.',
-                    tasks: [
-                        { id: 't3_1', description: 'Выбрать 1 идею приложения (на основе анализа и обратной связи)', completed: false },
-                        { id: 't3_2', description: 'Создать прототип MVP (базовый интерфейс с 1–2 функциями)', completed: false },
-                        { id: 't3_3', description: 'Изучить основы работы с API', completed: false },
-                        { id: 't3_4', description: 'Использовать ИИ для генерации макета дизайна или проверки кода', completed: false }
-                    ]
-                },
-                {
-                    id: 'sprint4',
-                    name: 'Посадка на рынок',
-                    goal: 'Доработать прототип и подготовить к публикации.',
-                    tasks: [
-                        { id: 't4_1', description: 'Добавить 1–2 ключевые функции в прототип', completed: false },
-                        { id: 't4_2', description: 'Опубликовать приложение на бесплатной платформе', completed: false },
-                        { id: 't4_3', description: 'Протестировать приложение с 2–3 пользователями, собрать обратную связь', completed: false },
-                        { id: 't4_4', description: 'Исследовать способы монетизации', completed: false }
-                    ]
-                }
-            ];
-            saveData(); // Save initial data to localStorage
+            // Initialize with some default data if no data exists (optional)
+            appData = {
+                sprints: [],
+                credits: 0,
+                trophies: [],
+                retrospective: ""
+            };
         }
-        renderSprints();
-        renderTrophies();
-        retrospectiveNotes.value = appData.retrospective;
-        updateCreditsDisplay();
-    };
+        renderUI();
+    }
+
+    // Save data to LocalStorage
+    function saveData() {
+        localStorage.setItem('agileAppData', JSON.stringify(appData));
+        renderUI(); // Re-render after saving
+    }
+
+    // Generate unique ID
+    function generateId() {
+        return Date.now().toString(36) + Math.random().toString(36).substring(2);
+    }
 
     // --- UI Rendering Functions ---
-    const updateCreditsDisplay = () => {
-        creditsCountSpan.textContent = appData.credits;
-        currentCreditsMainSpan.textContent = appData.credits;
-    };
 
-    const renderSprints = () => {
+    function renderUI() {
+        renderSprints();
+        updateCreditsDisplay();
+        renderTrophies();
+        retrospectiveNotesTextarea.value = appData.retrospective;
+        // Ensure only one section is active
+        const activeSection = document.querySelector('.active-section');
+        if (activeSection) {
+            activeSection.classList.remove('active-section');
+        }
+        // Set default section to sprints on load
+        sprintsSection.classList.add('active-section');
+        showSprintsBtn.classList.add('active'); // Set initial active sidebar button
+        showRewardsBtn.classList.remove('active');
+        showRetrospectiveBtn.classList.remove('active');
+        showDataManagementBtn.classList.remove('active');
+    }
+
+    function renderSprints() {
         sprintsList.innerHTML = '';
+        if (appData.sprints.length === 0) {
+            sprintsList.innerHTML = '<p>Пока нет спринтов. Нажмите "Добавить Спринт", чтобы начать!</p>';
+            return;
+        }
+
         appData.sprints.forEach(sprint => {
             const sprintCard = document.createElement('div');
             sprintCard.classList.add('sprint-card');
+            sprintCard.dataset.id = sprint.id;
+
+            const totalTasks = sprint.tasks.length;
+            const completedTasks = sprint.tasks.filter(task => task.completed).length;
+            const progressText = totalTasks > 0 ? `${completedTasks} из ${totalTasks}` : 'Нет задач';
+            const progressPercentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
             sprintCard.innerHTML = `
-                <div>
-                    <h3>${sprint.name}</h3>
-                    <p>${sprint.goal}</p>
+                <h3>${sprint.name}</h3>
+                <p>${sprint.goal}</p>
+                <div class="sprint-progress">
+                    <p>Прогресс: ${progressText}</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${progressPercentage}%;"></div>
+                    </div>
                 </div>
                 <div class="sprint-actions">
-                    <button class="view-tasks-btn" data-sprint-id="${sprint.id}">Задачи</button>
-                    <button class="edit-sprint-btn edit" data-sprint-id="${sprint.id}" title="Редактировать">&#9998;</button>
-                    <button class="delete-sprint-btn delete" data-sprint-id="${sprint.id}" title="Удалить">&#128465;</button>
+                    <button class="view-tasks-btn" data-id="${sprint.id}">Задачи</button>
+                    <button class="edit-sprint-btn edit" data-id="${sprint.id}"><i class="fas fa-edit"></i></button>
+                    <button class="delete-sprint-btn delete" data-id="${sprint.id}"><i class="fas fa-trash-alt"></i></button>
                 </div>
             `;
             sprintsList.appendChild(sprintCard);
         });
-    };
+    }
 
-    const renderTasks = (sprintId) => {
+    function updateCreditsDisplay() {
+        creditsCountSpan.textContent = appData.credits;
+        currentCreditsMainSpan.textContent = appData.credits;
+    }
+
+    function renderTasks(sprintId) {
         tasksList.innerHTML = '';
         const sprint = appData.sprints.find(s => s.id === sprintId);
-        if (sprint) {
-            currentSprintNameSpan.textContent = sprint.name;
-            sprint.tasks.forEach(task => {
-                const taskItem = document.createElement('div');
-                taskItem.classList.add('task-item');
-                if (task.completed) {
-                    taskItem.classList.add('completed');
-                }
-                taskItem.innerHTML = `
-                    <input type="checkbox" data-task-id="${task.id}" ${task.completed ? 'checked' : ''}>
-                    <span>${task.description}</span>
-                    <div class="task-actions">
-                        <button class="edit-task-btn" data-task-id="${task.id}" data-sprint-id="${sprintId}" title="Редактировать">&#9998;</button>
-                        <button class="delete-task-btn delete" data-task-id="${task.id}" data-sprint-id="${sprintId}" title="Удалить">&#128465;</button>
-                    </div>
-                `;
-                tasksList.appendChild(taskItem);
-            });
-        }
-    };
 
-    const renderTrophies = () => {
+        if (!sprint) {
+            tasksList.innerHTML = '<p>Спринт не найден.</p>';
+            return;
+        }
+
+        currentSprintNameSpan.textContent = sprint.name;
+        tasksModalTitle.textContent = `Задачи Спринта: "${sprint.name}"`;
+
+        if (sprint.tasks.length === 0) {
+            tasksList.innerHTML = '<p>В этом спринте пока нет задач. Добавьте первую задачу!</p>';
+            return;
+        }
+
+        sprint.tasks.forEach(task => {
+            const taskItem = document.createElement('div');
+            taskItem.classList.add('task-item');
+            if (task.completed) {
+                taskItem.classList.add('completed');
+            }
+            taskItem.dataset.id = task.id;
+
+            taskItem.innerHTML = `
+                <input type="checkbox" ${task.completed ? 'checked' : ''} data-id="${task.id}">
+                <div>
+                    <h4>${task.name} (${task.points} Кр.)</h4>
+                    <p>${task.description}</p>
+                </div>
+                <div class="task-actions">
+                    <button class="edit-task-btn edit" data-id="${task.id}"><i class="fas fa-edit"></i></button>
+                    <button class="delete-task-btn delete" data-id="${task.id}"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            `;
+            tasksList.appendChild(taskItem);
+        });
+    }
+
+    function renderTrophies() {
         trophiesList.innerHTML = '';
+        if (appData.trophies.length === 0) {
+            trophiesList.innerHTML = '<p>Пока нет трофеев. Выполняйте задачи и получайте награды!</p>';
+            return;
+        }
+
         appData.trophies.forEach(trophy => {
             const li = document.createElement('li');
+            li.dataset.id = trophy.id;
             li.innerHTML = `
-                <span>${trophy.description}</span>
-                <button class="delete-trophy-btn" data-trophy-id="${trophy.id}" title="Удалить">&#128465;</button>
+                <span>${trophy.name}: ${trophy.description}</span>
+                <button class="delete-trophy-btn delete" data-id="${trophy.id}"><i class="fas fa-trash-alt"></i></button>
             `;
             trophiesList.appendChild(li);
         });
-    };
-
-    // --- Event Handlers ---
-    const switchSection = (sectionToShow, activeButton) => {
-    // Hide all sections
-    document.querySelectorAll('main section').forEach(section => {
-        section.classList.add('hidden-section');
-        section.classList.remove('active-section');
-    });
-    // Remove active class from all sidebar buttons
-    document.querySelectorAll('.sidebar nav button').forEach(button => {
-        button.classList.remove('active');
-    });
-
-    // Show the selected section
-    sectionToShow.classList.remove('hidden-section');
-    sectionToShow.classList.add('active-section');
-    // Add active class to the clicked button
-    if (activeButton) {
-        activeButton.classList.add('active');
     }
-};
 
-// Update event listeners to pass the button element
-showSprintsBtn.addEventListener('click', (e) => switchSection(sprintsSection, e.target));
-showRewardsBtn.addEventListener('click', (e) => switchSection(rewardsSection, e.target));
-showRetrospectiveBtn.addEventListener('click', (e) => switchSection(retrospectiveSection, e.target));
-showDataManagementBtn.addEventListener('click', (e) => switchSection(dataManagementSection, e.target));
+    // --- Event Listeners ---
 
-// Also update the initial load to set the active button
-showSprintsBtn.click(); // Simulate click to set initial active state
+    // Navigation
+    showSprintsBtn.addEventListener('click', () => {
+        document.querySelector('.active-section').classList.remove('active-section');
+        sprintsSection.classList.add('active-section');
+        document.querySelector('.sidebar nav button.active').classList.remove('active');
+        showSprintsBtn.classList.add('active');
+    });
+
+    showRewardsBtn.addEventListener('click', () => {
+        document.querySelector('.active-section').classList.remove('active-section');
+        rewardsSection.classList.add('active-section');
+        document.querySelector('.sidebar nav button.active').classList.remove('active');
+        showRewardsBtn.classList.add('active');
+    });
+
+    showRetrospectiveBtn.addEventListener('click', () => {
+        document.querySelector('.active-section').classList.remove('active-section');
+        retrospectiveSection.classList.add('active-section');
+        document.querySelector('.sidebar nav button.active').classList.remove('active');
+        showRetrospectiveBtn.classList.add('active');
+    });
+
+    showDataManagementBtn.addEventListener('click', () => {
+        document.querySelector('.active-section').classList.remove('active-section');
+        dataManagementSection.classList.add('active-section');
+        document.querySelector('.sidebar nav button.active').classList.remove('active');
+        showDataManagementBtn.classList.add('active');
+    });
 
     // Sprint Management
     addSprintBtn.addEventListener('click', () => {
-        sprintModal.style.display = 'flex';
         sprintIdInput.value = '';
         sprintNameInput.value = '';
         sprintGoalInput.value = '';
-    });
-
-    sprintsList.addEventListener('click', (e) => {
-        if (e.target.classList.contains('view-tasks-btn')) {
-            currentSprintId = e.target.dataset.sprintId;
-            renderTasks(currentSprintId);
-            tasksModal.style.display = 'flex';
-        } else if (e.target.classList.contains('edit-sprint-btn')) {
-            const sprintId = e.target.dataset.sprintId;
-            const sprint = appData.sprints.find(s => s.id === sprintId);
-            if (sprint) {
-                sprintIdInput.value = sprint.id;
-                sprintNameInput.value = sprint.name;
-                sprintGoalInput.value = sprint.goal;
-                sprintModal.style.display = 'flex';
-            }
-        } else if (e.target.classList.contains('delete-sprint-btn')) {
-            const sprintId = e.target.dataset.sprintId;
-            if (confirm('Вы уверены, что хотите удалить этот спринт и все его задачи?')) {
-                appData.sprints = appData.sprints.filter(s => s.id !== sprintId);
-                saveData();
-                renderSprints();
-            }
-        }
+        sprintModal.classList.add('visible'); // Show modal
     });
 
     saveSprintBtn.addEventListener('click', () => {
@@ -261,193 +261,285 @@ showSprintsBtn.click(); // Simulate click to set initial active state
         const goal = sprintGoalInput.value.trim();
 
         if (!name || !goal) {
-            alert('Пожалуйста, заполните все поля для спринта.');
+            alert('Пожалуйста, введите название и цель спринта.');
             return;
         }
 
         if (id) {
             // Edit existing sprint
             const sprintIndex = appData.sprints.findIndex(s => s.id === id);
-            if (sprintIndex !== -1) {
+            if (sprintIndex > -1) {
                 appData.sprints[sprintIndex].name = name;
                 appData.sprints[sprintIndex].goal = goal;
             }
         } else {
             // Add new sprint
             appData.sprints.push({
-                id: 'sprint' + Date.now(),
+                id: generateId(),
                 name,
                 goal,
                 tasks: []
             });
         }
         saveData();
-        renderSprints();
-        sprintModal.style.display = 'none';
+        sprintModal.classList.remove('visible'); // Hide modal
+    });
+
+    sprintsList.addEventListener('click', (e) => {
+        // View Tasks
+        if (e.target.classList.contains('view-tasks-btn')) {
+            currentSprintId = e.target.dataset.id;
+            renderTasks(currentSprintId);
+            tasksModal.classList.add('visible'); // Show tasks modal
+        }
+
+        // Edit Sprint
+        if (e.target.classList.contains('edit-sprint-btn')) {
+            const sprintId = e.target.dataset.id;
+            const sprint = appData.sprints.find(s => s.id === sprintId);
+            if (sprint) {
+                sprintIdInput.value = sprint.id;
+                sprintNameInput.value = sprint.name;
+                sprintGoalInput.value = sprint.goal;
+                sprintModal.classList.add('visible'); // Show modal
+            }
+        }
+
+        // Delete Sprint
+        if (e.target.classList.contains('delete-sprint-btn')) {
+            const sprintId = e.target.dataset.id;
+            if (confirm('Вы уверены, что хотите удалить этот спринт и все его задачи?')) {
+                appData.sprints = appData.sprints.filter(s => s.id !== sprintId);
+                saveData();
+            }
+        }
     });
 
     // Task Management
     addTaskBtn.addEventListener('click', () => {
-        taskModal.style.display = 'flex';
         taskIdInput.value = '';
+        taskNameInput.value = '';
         taskDescriptionInput.value = '';
-    });
-
-    tasksList.addEventListener('click', (e) => {
-        if (e.target.type === 'checkbox') {
-            const taskId = e.target.dataset.taskId;
-            const sprint = appData.sprints.find(s => s.id === currentSprintId);
-            if (sprint) {
-                const task = sprint.tasks.find(t => t.id === taskId);
-                if (task) {
-                    task.completed = e.target.checked;
-                    saveData();
-                    renderTasks(currentSprintId); // Re-render to update class
-                }
-            }
-        } else if (e.target.classList.contains('edit-task-btn')) {
-            const taskId = e.target.dataset.taskId;
-            const sprint = appData.sprints.find(s => s.id === currentSprintId);
-            if (sprint) {
-                const task = sprint.tasks.find(t => t.id === taskId);
-                if (task) {
-                    taskIdInput.value = task.id;
-                    taskDescriptionInput.value = task.description;
-                    taskModal.style.display = 'flex';
-                }
-            }
-        } else if (e.target.classList.contains('delete-task-btn')) {
-            const taskId = e.target.dataset.taskId;
-            if (confirm('Вы уверены, что хотите удалить эту задачу?')) {
-                const sprint = appData.sprints.find(s => s.id === currentSprintId);
-                if (sprint) {
-                    sprint.tasks = sprint.tasks.filter(t => t.id !== taskId);
-                    saveData();
-                    renderTasks(currentSprintId);
-                }
-            }
-        }
+        taskPointsInput.value = 0;
+        taskCompletedInput.checked = false;
+        taskModal.classList.add('visible'); // Show task modal
     });
 
     saveTaskBtn.addEventListener('click', () => {
         const id = taskIdInput.value;
+        const name = taskNameInput.value.trim();
         const description = taskDescriptionInput.value.trim();
+        const points = parseInt(taskPointsInput.value, 10);
+        const completed = taskCompletedInput.checked;
 
-        if (!description) {
-            alert('Пожалуйста, введите описание задачи.');
+        if (!name || !description || isNaN(points) || points <= 0) {
+            alert('Пожалуйста, заполните все поля задачи корректно.');
             return;
         }
 
         const sprint = appData.sprints.find(s => s.id === currentSprintId);
-        if (sprint) {
-            if (id) {
-                // Edit existing task
-                const taskIndex = sprint.tasks.findIndex(t => t.id === id);
-                if (taskIndex !== -1) {
-                    sprint.tasks[taskIndex].description = description;
+        if (!sprint) return; // Should not happen if currentSprintId is set correctly
+
+        if (id) {
+            // Edit existing task
+            const taskIndex = sprint.tasks.findIndex(t => t.id === id);
+            if (taskIndex > -1) {
+                const oldCompleted = sprint.tasks[taskIndex].completed;
+                const oldPoints = sprint.tasks[taskIndex].points;
+
+                sprint.tasks[taskIndex].name = name;
+                sprint.tasks[taskIndex].description = description;
+                sprint.tasks[taskIndex].points = points;
+                sprint.tasks[taskIndex].completed = completed;
+
+                // Adjust credits if completion status changes
+                if (completed && !oldCompleted) {
+                    appData.credits += points; // Add credits on completion
+                } else if (!completed && oldCompleted) {
+                    appData.credits -= oldPoints; // Remove credits if un-completed
+                } else if (completed && oldCompleted && points !== oldPoints) {
+                    // If completed, but points changed, adjust difference
+                    appData.credits += (points - oldPoints);
                 }
-            } else {
-                // Add new task
-                sprint.tasks.push({
-                    id: 'task' + Date.now(),
-                    description,
-                    completed: false
-                });
             }
-            saveData();
-            renderTasks(currentSprintId);
-            taskModal.style.display = 'none';
+        } else {
+            // Add new task
+            const newTask = {
+                id: generateId(),
+                name,
+                description,
+                points,
+                completed
+            };
+            sprint.tasks.push(newTask);
+            if (completed) {
+                appData.credits += points; // Add credits if added as completed
+            }
+        }
+        saveData();
+        renderTasks(currentSprintId); // Re-render tasks for the current sprint
+        taskModal.classList.remove('visible'); // Hide task modal
+    });
+
+    tasksList.addEventListener('click', (e) => {
+        const sprint = appData.sprints.find(s => s.id === currentSprintId);
+        if (!sprint) return;
+
+        // Toggle Task Completion
+        if (e.target.type === 'checkbox') {
+            const taskId = e.target.dataset.id;
+            const task = sprint.tasks.find(t => t.id === taskId);
+            if (task) {
+                const oldCompleted = task.completed;
+                task.completed = e.target.checked;
+                if (task.completed && !oldCompleted) {
+                    appData.credits += task.points;
+                } else if (!task.completed && oldCompleted) {
+                    appData.credits -= task.points;
+                }
+                saveData();
+                renderTasks(currentSprintId); // Re-render to update UI
+            }
+        }
+
+        // Edit Task
+        if (e.target.classList.contains('edit-task-btn')) {
+            const taskId = e.target.dataset.id;
+            const task = sprint.tasks.find(t => t.id === taskId);
+            if (task) {
+                taskIdInput.value = task.id;
+                taskNameInput.value = task.name;
+                taskDescriptionInput.value = task.description;
+                taskPointsInput.value = task.points;
+                taskCompletedInput.checked = task.completed;
+                taskModal.classList.add('visible'); // Show task modal
+            }
+        }
+
+        // Delete Task
+        if (e.target.classList.contains('delete-task-btn')) {
+            const taskId = e.target.dataset.id;
+            if (confirm('Вы уверены, что хотите удалить эту задачу?')) {
+                const taskToDelete = sprint.tasks.find(t => t.id === taskId);
+                if (taskToDelete && taskToDelete.completed) {
+                    appData.credits -= taskToDelete.points; // Refund credits if task was completed
+                }
+                sprint.tasks = sprint.tasks.filter(t => t.id !== taskId);
+                saveData();
+                renderTasks(currentSprintId); // Re-render tasks for the current sprint
+            }
         }
     });
 
-    // Reward Management
+    // Credits Management
     addCreditsBtn.addEventListener('click', () => {
-        creditsModal.style.display = 'flex';
-        creditsAmountInput.value = '0';
+        creditsAmountInput.value = '';
         creditsReasonInput.value = '';
-        applyCreditsBtn.dataset.type = 'add'; // Custom attribute to determine action
-        applyCreditsBtn.textContent = 'Добавить';
+        creditsOperationTypeInput.value = 'add'; // Set operation type
+        creditsModal.classList.add('visible'); // Show credits modal
     });
 
     spendCreditsBtn.addEventListener('click', () => {
-        creditsModal.style.display = 'flex';
-        creditsAmountInput.value = '0';
+        creditsAmountInput.value = '';
         creditsReasonInput.value = '';
-        applyCreditsBtn.dataset.type = 'spend'; // Custom attribute to determine action
-        applyCreditsBtn.textContent = 'Потратить';
+        creditsOperationTypeInput.value = 'spend'; // Set operation type
+        creditsModal.classList.add('visible'); // Show credits modal
     });
 
     applyCreditsBtn.addEventListener('click', () => {
-        let amount = parseInt(creditsAmountInput.value);
+        const amount = parseInt(creditsAmountInput.value, 10);
         const reason = creditsReasonInput.value.trim();
-        const type = applyCreditsBtn.dataset.type;
+        const operationType = creditsOperationTypeInput.value;
 
-        if (isNaN(amount) || amount <= 0) {
-            alert('Пожалуйста, введите положительное число кредитов.');
+        if (isNaN(amount) || amount <= 0 || !reason) {
+            alert('Пожалуйста, введите корректную сумму и причину.');
             return;
         }
 
-        if (type === 'add') {
+        if (operationType === 'add') {
             appData.credits += amount;
-        } else if (type === 'spend') {
-            if (appData.credits < amount) {
-                alert('Недостаточно космических кредитов!');
-                return;
+            alert(`Добавлено ${amount} кредитов. Причина: ${reason}`);
+        } else if (operationType === 'spend') {
+            if (appData.credits >= amount) {
+                appData.credits -= amount;
+                alert(`Потрачено ${amount} кредитов. Причина: ${reason}`);
+                // Optionally add a trophy for spending credits
+                appData.trophies.push({
+                    id: generateId(),
+                    name: 'Потраченные кредиты',
+                    description: `Потрачено ${amount} кредитов на "${reason}"`
+                });
+            } else {
+                alert('Недостаточно кредитов.');
+                return; // Don't save if not enough credits
             }
-            appData.credits -= amount;
         }
-
-        // Optionally, store credit history with reason
-        // appData.creditHistory.push({ type, amount, reason, date: new Date().toISOString() });
-
         saveData();
-        updateCreditsDisplay();
-        creditsModal.style.display = 'none';
+        creditsModal.classList.remove('visible'); // Hide credits modal
     });
 
+    // Trophy Management
     addTrophyBtn.addEventListener('click', () => {
-        trophyModal.style.display = 'flex';
+        trophyIdInput.value = '';
+        trophyNameInput.value = '';
         trophyDescriptionInput.value = '';
+        trophyModal.classList.add('visible'); // Show trophy modal
     });
 
     saveTrophyBtn.addEventListener('click', () => {
+        const id = trophyIdInput.value;
+        const name = trophyNameInput.value.trim();
         const description = trophyDescriptionInput.value.trim();
-        if (!description) {
-            alert('Пожалуйста, введите описание трофея.');
+
+        if (!name || !description) {
+            alert('Пожалуйста, введите название и описание трофея.');
             return;
         }
-        appData.trophies.push({ id: 'trophy' + Date.now(), description });
+
+        if (id) {
+            // Edit existing trophy
+            const trophyIndex = appData.trophies.findIndex(t => t.id === id);
+            if (trophyIndex > -1) {
+                appData.trophies[trophyIndex].name = name;
+                appData.trophies[trophyIndex].description = description;
+            }
+        } else {
+            // Add new trophy
+            appData.trophies.push({
+                id: generateId(),
+                name,
+                description
+            });
+        }
         saveData();
-        renderTrophies();
-        trophyModal.style.display = 'none';
+        trophyModal.classList.remove('visible'); // Hide trophy modal
     });
 
     trophiesList.addEventListener('click', (e) => {
         if (e.target.classList.contains('delete-trophy-btn')) {
-            const trophyId = e.target.dataset.trophyId;
+            const trophyId = e.target.dataset.id;
             if (confirm('Вы уверены, что хотите удалить этот трофей?')) {
                 appData.trophies = appData.trophies.filter(t => t.id !== trophyId);
                 saveData();
-                renderTrophies();
             }
         }
     });
 
-    // Retrospective Management
+    // Retrospective
     saveRetrospectiveBtn.addEventListener('click', () => {
-        appData.retrospective = retrospectiveNotes.value.trim();
+        appData.retrospective = retrospectiveNotesTextarea.value.trim();
         saveData();
-        alert('Заметки по ретроспективе сохранены!');
+        alert('Заметки ретроспективы сохранены!');
     });
 
-    // Data Import/Export/Clear
+    // Data Management
     exportDataBtn.addEventListener('click', () => {
         const dataStr = JSON.stringify(appData, null, 2); // Pretty print JSON
         const blob = new Blob([dataStr], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'agile_plan_data.json';
+        a.download = 'agile_app_data.json';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -465,15 +557,18 @@ showSprintsBtn.click(); // Simulate click to set initial active state
             reader.onload = (e) => {
                 try {
                     const importedData = JSON.parse(e.target.result);
-                    if (confirm('Импортированные данные заменят текущие. Вы уверены?')) {
-                        appData = importedData;
-                        saveData();
-                        loadData(); // Re-render all sections with new data
-                        alert('Данные успешно импортированы!');
+                    if (confirm('ВНИМАНИЕ! Это действие заменит ВСЕ ваши текущие данные. Вы уверены?')) {
+                        // Basic validation for imported data structure
+                        if (importedData.sprints && importedData.credits !== undefined && importedData.trophies && importedData.retrospective !== undefined) {
+                            appData = importedData;
+                            saveData(); // Save and re-render
+                            alert('Данные успешно импортированы!');
+                        } else {
+                            alert('Ошибка: Некорректный формат файла данных.');
+                        }
                     }
                 } catch (error) {
-                    alert('Ошибка при импорте данных. Убедитесь, что это корректный JSON-файл.');
-                    console.error('Import error:', error);
+                    alert('Ошибка при чтении или парсинге файла JSON: ' + error.message);
                 }
             };
             reader.readAsText(file);
@@ -481,7 +576,7 @@ showSprintsBtn.click(); // Simulate click to set initial active state
     });
 
     clearDataBtn.addEventListener('click', () => {
-        if (confirm('ВНИМАНИЕ! Это действие удалит ВСЕ ваши данные (спринты, задачи, кредиты, трофеи). Вы уверены?')) {
+        if (confirm('ВНИМАНИЕ! Это действие удалит ВСЕ ваши данные (спринты, задачи, кредиты, трофеи, ретроспективу). Вы уверены?')) {
             localStorage.removeItem('agileAppData');
             appData = {
                 sprints: [],
@@ -494,34 +589,35 @@ showSprintsBtn.click(); // Simulate click to set initial active state
         }
     });
 
-    // Close modals
+    // Close modals - MODIFIED TO USE classList
     closeButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const modal = e.target.closest('.modal');
             if (modal) {
-                modal.style.display = 'none';
+                modal.classList.remove('visible'); // Hide modal using class
             }
         });
     });
 
+    // Close modals on outside click - MODIFIED TO USE classList
     window.addEventListener('click', (e) => {
         if (e.target === sprintModal) {
-            sprintModal.style.display = 'none';
+            sprintModal.classList.remove('visible');
         }
         if (e.target === tasksModal) {
-            tasksModal.style.display = 'none';
+            tasksModal.classList.remove('visible');
         }
         if (e.target === taskModal) {
-            taskModal.style.display = 'none';
+            taskModal.classList.remove('visible');
         }
         if (e.target === creditsModal) {
-            creditsModal.style.display = 'none';
+            creditsModal.classList.remove('visible');
         }
         if (e.target === trophyModal) {
-            trophyModal.style.display = 'none';
+            trophyModal.classList.remove('visible');
         }
     });
 
-    // --- Initial Load ---
+    // Initial load
     loadData();
 });

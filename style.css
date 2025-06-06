@@ -354,7 +354,15 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     justify-content: space-between;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     position: relative;
+    /* Добавлено для лучшего контроля ширины на мобильных */
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
 }
+.task-item div:first-child { /* Для текста задачи, чтобы он не выходил за рамки */
+    flex: 1; /* Позволяет тексту задачи занимать доступное пространство */
+    min-width: 0; /* Важно для предотвращения переполнения гибких элементов */
+    word-break: break-word; /* Разбивать длинные слова */
+}
+
 
 .task-item.completed {
     background-color: #f8f8f8;
@@ -372,6 +380,8 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     border-radius: 6px;
     background-color: var(--card-background);
     transition: all 0.2s ease-in-out;
+    /* Убедимся, что он всегда видим */
+    flex-shrink: 0; /* Не сжимать чекбокс */
 }
 
 .task-item input[type="checkbox"]:checked {
@@ -382,6 +392,9 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     display: flex;
     gap: 10px;
     align-items: center;
+    /* Убедимся, что они всегда видимы */
+    flex-shrink: 0;
+    margin-left: auto; /* Прижимаем к правому краю */
 }
 
 /* Modal Styles */
@@ -393,32 +406,40 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     top: 0;
     width: 100%;
     height: 100%;
-    /* overflow: auto;  Убрано для управления скроллом внутри modal-content */
     background-color: rgba(0, 0, 0, 0.7);
+    display: flex; /* Используем flex для центрирования */
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
+    padding: 20px; /* Добавляем padding для самого модала, чтобы он не прилипал к краям */
+    box-sizing: border-box; /* Важно */
+}
+/* Переопределяем modal:display:none через JS, чтобы оно показывалось*/
+.modal.visible {
+    display: flex;
 }
 
 .modal-content {
-    max-width: 600px; /* Base max-width for larger screens */
-    width: 90%; /* Start with 90% width for general responsiveness */
-    margin: auto;
+    background: var(--card-background);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    display: flex; /* Для Flexbox */
-    flex-direction: column; /* Элементы будут располагаться в столбец */
+    display: flex;
+    flex-direction: column;
     max-height: 90vh; /* Ограничиваем высоту модального окна */
     overflow-y: auto; /* Делаем содержимое прокручиваемым */
     box-sizing: border-box; /* Важно, чтобы padding не увеличивал ширину сверх width/max-width */
+    width: 90%; /* Начальная ширина для всех экранов, будет уточняться медиа-запросами */
+    max-width: 600px; /* Максимальная ширина для десктопов */
 }
 
 .close-button {
     color: #666666;
-    float: right;
+    align-self: flex-end; /* Прижимаем к правому верхнему углу */
     font-size: 30px;
     font-weight: normal;
     line-height: 1;
     transition: color 0.2s ease, transform 0.2s ease;
+    margin-bottom: 10px; /* Отступ от заголовка */
 }
 
 .close-button:hover,
@@ -439,27 +460,36 @@ p, ul li { /* Применяем ко всем параграфам и элем�
 }
 
 .modal-content input[type="text"],
-.modal-content input[type="number"],
-.modal-content textarea {
-    width: 100%; /* Убрал calc(100% - 40px) - теперь padding учитывается box-sizing */
+.modal-content input[type="number"] { /* Применяем к input[type="text"] и input[type="number"] */
+    width: 100%; /* Занимают всю доступную ширину родителя */
     padding: 18px 20px;
     margin-bottom: 20px;
     border: none;
     border-radius: 12px;
-    box-sizing: border-box; /* ВАЖНО: Убедиться, что padding не добавляется к width */
+    box-sizing: border-box; /* Важно */
     background-color: var(--input-background);
     color: var(--text-dark);
     font-size: 1.1rem;
     outline: none;
     transition: box-shadow 0.2s ease;
-    /* Добавляем прокрутку для полей ввода */
-    overflow: auto; /* Позволяет прокручивать содержимое, если оно не помещается */
-    resize: vertical; /* Разрешаем вертикальное изменение размера для textarea */
+    /* Убираем overflow, так как для input оно редко нужно и может мешать */
 }
 
-/* Исправлена полоса прокрутки для textarea */
-.modal-content textarea {
-    min-height: 100px; /* Минимальная высота для textarea */
+.modal-content textarea { /* Отдельно для textarea */
+    width: 100%;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    box-sizing: border-box;
+    background-color: var(--input-background);
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+    min-height: 120px; /* Увеличена мин. высота для удобства */
+    resize: vertical; /* Разрешаем вертикальное изменение размера */
+    overflow: auto; /* **ВАЖНО: Полоса прокрутки для textarea** */
 }
 
 
@@ -477,7 +507,7 @@ p, ul li { /* Применяем ко всем параграфам и элем�
 }
 
 .sub-modal .modal-content {
-    max-width: 550px;
+    max-width: 500px; /* Чуть меньше для под-модалов */
 }
 
 /* Reward Specific Styles */
@@ -516,7 +546,18 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     font-size: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     position: relative;
+    flex-wrap: wrap; /* Позволяет тексту трофея переноситься */
 }
+#trophies-list li span { /* Для текста трофея, чтобы он не выходил за рамки */
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+}
+#trophies-list li .delete-trophy-btn {
+    flex-shrink: 0;
+    margin-left: auto; /* Прижимаем к правому краю */
+}
+
 
 /* Retrospective Styles */
 #retrospective-notes {
