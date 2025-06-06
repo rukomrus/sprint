@@ -241,26 +241,53 @@ section h2 {
     box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
 }
 
-/* --- Кнопка "Задачи" --- */
-.sprint-actions button.view-tasks-btn {
+/* --- Единый стиль для всех остальных основных кнопок (Задачи, Добавить, Сохранить, и т.д.) --- */
+#add-sprint-btn, #add-task-btn, #save-sprint-btn, #save-task-btn,
+#add-credits-btn, #spend-credits-btn, #apply-credits-btn,
+#add-trophy-btn, #save-trophy-btn, #save-retrospective-btn,
+#export-data-btn, #import-data-btn,
+.sprint-actions button.view-tasks-btn, /* Включаем кнопку "Задачи" сюда */
+.modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) { /* Исключаем кнопки с иконками и кнопку закрытия модала */
     background: transparent; /* Прозрачный фон */
     color: #e0e0e0; /* Цвет текста */
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Белая обводка */
-    border-radius: 8px; /* Более закругленные углы */
-    padding: 10px 20px; /* Возвращаем нормальные отступы */
-    font-size: 0.95rem; /* Размер шрифта */
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Белая обводка с прозрачностью */
+    border-radius: 12px; /* Увеличиваем скругление */
+    padding: 12px 22px; /* Возвращаем нормальные отступы */
+    font-size: 1rem; /* Размер шрифта */
     font-weight: 500;
     transition: all 0.3s ease-in-out;
     box-shadow: none; /* Убираем тени по умолчанию */
     margin-left: 0; /* Управляем gap свойством flexbox */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.sprint-actions button.view-tasks-btn:hover {
+/* Ховер-эффекты для этих кнопок */
+#add-sprint-btn:hover, #add-task-btn:hover, #save-sprint-btn:hover, #save-task-btn:hover,
+#add-credits-btn:hover, #spend-credits-btn:hover, #apply-credits-btn:hover,
+#add-trophy-btn:hover, #save-trophy-btn:hover, #save-retrospective-btn:hover,
+#export-data-btn:hover, #import-data-btn:hover,
+.sprint-actions button.view-tasks-btn:hover,
+.modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn):hover {
     background-color: rgba(255, 255, 255, 0.1); /* Легкий фон при наведении */
     border-color: rgba(255, 255, 255, 0.8); /* Обводка становится ярче */
     transform: translateY(-2px); /* Легкий подъем */
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Легкое свечение */
 }
+
+/* Переопределяем цвета для "danger-button", если они также используются */
+#clear-data-btn.danger-button { /* Target specific clear button with danger class */
+    background: transparent !important; /* Прозрачный фон для кнопки очистки */
+    color: #ff4444 !important; /* Красный текст */
+    border: 1px solid rgba(255, 68, 68, 0.5) !important; /* Красная обводка */
+    box-shadow: none !important;
+}
+#clear-data-btn.danger-button:hover {
+    background-color: rgba(255, 68, 68, 0.1) !important;
+    border-color: rgba(255, 68, 68, 0.8) !important;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3) !important;
+}
+
 
 .task-item {
     background-color: rgba(35, 35, 55, 0.8); /* Slightly lighter dark for tasks */
@@ -449,50 +476,6 @@ section h2 {
     text-shadow: 0 0 5px rgba(255, 119, 0, 0.3);
 }
 
-/* --- Остальные основные кнопки сохраняют предыдущий стиль --- */
-/* Это важно, чтобы стили для "Добавить Спринт", "Сохранить Спринт" и т.д. не поменялись на обводочные */
-#add-sprint-btn, #add-task-btn, #save-sprint-btn, #save-task-btn,
-#add-credits-btn, #spend-credits-btn, #apply-credits-btn,
-#add-trophy-btn, #save-trophy-btn, #save-retrospective-btn,
-#export-data-btn, #import-data-btn, /* #clear-data-btn handled by danger-button */
-.modal-content button:not(.close-button) { /* Exclude close button from this rule */
-    background: linear-gradient(135deg, #007bff, #0056b3); /* Primary blue gradient */
-    color: white;
-    border: none;
-    padding: 12px 22px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-left: 10px; /* Keep margin for now, can adjust with gap on parent */
-    transition: all 0.3s ease-in-out;
-    font-weight: 600;
-    outline: none;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-#add-sprint-btn:hover, #add-task-btn:hover, #save-sprint-btn:hover, #save-task-btn:hover,
-#add-credits-btn:hover, #spend-credits-btn:hover, #apply-credits-btn:hover,
-#add-trophy-btn:hover, #save-trophy-btn:hover, #save-retrospective-btn:hover,
-#export-data-btn:hover, #import-data-btn:hover,
-.modal-content button:not(.close-button):hover {
-    background: linear-gradient(135deg, #0056b3, #004085);
-    box-shadow: 0 6px 18px rgba(0, 123, 255, 0.6);
-    transform: translateY(-1px);
-}
-
-/* Переопределяем цвета для "danger-button", если они также используются */
-#clear-data-btn.danger-button { /* Target specific clear button with danger class */
-    background: linear-gradient(135deg, #dc3545, #c82333) !important;
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4) !important;
-}
-#clear-data-btn.danger-button:hover {
-    background: linear-gradient(135deg, #c82333, #a71d2a) !important;
-    box-shadow: 0 6px 18px rgba(220, 53, 69, 0.6) !important;
-}
-
-
 /* Footer Styles */
 footer {
     background-color: rgba(10, 10, 20, 0.6);
@@ -530,13 +513,6 @@ footer {
         padding: 15px;
         font-size: 1rem;
     }
-
-    /* .sprint-actions button {
-        margin-left: 8px;
-        margin-top: 10px;
-        font-size: 0.9rem;
-        padding: 10px 18px;
-    } */ /* Removed as flex gap handles spacing now */
 
     .modal-content {
         padding: 25px;
@@ -600,12 +576,19 @@ footer {
         font-size: 1rem;
     }
 
-    .sprint-actions button.view-tasks-btn {
+    /* Adjust padding for new style buttons on small screens */
+    #add-sprint-btn, #add-task-btn, #save-sprint-btn, #save-task-btn,
+    #add-credits-btn, #spend-credits-btn, #apply-credits-btn,
+    #add-trophy-btn, #save-trophy-btn, #save-retrospective-btn,
+    #export-data-btn, #import-data-btn,
+    .sprint-actions button.view-tasks-btn,
+    .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) {
         padding: 8px 15px;
         font-size: 0.85rem;
+        border-radius: 10px; /* Slightly smaller radius for mobile */
     }
+
     .sprint-actions {
-        /* text-align: center; */ /* Not needed with flexbox justify-content: flex-end */
         justify-content: center; /* Center align buttons when they wrap */
     }
     .task-item {
