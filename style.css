@@ -46,25 +46,21 @@ body {
 
 /* Header Styles */
 header {
-    background-color: rgba(10, 10, 20, 0.6); /* Slightly transparent dark header */
-    backdrop-filter: blur(8px); /* Glassmorphism effect */
-    color: #f0f0f0;
-    padding: 1.8rem 0;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Deeper, softer shadow */
-    border-bottom: 1px solid rgba(50, 50, 80, 0.4); /* Subtle, thin border */
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    display: none; /* Скрываем весь header */
+    /* background-color: rgba(10, 10, 20, 0.6); */
+    /* backdrop-filter: blur(8px); */
+    /* color: #f0f0f0; */
+    /* padding: 1.8rem 0; */
+    /* text-align: center; */
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); */
+    /* border-bottom: 1px solid rgba(50, 50, 80, 0.4); */
+    /* position: sticky; */
+    /* top: 0; */
+    /* z-index: 100; */
 }
 
 header h1 {
-    display: none; /* Скрываем заголовок */
-    /* font-size: 2.5rem; */
-    /* margin: 0; */
-    /* letter-spacing: 1.5px; */
-    /* font-weight: 700; */
-    /* text-shadow: 0 0 10px rgba(0, 191, 255, 0.3); */
+    /* display: none;  Уже скрыт родительским элементом */
 }
 
 /* Main Content Area */
@@ -163,14 +159,14 @@ main {
 }
 
 section h2 {
-    color: #00ffcc; /* Accent color for section titles */
+    color: #ffffff; /* Цвет текста заголовков секций - белый */
     font-size: 2.2rem;
     margin-bottom: 30px;
-    border-bottom: 2px solid rgba(0, 255, 204, 0.5); /* Accent border matching credits */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5); /* Цвет полоски под заголовками - белый с прозрачностью */
     padding-bottom: 12px;
     letter-spacing: 1px;
     font-weight: 600;
-    text-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* Белое свечение текста */
 }
 
 .hidden-section {
@@ -556,9 +552,9 @@ footer {
         width: 95%;
     }
 
-    header h1 {
-        font-size: 2rem;
-    }
+    /* header h1 { */
+    /* font-size: 2rem; */
+    /* } */
 
     section h2 {
         font-size: 1.8rem;
@@ -580,9 +576,9 @@ footer {
         border-radius: 12px;
     }
 
-    header h1 {
-        font-size: 1.8rem;
-    }
+    /* header h1 { */
+    /* font-size: 1.8rem; */
+    /* } */
 
     section h2 {
         font-size: 1.6rem;
