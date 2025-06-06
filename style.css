@@ -180,7 +180,7 @@ section h2 {
 
 .sprint-card h3 {
     margin: 0 0 10px 0;
-    color: #f0f0f0;
+    color: #ffffff; /* Устанавливаем чисто белый цвет для заголовков карточек спринтов */
     font-size: 1.6rem;
     flex-basis: 100%;
     letter-spacing: 0.5px;
@@ -269,7 +269,7 @@ section h2 {
 .sprint-actions button.view-tasks-btn, /* Включаем кнопку "Задачи" сюда */
 .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) { /* Исключаем кнопки с иконками и кнопку закрытия модала */
     background: transparent; /* Прозрачный фон */
-    color: #e0e0e0; /* Цвет текста */
+    color: #ffffff; /* Устанавливаем чисто белый цвет для текста кнопок */
     border: 1px solid rgba(255, 255, 255, 0.5); /* Белая обводка с прозрачностью */
     border-radius: 12px; /* Увеличиваем скругление */
     padding: 12px 22px; /* Возвращаем нормальные отступы */
