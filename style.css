@@ -401,13 +401,15 @@ p, ul li { /* Применяем ко всем параграфам и элем�
 }
 
 .modal-content {
-    max-width: 600px;
+    max-width: 600px; /* Base max-width for larger screens */
+    width: 90%; /* Start with 90% width for general responsiveness */
     margin: auto;
     padding: 40px;
     display: flex; /* Для Flexbox */
     flex-direction: column; /* Элементы будут располагаться в столбец */
     max-height: 90vh; /* Ограничиваем высоту модального окна */
     overflow-y: auto; /* Делаем содержимое прокручиваемым */
+    box-sizing: border-box; /* Важно, чтобы padding не увеличивал ширину сверх width/max-width */
 }
 
 .close-button {
@@ -439,12 +441,12 @@ p, ul li { /* Применяем ко всем параграфам и элем�
 .modal-content input[type="text"],
 .modal-content input[type="number"],
 .modal-content textarea {
-    width: calc(100% - 40px); /* Adjust width considering padding */
+    width: 100%; /* Убрал calc(100% - 40px) - теперь padding учитывается box-sizing */
     padding: 18px 20px;
     margin-bottom: 20px;
     border: none;
     border-radius: 12px;
-    box-sizing: border-box; /* Include padding in width */
+    box-sizing: border-box; /* ВАЖНО: Убедиться, что padding не добавляется к width */
     background-color: var(--input-background);
     color: var(--text-dark);
     font-size: 1.1rem;
@@ -452,9 +454,14 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     transition: box-shadow 0.2s ease;
     /* Добавляем прокрутку для полей ввода */
     overflow: auto; /* Позволяет прокручивать содержимое, если оно не помещается */
-    white-space: pre-wrap; /* Сохраняет пробелы и переводы строк, переносит текст */
-    word-wrap: break-word; /* Разбивает длинные слова, если они не помещаются */
+    resize: vertical; /* Разрешаем вертикальное изменение размера для textarea */
 }
+
+/* Исправлена полоса прокрутки для textarea */
+.modal-content textarea {
+    min-height: 100px; /* Минимальная высота для textarea */
+}
+
 
 .modal-content input[type="text"]:focus,
 .modal-content input[type="number"]:focus,
@@ -513,13 +520,13 @@ p, ul li { /* Применяем ко всем параграфам и элем�
 
 /* Retrospective Styles */
 #retrospective-notes {
-    width: calc(100% - 40px);
+    width: 100%; /* Убрал calc(100% - 40px) */
     min-height: 300px;
     padding: 18px 20px;
     border: none;
     border-radius: 12px;
     font-size: 1.1rem;
-    box-sizing: border-box;
+    box-sizing: border-box; /* ВАЖНО */
     background-color: var(--input-background);
     color: var(--text-dark);
     outline: none;
@@ -527,8 +534,6 @@ p, ul li { /* Применяем ко всем параграфам и элем�
     transition: box-shadow 0.2s ease;
     /* Добавляем прокрутку для поля textarea */
     overflow: auto; /* Позволяет прокручивать содержимое */
-    white-space: pre-wrap; /* Сохраняет пробелы и переводы строк, переносит текст */
-    word-wrap: break-word; /* Разбивает длинные слова */
 }
 
 #retrospective-notes:focus {
@@ -561,7 +566,7 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
-    .app-header { /* Добавлено */
+    .app-header {
         padding: 15px 40px;
     }
     main {
@@ -590,10 +595,17 @@ footer {
     /* Модальные окна на средних экранах */
     .modal-content {
         padding: 30px;
-        width: 90%; /* Сделаем чуть уже */
-        max-width: 500px; /* Ограничим максимальную ширину */
-        max-height: 85vh; /* Немного уменьшим высоту */
+        width: 90%; /* Более контролируемая ширина */
+        max-width: 480px; /* Уменьшаем максимальную ширину */
+        max-height: 85vh;
     }
+    /* Убедимся, что поля ввода адаптируются */
+    .modal-content input[type="text"],
+    .modal-content input[type="number"],
+    .modal-content textarea {
+        width: 100%; /* Убедимся, что они занимают всю доступную ширину родителя */
+    }
+
 
     section h2 {
         font-size: 2rem;
@@ -605,14 +617,14 @@ footer {
 }
 
 @media (max-width: 576px) {
-    .app-header { /* Добавлено */
+    .app-header {
         padding: 10px 20px;
     }
-    .app-logo img { /* Добавлено */
+    .app-logo img {
         width: 40px;
         height: 40px;
     }
-    .app-logo h1 { /* Добавлено */
+    .app-logo h1 {
         font-size: 2rem;
     }
     main {
@@ -628,11 +640,19 @@ footer {
 
     /* Модальные окна на маленьких экранах */
     .modal-content {
-        padding: 20px; /* Уменьшаем padding */
+        padding: 15px; /* Еще меньше padding */
         width: 95%; /* Почти на всю ширину, но с отступами */
         max-width: unset; /* Снимаем ограничение max-width для узких экранов */
-        max-height: 80vh; /* Еще уменьшим высоту */
+        max-height: 80vh;
     }
+    /* Убедимся, что поля ввода адаптируются */
+    .modal-content input[type="text"],
+    .modal-content input[type="number"],
+    .modal-content textarea {
+        width: 100%;
+        padding: 12px 15px; /* Уменьшаем padding для инпутов */
+    }
+
 
     section h2 {
         font-size: 1.8rem;
@@ -696,13 +716,6 @@ footer {
         justify-content: flex-end;
     }
 
-    .modal-content input[type="text"],
-    .modal-content input[type="number"],
-    .modal-content textarea {
-        padding: 15px 18px;
-        font-size: 1rem;
-    }
-    
     /* Кнопки кредитов на мобильных */
     .reward-category .credits-buttons {
         flex-direction: column; /* Убедимся, что они всегда в колонке на мобильных */
