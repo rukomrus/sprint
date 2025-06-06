@@ -395,14 +395,15 @@ section h2 {
 }
 
 .modal-content h3, .modal-content h4 {
-    color: #00ffcc; /* Accent for modal titles */
+    color: #ffffff; /* Цвет текста заголовков модальных окон - белый */
     margin-top: 0;
     margin-bottom: 25px;
     font-size: 2rem;
-    border-bottom: 1px solid rgba(0, 255, 204, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Цвет полоски под заголовками модальных окон - белый с прозрачностью */
     padding-bottom: 12px;
     letter-spacing: 0.8px;
     font-weight: 600;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4); /* Белое свечение текста заголовков модальных окон */
 }
 
 .modal-content label {
