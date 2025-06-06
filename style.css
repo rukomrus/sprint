@@ -1,7 +1,7 @@
 /* style.css - Redesign based on passkeys.foundation */
 
 /* Import Google Fonts - Inter is a good fit for this modern, clean style */
-@import url('https://fonts.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 /* Define the new accent color for easier management */
 :root {
@@ -19,7 +19,7 @@
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 0; /* Удаляем padding, чтобы логотип мог быть в самом углу */
     background-color: var(--dark-background); /* Solid dark background */
     color: var(--text-medium); /* Default text color for body (main text) */
     display: flex;
@@ -32,24 +32,44 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Remove the old bg-glow as the reference site uses a solid dark background */
-.bg-glow {
-    display: none;
+/* Логотип, который скроллится */
+.page-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Пространство между иконкой и текстом */
+    color: var(--primary-accent); /* Акцентный цвет для текста логотипа */
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 30px 60px; /* Отступы, чтобы логотип был в левом верхнем углу, но внутри контента */
+    /* background-color: var(--dark-background); /* Может пригодиться, если нужно выделить фон */
 }
 
-/* Header Styles (if still present in HTML, although it was hidden in Odyssey) */
+.page-logo img {
+    /* Этот фильтр применяет к SVG цвет, соответствующий --primary-accent */
+    /* Он инвертирует цвета, затем сдвигает оттенок, чтобы достичь розового */
+    filter: invert(70%) sepia(50%) saturate(2000%) hue-rotate(290deg) brightness(100%) contrast(100%);
+}
+
+/* Удаляем или отключаем bg-glow, если он не нужен для вашего текущего дизайна */
+.bg-glow {
+    display: none; /* Если хотите убрать фоновое свечение */
+}
+
+/* Header Styles (если он был скрыт, то оставляем скрытым) */
 header {
-    display: none; /* Keep hidden as per original Odyssey project */
+    display: none;
 }
 
 /* Main Content Area */
 main {
     display: flex;
     flex: 1;
-    padding: 60px; /* More padding for spacious feel */
+    padding: 0px 60px 60px 60px; /* Убираем верхний padding, чтобы page-logo был сверху */
     gap: 40px; /* Increased gap between sidebar and content */
     max-width: 1600px; /* Wider content area */
-    margin: 40px auto; /* Center the main content */
+    margin: 0px auto; /* Center the main content, верхний margin теперь не нужен */
     position: relative;
     z-index: 1;
 }
@@ -500,10 +520,20 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
+    .page-logo {
+        padding: 20px 20px; /* Уменьшаем отступы для планшетов */
+        font-size: 1rem;
+        gap: 8px;
+    }
+    .page-logo img {
+        width: 20px;
+        height: 20px;
+    }
+
     main {
         flex-direction: column;
         padding: 40px;
-        margin: 30px auto;
+        margin: 0px auto; /* Убираем верхний margin */
         gap: 30px;
     }
 
@@ -538,9 +568,19 @@ footer {
 }
 
 @media (max-width: 576px) {
+    .page-logo {
+        padding: 15px 15px; /* Еще уменьшаем отступы для мобильных */
+        font-size: 0.9rem;
+        gap: 5px;
+    }
+    .page-logo img {
+        width: 18px;
+        height: 18px;
+    }
+
     main {
         padding: 20px;
-        margin: 20px auto;
+        margin: 0px auto; /* Убираем верхний margin */
         gap: 20px;
     }
 
