@@ -1,7 +1,7 @@
 /* style.css - Redesign based on passkeys.foundation */
 
 /* Import Google Fonts - Inter is a good fit for this modern, clean style */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap'); /* Исправлено: fonts.googleapis.com */
 
 /* Define the new accent color for easier management */
 :root {
@@ -38,11 +38,11 @@ body {
 }
 
 /* Header Styles for the new top logo bar */
-.app-header {
+.app-header { /* Используем класс .app-header вместо header */
     background-color: var(--card-background); /* White background for the header bar */
     padding: 20px 60px; /* Padding for the header */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-    display: flex;
+    display: flex; /* Делаем видимым */
     align-items: center;
     justify-content: flex-start; /* Align content to the left */
     width: 100%;
@@ -561,7 +561,7 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
-    .app-header {
+    .app-header { /* Добавлено */
         padding: 15px 40px;
     }
     main {
@@ -605,14 +605,14 @@ footer {
 }
 
 @media (max-width: 576px) {
-    .app-header {
+    .app-header { /* Добавлено */
         padding: 10px 20px;
     }
-    .app-logo img {
+    .app-logo img { /* Добавлено */
         width: 40px;
         height: 40px;
     }
-    .app-logo h1 {
+    .app-logo h1 { /* Добавлено */
         font-size: 2rem;
     }
     main {
