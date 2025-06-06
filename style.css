@@ -7,7 +7,8 @@
 :root {
     --primary-accent: #E762A4; /* A vibrant pink/purple accent color */
     --secondary-accent: #00aaff; /* For specific blue elements if needed */
-    --text-dark: #222222; /* Very dark grey for text on light backgrounds */
+    --text-dark: #222222; /* Very dark grey for text on light backgrounds (for headings) */
+    --text-medium: #555555; /* Medium grey for main body text */
     --text-light: #ffffff; /* White text on dark backgrounds */
     --card-background: #ffffff; /* White background for all main content cards */
     --dark-background: #000000; /* Main body background */
@@ -20,7 +21,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--dark-background); /* Solid dark background */
-    color: var(--text-light); /* Default text color for body (mostly for elements on dark parts) */
+    color: var(--text-medium); /* Default text color for body (main text) */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -38,7 +39,6 @@ body {
 
 /* Header Styles (if still present in HTML, although it was hidden in Odyssey) */
 header {
-    /* If you decide to show header in Odyssey, style it here */
     display: none; /* Keep hidden as per original Odyssey project */
 }
 
@@ -79,7 +79,7 @@ main {
 
 .sidebar nav button {
     background: var(--card-background); /* White background for inactive buttons */
-    color: var(--text-dark); /* Dark text */
+    color: var(--text-dark); /* Dark text for inactive buttons */
     border: none; /* No border */
     padding: 18px 25px;
     border-radius: 12px; /* Rounded buttons */
@@ -101,7 +101,7 @@ main {
 .sidebar nav button.active {
     background: var(--primary-accent); /* Accent color for active state */
     color: var(--text-light); /* White text for active */
-    box-shadow: 0 5px 20px rgba(var(--primary-accent-rgb, 231, 98, 164), 0.5); /* Glow with accent color */
+    box-shadow: 0 5px 20px rgba(231, 98, 164, 0.5); /* Glow with accent color */
     font-weight: 600;
 }
 
@@ -114,9 +114,10 @@ main {
 
 .current-credits h3 {
     margin: 0;
-    color: var(--text-dark); /* Dark text for credits title */
+    color: var(--text-dark); /* Dark text for credits title (Heading style) */
     font-size: 1.5rem;
     letter-spacing: 0.8px;
+    font-weight: 600; /* Adjusted for consistency */
 }
 
 .current-credits span {
@@ -132,15 +133,33 @@ main {
     flex: 1;
 }
 
-section h2 {
-    color: var(--text-dark); /* Dark text for section headings */
-    font-size: 2.5rem; /* Larger headings */
+/* Все заголовки: стиль надписи "Мои Спринты" */
+h1, h2, h3, h4 {
+    color: var(--text-dark); /* Темный цвет для всех заголовков */
+    font-weight: 700; /* Жирный шрифт для всех заголовков */
+    letter-spacing: -0.5px; /* Немного более плотное межбуквенное расстояние */
+}
+
+/* Конкретные размеры для разных уровней заголовков */
+section h2 { /* Мои Спринты */
+    font-size: 2.5rem;
     margin-bottom: 30px;
-    border-bottom: none; /* Remove bottom border */
+    border-bottom: none;
     padding-bottom: 0;
-    letter-spacing: -0.5px; /* Tighter letter spacing for modern look */
-    font-weight: 700; /* Bold */
-    text-shadow: none; /* Remove text shadow */
+}
+
+.modal-content h3, .modal-content h4 { /* Заголовки модальных окон */
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sprint-card h3 { /* Заголовки карточек спринтов */
+    font-size: 1.8rem;
+    margin: 0 0 10px 0;
+    flex-basis: 100%;
 }
 
 .hidden-section {
@@ -150,12 +169,12 @@ section h2 {
 /* Card and Item Styles (Sprint Card, Task Item, Reward Category, Trophy List) */
 .sprint-card, .reward-category {
     background: var(--card-background); /* White background for cards */
-    border: none; /* Rely on shadow */
+    border: none;
     padding: 30px;
     margin-bottom: 25px;
-    border-radius: 16px; /* Consistent rounded corners */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Soft shadow */
-    position: relative; /* For the accent border */
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Soft, diffused shadow */
+    position: relative;
 }
 
 /* Accent left border for all main cards */
@@ -171,20 +190,16 @@ section h2 {
     border-bottom-left-radius: 16px;
 }
 
-.sprint-card h3 {
-    margin: 0 0 10px 0;
-    color: var(--text-dark); /* Dark text for sprint card titles */
-    font-size: 1.8rem;
-    flex-basis: 100%;
-    letter-spacing: -0.3px;
-    font-weight: 600;
+/* Подзаголовки: стиль надписи "Запуск на орбиту" (это для описаний, как и весь текст) */
+/* Весь текст: стиль текста "Заложить фундамент знаний и создать первую веб-страницу." */
+p, ul li { /* Применяем ко всем параграфам и элементам списков */
+    color: var(--text-medium); /* Средне-серый цвет для основного текста */
+    font-size: 1rem; /* Единый размер для основного текста */
 }
 
-.sprint-card p {
+.sprint-card p { /* Описание спринта */
     margin: 0;
-    color: #555555; /* Medium grey for body text */
     flex-basis: 100%;
-    font-size: 1rem;
 }
 
 .sprint-actions {
@@ -195,7 +210,7 @@ section h2 {
     justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px; /* Increased gap between buttons */
+    gap: 12px;
 }
 
 /* General styles for small icon buttons (edit/delete) */
@@ -204,11 +219,11 @@ section h2 {
 .task-item .task-actions button.edit-task-btn,
 .task-item .task-actions button.delete-task-btn,
 #trophies-list li .delete-trophy-btn {
-    background: #e0e0e0; /* Light grey background */
-    color: var(--text-dark); /* Dark icon color */
+    background: #e0e0e0;
+    color: var(--text-dark);
     border: none;
     border-radius: 50%;
-    min-width: 44px; /* Larger icon buttons */
+    min-width: 44px;
     height: 44px;
     display: inline-flex;
     justify-content: center;
@@ -224,7 +239,7 @@ section h2 {
 .task-item .task-actions button.edit-task-btn:hover,
 .task-item .task-actions button.delete-task-btn:hover,
 #trophies-list li .delete-trophy-btn:hover {
-    background-color: #d0d0d0; /* Darker grey on hover */
+    background-color: #d0d0d0;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
@@ -232,20 +247,20 @@ section h2 {
 /* Specific styles for "Edit" button (using accent color) */
 .sprint-actions button.edit, .task-item .task-actions button.edit-task-btn {
     background-color: var(--primary-accent);
-    color: var(--text-light); /* White icon */
+    color: var(--text-light);
 }
 .sprint-actions button.edit:hover, .task-item .task-actions button.edit-task-btn:hover {
-    background-color: darken(var(--primary-accent), 10%); /* Darker accent on hover */
-    box-shadow: 0 5px 15px rgba(var(--primary-accent-rgb, 231, 98, 164), 0.3);
+    background-color: #d94fa2; /* Darker accent on hover */
+    box-shadow: 0 5px 15px rgba(231, 98, 164, 0.3);
 }
 
 /* Specific styles for "Delete" button (using red) */
 .sprint-actions button.delete, .task-item .task-actions button.delete-task-btn, #trophies-list li .delete-trophy-btn {
-    background-color: #ff4444; /* Red for delete */
+    background-color: #ff4444;
     color: var(--text-light);
 }
 .sprint-actions button.delete:hover, .task-item .task-actions button.delete-task-btn:hover, #trophies-list li .delete-trophy-btn:hover {
-    background-color: darken(#ff4444, 10%);
+    background-color: #e63939;
     box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
 }
 
@@ -256,8 +271,8 @@ section h2 {
 #export-data-btn, #import-data-btn,
 .sprint-actions button.view-tasks-btn,
 .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn) {
-    background: var(--text-dark); /* Dark background for primary buttons */
-    color: var(--text-light); /* White text */
+    background: var(--text-dark);
+    color: var(--text-light);
     border: none;
     border-radius: 12px;
     padding: 14px 28px;
@@ -265,8 +280,8 @@ section h2 {
     font-weight: 500;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    text-transform: capitalize; /* Capitalize first letter */
-    letter-spacing: 0; /* Remove letter spacing */
+    text-transform: capitalize;
+    letter-spacing: 0;
 }
 
 /* Hover effects for these primary buttons */
@@ -276,58 +291,55 @@ section h2 {
 #export-data-btn:hover, #import-data-btn:hover,
 .sprint-actions button.view-tasks-btn:hover,
 .modal-content button:not(.close-button):not(.edit-sprint-btn):not(.delete-sprint-btn):not(.edit-task-btn):not(.delete-task-btn):not(.delete-trophy-btn):hover {
-    background-color: lighten(var(--text-dark), 10%); /* Slightly lighter dark on hover */
+    background-color: #333333; /* Slightly lighter dark on hover */
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Override for danger-button (e.g., clear data) */
 #clear-data-btn.danger-button {
-    background: #ff4444 !important; /* Red background */
+    background: #ff4444 !important;
     color: var(--text-light) !important;
     box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2) !important;
 }
 #clear-data-btn.danger-button:hover {
-    background-color: darken(#ff4444, 10%) !important;
+    background-color: #e63939 !important;
     box-shadow: 0 6px 20px rgba(255, 68, 68, 0.3) !important;
 }
 
 .task-item {
-    background: var(--card-background); /* White background for task items */
+    background: var(--card-background);
     border: none;
-    /* border-left will be applied by ::before pseudo-element */
     padding: 20px;
     margin-bottom: 15px;
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     position: relative;
 }
-/* No explicit border-left property here, it's moved to ::before */
 
 .task-item.completed {
-    background-color: #f8f8f8; /* Very light grey for completed tasks */
+    background-color: #f8f8f8;
     text-decoration: line-through;
     color: #888;
-    /* The ::before accent stripe will still apply */
 }
 
 .task-item input[type="checkbox"] {
     margin-right: 20px;
-    width: 28px; /* Larger checkbox */
+    width: 28px;
     height: 28px;
-    accent-color: var(--primary-accent); /* Accent color for checkbox */
+    accent-color: var(--primary-accent);
     cursor: pointer;
-    border: 2px solid #ccc; /* Lighter border */
-    border-radius: 6px; /* Slightly rounded checkbox */
+    border: 2px solid #ccc;
+    border-radius: 6px;
     background-color: var(--card-background);
     transition: all 0.2s ease-in-out;
 }
 
 .task-item input[type="checkbox"]:checked {
-    box-shadow: 0 0 10px rgba(var(--primary-accent-rgb, 231, 98, 164), 0.5);
+    box-shadow: 0 0 10px rgba(231, 98, 164, 0.5);
 }
 
 .task-item .task-actions {
@@ -335,7 +347,6 @@ section h2 {
     gap: 10px;
     align-items: center;
 }
-
 
 /* Modal Styles */
 .modal {
@@ -347,46 +358,33 @@ section h2 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+    background-color: rgba(0, 0, 0, 0.7);
     justify-content: center;
     align-items: center;
     padding-top: 50px;
 }
 
 .modal-content {
-    /* Styles are defined in .sidebar, .content, .modal-content shared rule */
-    max-width: 600px; /* Adjust modal width */
+    max-width: 600px;
     margin: auto;
     padding: 40px;
 }
 
 .close-button {
-    color: #666666; /* Darker close button */
+    color: #666666;
     float: right;
-    font-size: 30px; /* Slightly smaller, more subtle */
-    font-weight: normal; /* Less bold */
+    font-size: 30px;
+    font-weight: normal;
     line-height: 1;
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: var(--primary-accent); /* Accent color on hover */
-    transform: rotate(0deg); /* No spin */
+    color: var(--primary-accent);
+    transform: rotate(0deg);
     text-decoration: none;
     cursor: pointer;
-}
-
-.modal-content h3, .modal-content h4 {
-    color: var(--text-dark); /* Dark text for modal headings */
-    margin-top: 0;
-    margin-bottom: 25px;
-    font-size: 2.2rem;
-    border-bottom: none; /* Remove border */
-    padding-bottom: 0;
-    letter-spacing: -0.5px;
-    font-weight: 700;
-    text-shadow: none; /* Remove text shadow */
 }
 
 .modal-content label {
@@ -401,14 +399,14 @@ section h2 {
 .modal-content input[type="text"],
 .modal-content input[type="number"],
 .modal-content textarea {
-    width: calc(100% - 40px); /* Adjust padding */
-    padding: 18px 20px; /* More vertical padding */
+    width: calc(100% - 40px);
+    padding: 18px 20px;
     margin-bottom: 20px;
-    border: none; /* No border */
-    border-radius: 12px; /* Rounded corners */
+    border: none;
+    border-radius: 12px;
     box-sizing: border-box;
-    background-color: var(--input-background); /* Light input background */
-    color: var(--text-dark); /* Dark text */
+    background-color: var(--input-background);
+    color: var(--text-dark);
     font-size: 1.1rem;
     outline: none;
     transition: box-shadow 0.2s ease;
@@ -417,14 +415,14 @@ section h2 {
 .modal-content input[type="text"]:focus,
 .modal-content input[type="number"]:focus,
 .modal-content textarea:focus {
-    box-shadow: 0 0 0 3px var(--primary-accent); /* Accent glow on focus */
+    box-shadow: 0 0 0 3px var(--primary-accent);
 }
 
 /* Specific styling for placeholder text */
 .modal-content input::placeholder,
 .modal-content textarea::placeholder {
-    color: #999999; /* Softer placeholder color */
-    opacity: 1; /* Firefox fix */
+    color: #999999;
+    opacity: 1;
 }
 
 .sub-modal .modal-content {
@@ -433,8 +431,7 @@ section h2 {
 
 /* Reward Specific Styles */
 .reward-category {
-    /* Styles are defined in .sprint-card shared rule */
-    position: relative; /* For the accent border */
+    position: relative;
 }
 
 #trophies-list {
@@ -443,61 +440,60 @@ section h2 {
 }
 
 #trophies-list li {
-    background: var(--card-background); /* White background */
+    background: var(--card-background);
     border: none;
-    /* border-left will be applied by ::before pseudo-element */
     padding: 20px;
     margin-bottom: 15px;
     border-radius: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--text-dark); /* Dark text */
-    font-size: 1.05rem;
+    color: var(--text-medium); /* Main text style for list items */
+    font-size: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     position: relative;
 }
 
 /* Retrospective Styles */
 #retrospective-notes {
-    width: calc(100% - 40px); /* Adjust padding */
+    width: calc(100% - 40px);
     min-height: 300px;
     padding: 18px 20px;
     border: none;
     border-radius: 12px;
     font-size: 1.1rem;
     box-sizing: border-box;
-    background-color: var(--input-background); /* Light background */
-    color: var(--text-dark); /* Dark text */
+    background-color: var(--input-background);
+    color: var(--text-dark);
     outline: none;
     resize: vertical;
     transition: box-shadow 0.2s ease;
 }
 
 #retrospective-notes:focus {
-    box-shadow: 0 0 0 3px var(--primary-accent); /* Accent glow on focus */
+    box-shadow: 0 0 0 3px var(--primary-accent);
 }
 
 
 /* Data Management Styles */
 .warning-text {
-    color: #ff7700; /* Orange for warnings */
+    color: #ff7700;
     font-weight: 600;
     margin-top: 25px;
     font-size: 0.95rem;
-    text-shadow: none; /* Remove text shadow */
+    text-shadow: none;
 }
 
 /* Footer Styles */
 footer {
-    background-color: var(--dark-background); /* Dark footer background */
-    backdrop-filter: none; /* Remove blur */
-    color: #777777; /* Darker grey for footer text */
+    background-color: var(--dark-background);
+    backdrop-filter: none;
+    color: #777777;
     text-align: center;
     padding: 2rem 0;
     margin-top: auto;
-    box-shadow: none; /* Remove shadow */
-    border-top: 1px solid #333333; /* Subtle dark border */
+    box-shadow: none;
+    border-top: 1px solid #333333;
     font-size: 0.9rem;
     letter-spacing: 0.5px;
 }
@@ -514,7 +510,7 @@ footer {
     .sidebar {
         width: auto;
         padding: 30px;
-        order: 2; /* Move sidebar below content on small screens */
+        order: 2;
     }
 
     .content {
