@@ -83,9 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     name: 'Спринт 1',
                     goal: 'Цель спринта 1.',
                     tasks: [
-                        { id: 't1_1', description: 'Задача 1', completed: false },
+                        { id: 't4_1', description: 'Задача 1', completed: false },
+                        { id: 't4_4', description: 'Задача 2', completed: false }
                     ]
-                },
+                }
             ];
             saveData(); // Save initial data to localStorage
         }
