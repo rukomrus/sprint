@@ -80,13 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
             appData.sprints = [
                 {
                     id: 'sprint1',
-                    name: 'Запуск на орбиту',
-                    goal: 'Заложить фундамент знаний и создать первую веб-страницу.',
+                    name: 'Спринт 1',
+                    goal: 'Цель спринта 1.',
                     tasks: [
-                        { id: 't1_1', description: 'Пройти уроки по HTML и CSS на freeCodeCamp (5–7 часов)', completed: false },
-                        { id: 't1_2', description: 'Создать статическую веб-страницу (например, личная страница "Обо мне")', completed: false },
-                        { id: 't1_3', description: 'Задать ИИ 3 вопроса по HTML/CSS для уточнения', completed: false },
-                        { id: 't1_4', description: 'Исследовать 2–3 идеи приложения', completed: false }
+                        { id: 't1_1', description: 'Задача 1', completed: false },
+                        { id: 't1_2', description: 'Задача 2', completed: false }
                     ]
                 },
                 {
