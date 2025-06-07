@@ -89,35 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 {
                     id: 'sprint2',
-                    name: 'Космический полёт в JavaScript',
-                    goal: 'Освоить основы JavaScript и добавить интерактивность в проект.',
+                    name: 'Спринт 2',
+                    goal: 'Цель спринта 2.',
                     tasks: [
-                        { id: 't2_1', description: 'Пройти уроки по JavaScript (переменные, функции, события) на freeCodeCamp', completed: false },
-                        { id: 't2_2', description: 'Добавить на страницу интерактив (кнопку, меняющую текст или цвет)', completed: false },
-                        { id: 't2_3', description: 'Использовать ИИ для генерации простого JS-кода', completed: false },
-                        { id: 't2_4', description: 'Собрать 5 идей приложения, обсудить 1–2 с друзьями', completed: false }
-                    ]
-                },
-                {
-                    id: 'sprint3',
-                    name: 'Гиперпрыжок к MVP',
-                    goal: 'Выбрать идею приложения и начать прототип.',
-                    tasks: [
-                        { id: 't3_1', description: 'Выбрать 1 идею приложения (на основе анализа и обратной связи)', completed: false },
-                        { id: 't3_2', description: 'Создать прототип MVP (базовый интерфейс с 1–2 функциями)', completed: false },
-                        { id: 't3_3', description: 'Изучить основы работы с API', completed: false },
-                        { id: 't3_4', description: 'Использовать ИИ для генерации макета дизайна или проверки кода', completed: false }
-                    ]
-                },
-                {
-                    id: 'sprint4',
-                    name: 'Посадка на рынок',
-                    goal: 'Доработать прототип и подготовить к публикации.',
-                    tasks: [
-                        { id: 't4_1', description: 'Добавить 1–2 ключевые функции в прототип', completed: false },
-                        { id: 't4_2', description: 'Опубликовать приложение на бесплатной платформе', completed: false },
-                        { id: 't4_3', description: 'Протестировать приложение с 2–3 пользователями, собрать обратную связь', completed: false },
-                        { id: 't4_4', description: 'Исследовать способы монетизации', completed: false }
+                        { id: 't2_1', description: 'Задача 1', completed: false },
+                        { id: 't2_2', description: 'Задача 2', completed: false }
                     ]
                 }
             ];
