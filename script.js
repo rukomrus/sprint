@@ -80,48 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
             appData.sprints = [
                 {
                     id: 'sprint1',
-                    name: 'Запуск на орбиту',
-                    goal: 'Заложить фундамент знаний и создать первую веб-страницу.',
+                    name: 'Спринт 1',
+                    goal: 'Цель спринта 1.',
                     tasks: [
-                        { id: 't1_1', description: 'Пройти уроки по HTML и CSS на freeCodeCamp (5–7 часов)', completed: false },
-                        { id: 't1_2', description: 'Создать статическую веб-страницу (например, личная страница "Обо мне")', completed: false },
-                        { id: 't1_3', description: 'Задать ИИ 3 вопроса по HTML/CSS для уточнения', completed: false },
-                        { id: 't1_4', description: 'Исследовать 2–3 идеи приложения', completed: false }
+                        { id: 't1_1', description: 'Задача 1', completed: false },
                     ]
                 },
-                {
-                    id: 'sprint2',
-                    name: 'Космический полёт в JavaScript',
-                    goal: 'Освоить основы JavaScript и добавить интерактивность в проект.',
-                    tasks: [
-                        { id: 't2_1', description: 'Пройти уроки по JavaScript (переменные, функции, события) на freeCodeCamp', completed: false },
-                        { id: 't2_2', description: 'Добавить на страницу интерактив (кнопку, меняющую текст или цвет)', completed: false },
-                        { id: 't2_3', description: 'Использовать ИИ для генерации простого JS-кода', completed: false },
-                        { id: 't2_4', description: 'Собрать 5 идей приложения, обсудить 1–2 с друзьями', completed: false }
-                    ]
-                },
-                {
-                    id: 'sprint3',
-                    name: 'Гиперпрыжок к MVP',
-                    goal: 'Выбрать идею приложения и начать прототип.',
-                    tasks: [
-                        { id: 't3_1', description: 'Выбрать 1 идею приложения (на основе анализа и обратной связи)', completed: false },
-                        { id: 't3_2', description: 'Создать прототип MVP (базовый интерфейс с 1–2 функциями)', completed: false },
-                        { id: 't3_3', description: 'Изучить основы работы с API', completed: false },
-                        { id: 't3_4', description: 'Использовать ИИ для генерации макета дизайна или проверки кода', completed: false }
-                    ]
-                },
-                {
-                    id: 'sprint4',
-                    name: 'Посадка на рынок',
-                    goal: 'Доработать прототип и подготовить к публикации.',
-                    tasks: [
-                        { id: 't4_1', description: 'Добавить 1–2 ключевые функции в прототип', completed: false },
-                        { id: 't4_2', description: 'Опубликовать приложение на бесплатной платформе', completed: false },
-                        { id: 't4_3', description: 'Протестировать приложение с 2–3 пользователями, собрать обратную связь', completed: false },
-                        { id: 't4_4', description: 'Исследовать способы монетизации', completed: false }
-                    ]
-                }
             ];
             saveData(); // Save initial data to localStorage
         }
