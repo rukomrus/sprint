@@ -391,7 +391,7 @@ showSprintsBtn.click(); // Simulate click to set initial active state
             appData.credits += amount;
         } else if (type === 'spend') {
             if (appData.credits < amount) {
-                alert('Недостаточно космических кредитов!');
+                alert('Недостаточно кредитов!');
                 return;
             }
             appData.credits -= amount;
